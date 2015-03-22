@@ -23,7 +23,8 @@ Chapter
 		Git Has Integrity.
 		Git Generally Only Adds Data.
 			In Git, doing nearly all of actions, you only add data to the Git database.
-			It is very difficult to lose your data, especially if you regularly push your database to another repository.
+			It is very difficult to lose your data,
+			especially if you regularly push your database to another repository.
 			Everything (files, dirs) in Git is check-summed before it's stored (to GIT) and
 			is then referred to by that checksum.
 			This means it’s impossible to change the contents without Git knowing about it.
@@ -34,9 +35,9 @@ Chapter
 2.      Git Basics.
 2.1     Getting a Git Repository
 		Git initializing in an Existing Directory
-			Init in a current directory: $ git init
+			Init in a current directory: [$ git init]
 		Cloning an Existing Repository.
-			You clone a repository with: $ git clone [url].
+			You clone a repository with: [$ git clone [url]].
 
 2.2.    Recording Changes to the Repository
 		Recording Changes to the Repository
@@ -50,21 +51,62 @@ Chapter
 			    staged
 
 		Checking the Status of Your Files
-			Check status of files in current dir: $ git status
+			Check status of files in current dir: [$ git status]
 		Tracking New Files
 			Begin tracking new file: $ git add [file]
 		Staging Modified Files
 			git add is a multipurpose command – you use it to begin tracking new files,
 			to stage files, and to do other things like marking merge-conflicted files as resolved.
+		Ignoring Files
+			see .gitignore
+		Viewing Your Staged and Unstaged Changes
+			[$ git diff] - shows you the exact lines added and removed – the patch, as it were.
 		Removing Files
-			Command: $ git rm [file | dir]
+			Command: [$ git rm [file | dir]]
 			This command simply delete tracked file.
 
 		Moving Files (Renaming)
 			If you want to rename a file in Git, you can run something like:
-			$ git mv file_from file_to
+			[$ git mv file_from file_to]
 
-2.3.    Viewing the Commit History
+2.3.    Viewing the Commit History: git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History
+		Viewing the Commit History
+			To do this is the [$ git log] command.
+			One of the more helpful options is [-p], which shows the difference introduced in each commit.
+			You can also use [-2], which limits the output.
+			If you want to see some abbreviated stats for each commit, you can use the [--stat] option.
+			Another really useful option is [--pretty=oneline|short|full|fuller|format:]
+			Show graph: [$ git log --graph]
+			e.g.: [$ git log --pretty=format:"%h - %an, %ar : %s"]
+			More info available on the above link.
+			Different between committer and author is the author is the person who originally wrote the work,
+			whereas the committer is the person who last applied the work.
+		Limiting Log Output
+			With: [-<n>] where n is any integer to show the last n commits.
+			The time-limiting options such as --since and --until.
+			See other command in reference.
+
+
+2.4.    Undoing Things
+		Undoing Things
+			[$ git commit --amend]
+		Unstaging a Staged File
+			Unstaging carry out with the [$ git reset HEAD <file>] command:
+		Unmodifying a Modified File
+			It’s important to understand that [$ git checkout -- [file]] is a dangerous command.
+			Remember, anything that is committed in Git can almost always be recovered.
+2.5     Working with Remotes
+			Remote repositories are versions of your project
+			that are hosted on the Internet or network somewhere.
+			Remotes enable you collaborate on any project remotely.
+			It is them porpose.
+		Showing Your Remotes
+			To see which remote servers you have configured, you can run the [$ git remote]
+			
+
+
+
+
 
 
 My notes.
