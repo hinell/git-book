@@ -1,12 +1,15 @@
-<!DOCTYPE html><html lang="en"><head><title>VCS Git Synopsis</title><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><link href="css/bootstrap.min.css" rel="stylesheet"></head><body><H1>VCS GIT. Based on:<a href="http://git-scm.com/book/en/v2">Git Book</a></H1><p> Temp:</p><p> Chapter</p><p>    Part Chapter along with Header</p><p>    Paragraph</p><p>    Body of.</p><H1>1.      Getting started.</H1><H2>1.3.    Git Basics.</H2><h3>   Snapshots.</h3><p>Every time you commit, or save the state of your project in Git,
+<!DOCTYPE html><html lang="en"><head><title>VCS Git Synopsis</title><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><link href="css/bootstrap.min.css" rel="stylesheet"><style type="text/css">.color-back-grey {
+background-color: rgb(234, 234, 234);
+}
+[data-toggle]{
+  text-decoration: underline;
+}</style></head><body class="container"><dl class="dl-horizontal"><dt>VCS GIT. Based on:</dt><dd><a href="http://git-scm.com/book/en/v2">Git Book</a></dd><p> Temp:</p><p> Chapter</p><p>    Part Chapter along with Header</p><p>    Paragraph</p><p>    Body of.</p><hr><H1>1.      Getting started.</H1><H2 data-toggle="collapse" data-target="#Snapshots" aria-expanded="false" aria-controls="Snapshots">1.3.    Git Basics.</H2><div id="Snapshots" class="collapse color-back-grey"><hr><dt>   Snapshots.</dt><dd>Every time you commit, or save the state of your project in Git,
 it basically takes a picture of what all your files look like at that moment
 and stores a reference to that snapshot (if files have not changed,
 Git doesn't store the file again (like others VCSs),
 just a link to the previous identical file it has already stored.)
-Git thinks about its data more like a stream of snapshots.
-</p><h3>  Nearly Every Operation Is Local.</h3><p>Git only need local files and resources to operate unlike
-other VCSs which have latency network overhead.
-</p><h3>    Git Has Integrity.</h3><h3>    Git Generally Only Adds Data.</h3><p>In Git, doing nearly all of actions, you only add data to the Git database.
+Git thinks about its data more like a stream of snapshots.</dd><hr><dt>   Nearly Every Operation Is Local.</dt><dd>Git only need local files and resources to operate unlike
+other VCSs which have latency network overhead.</dd><hr><dt>    Git Has Integrity.</dt><dt>    Git Generally Only Adds Data.</dt><dd>In Git, doing nearly all of actions, you only add data to the Git database.
 It is very difficult to lose your data,
 especially if you regularly push your database to another repository.
 Everything (files, dirs) in Git is check-summed before it's stored (to GIT) and
@@ -14,20 +17,17 @@ is then referred to by that checksum.
 This means it’s impossible to change the contents without Git knowing about it.
 Git hash-mechanism: SHA-1
 Git stored snapshots in DB by the hash.
-
-</p><h1>2.      Git Basics.</h1><h2>2.1     Getting a Git Repository</h2><p>Git initializing in an Existing Directory
-  Init in a current directory: [$ git init]
-Cloning an Existing Repository.
-  You clone a repository with: [$ git clone [url]].
-</p><h2>2.2.    Recording Changes to the Repository</h2><h3> Recording Changes to the Repository</h3><p>Current dir - directory where git had initialized.
+</dd></div><hr><h1>2.      Git Basics.</h1><h2>2.1     Getting a Git Repository</h2><p></p><dt>  Git initializing in an Existing Directory</dt><dd>   Init in a current directory: [$ git init]</dd><dt>  Cloning an Existing Repository.</dt><dd>   You clone a repository with: [$ git clone [url]].</dd><hr><h2>2.2.    Recording Changes to the Repository</h2><dt>  Recording Changes to the Repository</dt><dd>Current dir - directory where git had initialized.
   Each file in the current directory may have two states:
     untracked(не отслеживаемые)
     tracked  (отслеживаемые, in last snapshot)
   Tracked files are files that were of the last snapshot; their states:
       unmodified
       modified
-      staged
-</p><h3>Checking the Status of Your Files</h3><p>      Check status of files in current dir: [$ git status]</p><h3> Tracking New Files</h3><p>      Begin tracking new file:[ $ git add [file]]</p><h3> Staging Modified Files</h3><p>      Git add is a multipurpose command – you use it to begin tracking new files,</p><p>      to stage files, and to do other things like marking merge-conflicted files as resolved.</p><h3> Ignoring Files</h3><p>      See .gitignore</p><h3> Viewing Your Staged and Unstaged Changes</h3><p>      [$ git diff] - shows you the exact lines added and removed – the patch, as it were.</p><h3> Removing Files</h3><p>     Command: [$ git rm [file | dir]]</p><p>     This command simply delete tracked file.</p><h3> Moving Files (Renaming)</h3><p>      If you want to rename a file in Git, you can run something like:</p><p>      [$ git mv file_from file_to]</p><h2>2.3.   Viewing the Commit History.</h2><h3>   Viewing the Commit History</h3><p>To do this you need type the [$ git log] command.
+      staged</dd><hr><dt> Checking the Status of Your Files</dt><dd>     Check status of files in current dir: [$ git status]</dd><hr><dt>  Tracking New Files</dt><dd>     Begin tracking new file:[ $ git add [file]]</dd><hr><dt> Staging Modified Files</dt><dd>Git add is a multipurpose command – you use it to begin tracking new files,
+to stage files, and to do other things like marking merge-conflicted files as resolved.</dd><hr><dt> Ignoring Files</dt><dd>     See .gitignore</dd><hr><dt> Viewing Your Staged and Unstaged Changes</dt><dd>     [$ git diff] - shows you the exact lines added and removed – the patch, as it were.</dd><hr><dt> Removing Files</dt><dd>Command: [$ git rm [file | dir]]
+This command simply delete tracked file.</dd><hr><dt>  Moving Files (Renaming)</dt><dd>If you want to rename a file in Git, you can run something like:
+[$ git mv file_from file_to]</dd><hr><h2>2.3.   Viewing the Commit History.</h2><hr><dt>    Viewing the Commit History</dt><dd>To do this you need type the [$ git log] command.
 One of the more helpful options is [-p], which shows the difference introduced in each commit.
 You can also use [-2], which limits the output.
 If you want to see some abbreviated stats for each commit, you can use the [--stat] option.
@@ -39,40 +39,38 @@ More info available on the above link.
 To see only the commits of a certain author: git log --author=bob
 
 Different between committer and author is the author is the person who originally wrote the work,
-whereas the committer is the person who last applied the work.
-</p><h3>    Limiting Log Output</h3><p>With: [-<n>] where n is any integer to show the last n commits.
+whereas the committer is the person who last applied the work.</dd><hr><dt>     Limiting Log Output</dt><dd>With: [-<n>] where n is any integer to show the last n commits.
 The time-limiting options such as --since and --until.
 See other command in reference.
-
-</p><h2>2.4.    Undoing Things<h3>Undoing Things</h3><p> [$ git commit --amend]</p><h3>Unstaging a Staged File</h3><p> To unstage content in current dir, you can use: [$ git reset HEAD <file>] command:</p><h3>Unmodifying a Modified File</h3><p>You can replace local changes using the command:
+</dd><hr><h2>2.4.    Undoing Things</h2><dt>   Undoing Things</dt><dd>   [$ git commit --amend]</dd><dt>   Unstaging a Staged File</dt><dd>   To unstage content in current dir, you can use: [$ git reset HEAD <file>] command:</dd><dt>   Unmodifying a Modified File</dt><dd>You can replace local changes using the command:
 [$ git checkout -- [file]] - be careful - is a dangerous command.
 This kept files already added to the index,(new files).
-Remember, anything that is committed in Git can almost always be recovered.</p></h2><p>If you instead want to drop all your local changes, use:
+Remember, anything that is committed in Git can almost always be recovered.
+
+If you instead want to drop all your local changes, use:
 [$ git fetch origin]. It fetch the latest history
-from the server and point your local master branch.
-</p><h2>2.5.     Working with Remotes<p>Remote repositories are versions of your project
+from the server and point your local master branch.</dd><hr><h2>2.5.     Working with Remotes</h2><p>Remote repositories are versions of your project
 that are hosted on the Internet or network somewhere.
 Remotes enable you collaborate on any project remotely.
 It is them porpose.
-</p><h3>Showing Your Remotes</h3><p> To see which remote servers you have configured, you can run the [$ git remote]</p><h3>Adding Remote Repositories</h3><p> [$ git remote add [shortname] [url]]</p><h3>Fetching and Pulling from Your Remotes</h3><p>As you just saw, to get data from your remote projects,
+</p><dt>   Showing Your Remotes</dt><dd>   To see which remote servers you have configured, you can run the [$ git remote]</dd><dt>   Adding Remote Repositories</dt><dd>   [$ git remote add [shortname] [url]]</dd><dt>   Fetching and Pulling from Your Remotes</dt><dd>As you just saw, to get data from your remote projects,
 you can run:[$ git fetch [remote-name]]
 
 For example, if you want to fetch all the information that remote repo has
 but that you don’t yet have in your repository, you can run [$ git fetch [shortname]]
 If you have a branch set up to track a remote branch, you can use
-
 the [$ git pull] command to automatically fetch and then merge a remote branch into your current branch.
-</p><h3>Pushing to Your Remotes</h3><p>When you have your project at a point that you want to share,
+
+</dd><dt>   Pushing to Your Remotes</dt><dd>When you have your project at a point that you want to share,
 you have to push it upstream. The command for this is simple:
 [git push [remote-name] [branch-name]]
-</p><Inspecting>a Remote</Inspecting><p>If you want to see more information about a particular remote:
+</dd><dt>   Inspecting a Remote</dt><dd>If you want to see more information about a particular remote:
 [$ git remote show [remote-name] ]
-
-</p></h2><h2>2.5.    Tagging<h3>Tagging</h3><p>  Typically people use this functionality to mark release points (v1.0, and so on).</p></h2><h2>3.1.	Branching in a Nutshell.<p>Branching means you diverge from the main line of development
+</dd><hr><h2>2.5.    Tagging</h2><dt>   Tagging</dt><dd>    Typically people use this functionality to mark release points (v1.0, and so on).</dd><hr><h2>3.1.	Branching in a Nutshell.</h2><p>Branching means you diverge from the main line of development
 and continue to do work without messing with that main line.
-</p><h3>Branching in a Nutshell</h3><p>When you make a commit, Git stores a commit object that
+</p><dt>    Branching in a Nutshell</dt><dd>When you make a commit, Git stores a commit object that
 contains a pointer to the snapshot of the content you staged.
-</p><h3>Creating a New Branch</h3><p>[$ git branch [branch name]]
+</dd><dt>    Creating a New Branch</dt><dd>[$ git branch [branch name]]
 How does Git know what branch you’re currently on?
 It keeps a special pointer called HEAD.
 Note that this is a lot different than the concept of HEAD
@@ -91,16 +89,18 @@ back to the snapshot that master points to.
 
 
 
-
-</p></h2><h2>My notes.<p>Head  - points to the last commit i have made.
+</dd></dl><hr><dt> My notes.</dt><dd>Head  - points to the last commit i have made.
 Index - is the current state of file of current dir
 that will comprise next commit (in other words - staged area, or
 is the last snapshot of files in the current dir.
-
 Useful hints:
   [$ gitk]                            - built-in git GUI
   [$ git config color.ui true]        - use colorful git output
   [$ git config format.pretty oneline]- show log on just one line per commit
   [$ git add -i]                      - use interactive adding
 
-</p><p> adding for tracking(or staging) : git add [dir]</p><p> dChecking status                : git status</p><p> dChecking status (short)        : git status -s</p></h2><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script><script src="js/bootstrap.min.js"></script></body></html>
+
+ adding for tracking(or staging) : git add [dir]
+ dChecking status                : git status
+ dChecking status (short)        : git status -s
+</dd><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script><script src="js/bootstrap.min.js"></script></body></html>

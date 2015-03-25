@@ -6,226 +6,240 @@ html(lang="en")
     meta(http-equiv="X-UA-Compatible" content="IE=edge")
     meta(name="viewport" content="width=device-width, initial-scale=1")
     link(href="css/bootstrap.min.css" rel="stylesheet")
+    style(type="text/css").
+         .color-back-grey {
+         background-color: rgb(234, 234, 234);
+         }
+         [data-toggle]{
+           text-decoration: underline;
+         }
+  body.container
+    dl.dl-horizontal
+      dt VCS GIT. Based on:
+      dd
+        a(href="http://git-scm.com/book/en/v2")
+          | Git Book
 
-  body
-    H1 VCS GIT. Based on:
-      a(href="http://git-scm.com/book/en/v2")
-        | Git Book
+      p  Temp:
+      p  Chapter
+      p     Part Chapter along with Header
+      p     Paragraph
+      p     Body of.
 
-    p  Temp:
-    p  Chapter
-    p     Part Chapter along with Header
-    p     Paragraph
-    p     Body of.
+      hr
+      H1 1.      Getting started.
+      H2(data-toggle="collapse" data-target="#Snapshots" aria-expanded="false" aria-controls="Snapshots") 1.3.    Git Basics.
+      div(id="Snapshots").collapse.color-back-grey
+        hr
+        dt    Snapshots.
+        dd.
+              Every time you commit, or save the state of your project in Git,
+              it basically takes a picture of what all your files look like at that moment
+              and stores a reference to that snapshot (if files have not changed,
+              Git doesn't store the file again (like others VCSs),
+              just a link to the previous identical file it has already stored.)
+              Git thinks about its data more like a stream of snapshots.
+        hr
+        dt    Nearly Every Operation Is Local.
+        dd.
+              Git only need local files and resources to operate unlike
+              other VCSs which have latency network overhead.
+        hr
+        dt     Git Has Integrity.
+        dt     Git Generally Only Adds Data.
+        dd.
+              In Git, doing nearly all of actions, you only add data to the Git database.
+              It is very difficult to lose your data,
+              especially if you regularly push your database to another repository.
+              Everything (files, dirs) in Git is check-summed before it's stored (to GIT) and
+              is then referred to by that checksum.
+              This means it’s impossible to change the contents without Git knowing about it.
+              Git hash-mechanism: SHA-1
+              Git stored snapshots in DB by the hash.
 
-    H1 1.      Getting started.
-    H2 1.3.    Git Basics.
-
-    h3    Snapshots.
-    p.
-          Every time you commit, or save the state of your project in Git,
-          it basically takes a picture of what all your files look like at that moment
-          and stores a reference to that snapshot (if files have not changed,
-          Git doesn't store the file again (like others VCSs),
-          just a link to the previous identical file it has already stored.)
-          Git thinks about its data more like a stream of snapshots.
-
-    h3   Nearly Every Operation Is Local.
-    p.
-          Git only need local files and resources to operate unlike
-          other VCSs which have latency network overhead.
-
-    h3     Git Has Integrity.
-    h3     Git Generally Only Adds Data.
-    p.
-          In Git, doing nearly all of actions, you only add data to the Git database.
-          It is very difficult to lose your data,
-          especially if you regularly push your database to another repository.
-          Everything (files, dirs) in Git is check-summed before it's stored (to GIT) and
-          is then referred to by that checksum.
-          This means it’s impossible to change the contents without Git knowing about it.
-          Git hash-mechanism: SHA-1
-          Git stored snapshots in DB by the hash.
-
-
-    h1 2.      Git Basics.
-    h2 2.1     Getting a Git Repository
-    p.
-        Git initializing in an Existing Directory
-          Init in a current directory: [$ git init]
-        Cloning an Existing Repository.
-          You clone a repository with: [$ git clone [url]].
-
-    h2 2.2.    Recording Changes to the Repository
-    h3  Recording Changes to the Repository
-    p.
-        Current dir - directory where git had initialized.
-          Each file in the current directory may have two states:
-            untracked(не отслеживаемые)
-            tracked  (отслеживаемые, in last snapshot)
-          Tracked files are files that were of the last snapshot; their states:
-              unmodified
-              modified
-              staged
-
-    h3 Checking the Status of Your Files
-    p       Check status of files in current dir: [$ git status]
-
-    h3  Tracking New Files
-    p       Begin tracking new file:[ $ git add [file]]
-
-    h3  Staging Modified Files
-    p       Git add is a multipurpose command – you use it to begin tracking new files,
-    p       to stage files, and to do other things like marking merge-conflicted files as resolved.
-
-    h3  Ignoring Files
-    p       See .gitignore
-
-    h3  Viewing Your Staged and Unstaged Changes
-    p       [$ git diff] - shows you the exact lines added and removed – the patch, as it were.
-
-    h3  Removing Files
-    p      Command: [$ git rm [file | dir]]
-    p      This command simply delete tracked file.
-
-    h3  Moving Files (Renaming)
-    p       If you want to rename a file in Git, you can run something like:
-    p       [$ git mv file_from file_to]
-
-    h2 2.3.   Viewing the Commit History.
-
-    h3    Viewing the Commit History
-    p.
-          To do this you need type the [$ git log] command.
-          One of the more helpful options is [-p], which shows the difference introduced in each commit.
-          You can also use [-2], which limits the output.
-          If you want to see some abbreviated stats for each commit, you can use the [--stat] option.
-          Another really useful option is [--pretty=oneline|short|full|fuller|format:]
-          Show graph: [$ git log --graph]
-          e.g.: [$ git log --pretty=format:"%h - %an, %ar : %s"]
-          More info available on the above link.
-
-          To see only the commits of a certain author: git log --author=bob
-
-          Different between committer and author is the author is the person who originally wrote the work,
-          whereas the committer is the person who last applied the work.
-
-    h3     Limiting Log Output
-    p.
-          With: [-<n>] where n is any integer to show the last n commits.
-          The time-limiting options such as --since and --until.
-          See other command in reference.
-
-
-    h2 2.4.    Undoing Things
-        h3 Undoing Things
-        p  [$ git commit --amend]
-
-        h3 Unstaging a Staged File
-        p  To unstage content in current dir, you can use: [$ git reset HEAD <file>] command:
-
-        h3 Unmodifying a Modified File
-        p.
-          You can replace local changes using the command:
-          [$ git checkout -- [file]] - be careful - is a dangerous command.
-          This kept files already added to the index,(new files).
-          Remember, anything that is committed in Git can almost always be recovered.
+      hr
+      h1 2.      Git Basics.
+      h2 2.1     Getting a Git Repository
       p.
-          If you instead want to drop all your local changes, use:
-          [$ git fetch origin]. It fetch the latest history
-          from the server and point your local master branch.
+      dt   Git initializing in an Existing Directory
+      dd    Init in a current directory: [$ git init]
 
-    h2 2.5.     Working with Remotes
-        p.
-          Remote repositories are versions of your project
-          that are hosted on the Internet or network somewhere.
-          Remotes enable you collaborate on any project remotely.
-          It is them porpose.
+      dt   Cloning an Existing Repository.
+      dd    You clone a repository with: [$ git clone [url]].
+      hr
 
-        h3 Showing Your Remotes
-        p  To see which remote servers you have configured, you can run the [$ git remote]
+      h2 2.2.    Recording Changes to the Repository
+      dt   Recording Changes to the Repository
+      dd.
+          Current dir - directory where git had initialized.
+            Each file in the current directory may have two states:
+              untracked(не отслеживаемые)
+              tracked  (отслеживаемые, in last snapshot)
+            Tracked files are files that were of the last snapshot; their states:
+                unmodified
+                modified
+                staged
+      hr
+      dt  Checking the Status of Your Files
+      dd      Check status of files in current dir: [$ git status]
+      hr
+      dt   Tracking New Files
+      dd      Begin tracking new file:[ $ git add [file]]
+      hr
+      dt  Staging Modified Files
+      dd.
+              Git add is a multipurpose command – you use it to begin tracking new files,
+              to stage files, and to do other things like marking merge-conflicted files as resolved.
+      hr
+      dt  Ignoring Files
+      dd      See .gitignore
+      hr
+      dt  Viewing Your Staged and Unstaged Changes
+      dd      [$ git diff] - shows you the exact lines added and removed – the patch, as it were.
+      hr
+      dt  Removing Files
+      dd.
+          Command: [$ git rm [file | dir]]
+          This command simply delete tracked file.
+      hr
+      dt   Moving Files (Renaming)
+      dd.
+          If you want to rename a file in Git, you can run something like:
+          [$ git mv file_from file_to]
+      hr
+      h2 2.3.   Viewing the Commit History.
+      hr
+      dt     Viewing the Commit History
+      dd.
+            To do this you need type the [$ git log] command.
+            One of the more helpful options is [-p], which shows the difference introduced in each commit.
+            You can also use [-2], which limits the output.
+            If you want to see some abbreviated stats for each commit, you can use the [--stat] option.
+            Another really useful option is [--pretty=oneline|short|full|fuller|format:]
+            Show graph: [$ git log --graph]
+            e.g.: [$ git log --pretty=format:"%h - %an, %ar : %s"]
+            More info available on the above link.
 
-        h3 Adding Remote Repositories
-        p  [$ git remote add [shortname] [url]]
+            To see only the commits of a certain author: git log --author=bob
 
-        h3 Fetching and Pulling from Your Remotes
-        p.
-          As you just saw, to get data from your remote projects,
-          you can run:[$ git fetch [remote-name]]
+            Different between committer and author is the author is the person who originally wrote the work,
+            whereas the committer is the person who last applied the work.
+      hr
+      dt      Limiting Log Output
+      dd.
+            With: [-<n>] where n is any integer to show the last n commits.
+            The time-limiting options such as --since and --until.
+            See other command in reference.
 
-          For example, if you want to fetch all the information that remote repo has
-          but that you don’t yet have in your repository, you can run [$ git fetch [shortname]]
-          If you have a branch set up to track a remote branch, you can use
+      hr
+      h2 2.4.    Undoing Things
+      dt    Undoing Things
+      dd    [$ git commit --amend]
 
-          the [$ git pull] command to automatically fetch and then merge a remote branch into your current branch.
+      dt    Unstaging a Staged File
+      dd    To unstage content in current dir, you can use: [$ git reset HEAD <file>] command:
 
-        h3 Pushing to Your Remotes
-        p.
-          When you have your project at a point that you want to share,
-          you have to push it upstream. The command for this is simple:
-          [git push [remote-name] [branch-name]]
+      dt    Unmodifying a Modified File
+      dd.
+            You can replace local changes using the command:
+            [$ git checkout -- [file]] - be careful - is a dangerous command.
+            This kept files already added to the index,(new files).
+            Remember, anything that is committed in Git can almost always be recovered.
 
-        Inspecting a Remote
-        p.
-          If you want to see more information about a particular remote:
-          [$ git remote show [remote-name] ]
-
-
-    h2 2.5.    Tagging
-        h3 Tagging
-        p   Typically people use this functionality to mark release points (v1.0, and so on).
-
-
-    h2 3.1.	Branching in a Nutshell.
-        p.
-          Branching means you diverge from the main line of development
-          and continue to do work without messing with that main line.
-
-        h3 Branching in a Nutshell
-        p.
-          When you make a commit, Git stores a commit object that
-          contains a pointer to the snapshot of the content you staged.
-
-        h3 Creating a New Branch
-        p.
-          [$ git branch [branch name]]
-          How does Git know what branch you’re currently on?
-          It keeps a special pointer called HEAD.
-          Note that this is a lot different than the concept of HEAD
-          in other VCSs you may be used to, such as Subversion or CVS.
-          The git branch command only created a new branch – it didn’t switch to that branch.
-          To see where the point of your HEAD, use:
-          [$ git log --oneline --decorate]
-
-          [$ git checkout [branch name]]
-          That command did two things.
-          It moved the HEAD pointer back to point to the [branch name] branch,
-          and it reverted the files in your working directory
-          back to the snapshot that master points to.
-
-          [git log --oneline --decorate --graph --all]
-
-
-
-
-
-    h2 My notes.
+            If you instead want to drop all your local changes, use:
+            [$ git fetch origin]. It fetch the latest history
+            from the server and point your local master branch.
+      hr
+      h2 2.5.     Working with Remotes
       p.
-        Head  - points to the last commit i have made.
-        Index - is the current state of file of current dir
-        that will comprise next commit (in other words - staged area, or
-        is the last snapshot of files in the current dir.
+            Remote repositories are versions of your project
+            that are hosted on the Internet or network somewhere.
+            Remotes enable you collaborate on any project remotely.
+            It is them porpose.
 
-        Useful hints:
-          [$ gitk]                            - built-in git GUI
-          [$ git config color.ui true]        - use colorful git output
-          [$ git config format.pretty oneline]- show log on just one line per commit
-          [$ git add -i]                      - use interactive adding
+      dt    Showing Your Remotes
+      dd    To see which remote servers you have configured, you can run the [$ git remote]
+
+      dt    Adding Remote Repositories
+      dd    [$ git remote add [shortname] [url]]
+
+      dt    Fetching and Pulling from Your Remotes
+      dd.
+            As you just saw, to get data from your remote projects,
+            you can run:[$ git fetch [remote-name]]
+
+            For example, if you want to fetch all the information that remote repo has
+            but that you don’t yet have in your repository, you can run [$ git fetch [shortname]]
+            If you have a branch set up to track a remote branch, you can use
+            the [$ git pull] command to automatically fetch and then merge a remote branch into your current branch.
 
 
-      p  adding for tracking(or staging) : git add [dir]
-      p  dChecking status                : git status
-      p  dChecking status (short)        : git status -s
+      dt    Pushing to Your Remotes
+      dd.
+            When you have your project at a point that you want to share,
+            you have to push it upstream. The command for this is simple:
+            [git push [remote-name] [branch-name]]
+
+      dt    Inspecting a Remote
+      dd.
+            If you want to see more information about a particular remote:
+            [$ git remote show [remote-name] ]
+
+      hr
+      h2 2.5.    Tagging
+      dt    Tagging
+      dd     Typically people use this functionality to mark release points (v1.0, and so on).
+
+      hr
+      h2 3.1.	Branching in a Nutshell.
+      p.
+            Branching means you diverge from the main line of development
+            and continue to do work without messing with that main line.
+
+      dt     Branching in a Nutshell
+      dd.
+            When you make a commit, Git stores a commit object that
+            contains a pointer to the snapshot of the content you staged.
+
+      dt     Creating a New Branch
+      dd.
+            [$ git branch [branch name]]
+            How does Git know what branch you’re currently on?
+            It keeps a special pointer called HEAD.
+            Note that this is a lot different than the concept of HEAD
+            in other VCSs you may be used to, such as Subversion or CVS.
+            The git branch command only created a new branch – it didn’t switch to that branch.
+            To see where the point of your HEAD, use:
+            [$ git log --oneline --decorate]
+
+            [$ git checkout [branch name]]
+            That command did two things.
+            It moved the HEAD pointer back to point to the [branch name] branch,
+            and it reverted the files in your working directory
+            back to the snapshot that master points to.
+
+            [git log --oneline --decorate --graph --all]
+
+
+
+
+    hr
+    dt  My notes.
+    dd.
+          Head  - points to the last commit i have made.
+          Index - is the current state of file of current dir
+          that will comprise next commit (in other words - staged area, or
+          is the last snapshot of files in the current dir.
+          Useful hints:
+            [$ gitk]                            - built-in git GUI
+            [$ git config color.ui true]        - use colorful git output
+            [$ git config format.pretty oneline]- show log on just one line per commit
+            [$ git add -i]                      - use interactive adding
+
+
+           adding for tracking(or staging) : git add [dir]
+           dChecking status                : git status
+           dChecking status (short)        : git status -s
 
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
     script(src="js/bootstrap.min.js")
