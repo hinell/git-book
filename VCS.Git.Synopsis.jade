@@ -22,11 +22,11 @@ html(lang="en")
            color: #8d5201;
          }
   body.container.dl-horizontal
-    dt VCS GIT. Based on:
+    dt VCS GIT. Based on: 28.March.2015
     dd
       a(href="http://git-scm.com/book/en/v2")
         | Git Book
-
+    dt Version:
     ul  Temp:
     ul Chapter
      li    Part Chapter along with Header
@@ -161,11 +161,10 @@ html(lang="en")
       dd    To unstage content in current dir, you can use: [$ git reset HEAD <file>] command:
 
       dt    Unmodifying a Modified File
-      dd.
-            You can replace local changes using the command:
-            [$ git checkout -- [file]] - be careful - is a dangerous command.
-            This kept files already added to the index,(new files).
-            Remember, anything that is committed in Git can almost always be recovered.
+      dd    You can replace local changes using the command:
+      dd    [$ git checkout -- [file]] - be careful - is a dangerous command.
+      dd    This kept files already added to the index,(new files).
+      dd    Remember, anything that is committed in Git can almost always be recovered.
       dd.
             If you instead want to drop all your local changes, use:
             [$ git fetch origin]. It fetch the latest history
@@ -174,10 +173,10 @@ html(lang="en")
     H2(data-toggle="collapse" data-target="#25" aria-expanded="false" aria-controls="25").
       2.5.     Working with Remotes
     div(id="25").collapse.color-back-grey
-      p    Remote repositories are versions of your project
-      p    that are hosted on the Internet or network somewhere.
-      p    Remotes enable you collaborate on any project remotely.
-      p    It is them porpose.
+      dd    Remote repositories are versions of your project
+      dd    that are hosted on the Internet or network somewhere.
+      dd    Remotes enable you collaborate on any project remotely.
+      dd    It is them porpose.
 
       dt    Showing Your Remotes
       dd    To see which remote servers you have configured, you can run the [$ git remote]
@@ -212,62 +211,123 @@ html(lang="en")
       dt    Tagging
       dd      Typically people use this functionality to mark release points (v1.0, and so on).
 
-      dt
+      dt    Listing Your Tags
+      dd      [$ git tag]
+      dd    You can also search for tags with a particualar pattern like this
+      dd    [$ git tag -l 'v1.*']
 
+      dt    Creating Tags
+      dd    Git uses two main types of tags:
+        li lightweight
+        li annotated.
+
+      dd    A lightweight tag is very much like a branch that doesn’t change – it’s just a pointer to a specific commit.
+      dd    Annotated tags, are stored as full objects in the Git database
+      dd    (including the tagger name, e-mail, date;
+      dd    a tagging message; and can be signed / verified with GNU Privacy Guard (GPG).)
+
+      dt    Annotated Tags
+      dd    The easiest way is to specify [-a | -m | -s ]: [$ git -a ]
+      dd    e.g.: [$ git tag -a v.1.4 - 'my version 1.4']
+      dd    To see tag data along with commit that was tagged, use: [$ git show [tagname]]
+
+      dt    Lightweight Tags
+      dd    To create a lightweight tag, don’t supply the -a, -s, or -m option, i.e:
+      dd    [$ git tag v1.4-lw]
+
+      dt    Tagging later
+      dd    [$ git tag -a [tagName] [commit]] i.e.:
+      dd    [$ git tag -a v1.2 9fceb02]
+
+      dt    Sharing Tags
+      dd    Just run: [$ git push origin [tagname]
+      dd    By default the [$ git push] command doesn’t transfer tags to remote servers.
+      dd    To push up at once a lot of tags you can use the:[$ git push --tags]
+
+      dt    Checking out Tags
+      dd    You can create a new branch at a specific tag:[$ git checkout -b [branchname] [tag(v.2 etc)]]
+    hr
+    H2(data-toggle="collapse" data-target="#27" aria-expanded="false" aria-controls="27").
+      2.7.	Git Aliases
+    div(id="27").collapse.color-back-grey
+      dd    You can easily set up an alias for each command using git config:
+      dd    [$ git config --global alias.[nameOfNewCommand] ["git.command]"]
+      dd    i.e.: [$ git config --global alias.co checkout]
+      dd    However, maybe you want to run an external command
+      dd    you start the command with a ! character.
+      dd    e.g.: [$ git config --global alias.visual "!gitk"]
 
     h1 3. Git Branching
-    H2(data-toggle="collapse" data-target="#31" aria-expanded="false" aria-controls="31").
-      3.1.	Branching in a Nutshell.
-    div(id="31").collapse.color-back-grey
-      dd    Branching means you diverge from the main line of development
-      dd    and continue to do work without messing with that main line.
+      H2(data-toggle="collapse" data-target="#31" aria-expanded="false" aria-controls="31").
+        3.1.	Branching in a Nutshell.
+      div(id="31").collapse.color-back-grey
+        dd    Branching means you diverge from the main line of development
+        dd    and continue to do work without messing with that main line.
 
-      dt    Branching in a Nutshell
-      dd    When you make a commit, Git stores a commit object that
-      dd    contains a pointer to the snapshot of the content you staged.
+        dt    Branching in a Nutshell
+        dd    When you make a commit, Git stores a commit object that
+        dd    contains a pointer to the snapshot of the content you staged.
 
-      dt    Creating a New Branch
-      dd    [$ git branch [branch name]]
-      dd    How does Git know what branch you’re currently on?
-      dd    It keeps a special pointer called HEAD.
-      dd    Note that this is a lot different than the concept of HEAD
-      dd    in other VCSs you may be used to, such as Subversion or CVS.
-      dd    The git branch command only created a new branch – it didn’t switch to that branch.
+        dt    Creating a New Branch
+        dd    [$ git branch [branch name]]
+        dd    How does Git know what branch you’re currently on?
+        dd    It keeps a special pointer called HEAD.
+        dd    Note that this is a lot different than the concept of HEAD
+        dd    in other VCSs you may be used to, such as Subversion or CVS.
+        dd    The git branch command only created a new branch – it didn’t switch to that branch.
 
-      br
-      dd    To see where the point of your HEAD, use:
-      dd    [$ git log --oneline --decorate]
+        br
+        dd    To see where the point of your HEAD, use:
+        dd    [$ git log --oneline --decorate]
 
-      dd    [$ git checkout [branch name]]
-      dd    That command did two things.
-      dd    It moved the HEAD pointer back to point to the [branch name] branch,
-      dd    and it reverted the files in your working directory
-      dd    back to the snapshot that master points to.
+        dd    [$ git checkout [branch name]]
+        dd    That command did two things.
+        dd    It moved the HEAD pointer back to point to the [branch name] branch,
+        dd    and it reverted the files in your working directory
+        dd    back to the snapshot that master points to.
 
-      dd    [git log --oneline --decorate --graph --all]
-
-
+        dd    [git log --oneline --decorate --graph --all]
 
 
+      H2(data-toggle="collapse" data-target="#32" aria-expanded="false" aria-controls="32").
+        3.2.	Basic Branching and Merging
+      div(id="32").collapse.color-back-grey
+        dt    Basic Branching and Merging
+        dd    At this stage, you’ll receive a call that another issue
+        dd    is critical and you need a hotfix. You’ll do the following:
+          ol
+            li Switch to your production branch.
+            li Create a branch to add the hotfix.
+            li After it’s tested, merge the hotfix branch, and push to production.
+            li Switch back to your original story and continue working.
+        dt    Basic Merging
+        dd    It’s worth pointing out that Git determines the best common ancestor to use
+        dd    for its merge base; this is different than older tools like CVS or Subversion (before version 1.5)
 
-    hr
-    H2(data-toggle="collapse" data-target="#Mynotes" aria-expanded="false" aria-controls="Mynotes").
-      My notes.
-    div(id="Mynotes").collapse.color-back-grey
 
-      ul   Head  - points to the last commit i have made.
-        li  Index - is the current state of file of current dir
-        li  that will comprise next commit (in other words - staged area, or
-        li  is the last snapshot of files in the current dir.
-      ul  Useful hints:
-        li    [$ gitk]                            - built-in git GUI
-        li    [$ git config color.ui true]        - use colorful git output
-        li    [$ git config format.pretty oneline]- show log on just one line per commit
-        li    [$ git add -i]                      - use interactive adding
-      ul
-        li   adding for tracking(or staging) : git add [dir]
-        li   dChecking status                : git status
-        li   dChecking status (short)        : git status -s
+      hr
+      H2(data-toggle="collapse" data-target="#Mynotes" aria-expanded="false" aria-controls="Mynotes").
+        My notes.
+      div(id="Mynotes").collapse.color-back-grey
+        dt      GPG
+        dd      - GNU Privacy Guard
+        dd      Head  - points to the last commit i have made.
+        dd      Index - is the current state of file of current dir
+        dd      that will comprise next commit (in other words - staged area, or
+        dd      is the last snapshot of files in the current dir.
+        dt      Useful hints:
+        dd
+          ol
+            li  [$ gitk]                            - built-in git GUI
+            li  [$ git config color.ui true]        - use colorful git output
+            li  [$ git config format.pretty oneline]- show log on just one line per commit
+            li  [$ git add -i]                      - use interactive adding
+        dt      Other
+        dd
+          ul
+            li   adding for tracking(or staging) : git add [dir]
+            li   dChecking status                : git status
+            li   dChecking status (short)        : git status -s
 
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
     script(src="js/bootstrap.min.js")
