@@ -7,119 +7,98 @@ html(lang="en")
     meta(name="viewport" content="width=device-width, initial-scale=1")
     link(href="css/bootstrap.min.css" rel="stylesheet")
     style(type="text/css").
-
-        .color-back-black {
-          background-color: rgb(0, 0, 0);
-        }
-        .color-text-white {
-         color: #ffffff;
-        }
-        h1, h2, h3 {
-           margin-top: 0;
-           margin-bottom: 0;
-          color: #942f11;
-
-         }
-        .h2, h2 {
-          font-size: 24px;
-        }
-        /*.collapsing{color : rgb(169, 169, 169) }*/
-
-        [data-toggle]:hover {
-          text-decoration : underline;
-        }
-        [data-toggle]{
-          color: #ffffff;
-          background-color: #2d2d2d;
-        }
-
-        .collapse.in:hover {
-          background-color: #f8f8f8 }
-
-        ::-webkit-scrollbar {
-          width : 2px;
-          position : fixed;
-        }
-        ::-webkit-scrollbar-track       {
-          width: 2px;
-          border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb {
-          border-radius   : 10px;
-          background-color: #942f11;
-        }
-        body {
-          min-height: 1200px;
-          max-width : 900px;
-        }
-
+      .color-back-black {
+        background-color : rgb(0, 0, 0);
+      }
+      .color-text-white {
+        color : #ffffff;
+      }
+      h1, h2, h3 {
+        margin-top    : 0;
+        margin-bottom : 0;
+        color         : #942f11;
+      }
+      .h2, h2 {
+        font-size : 24px;
+      }
+      /*.collapsing{color : rgb(169, 169, 169) }*/
+      [data-toggle]:hover {
+        text-decoration : underline;
+      }
+      [data-toggle] {
+        color            : #ffffff;
+        background-color : #2d2d2d;
+      }
+      .collapse.in:hover {
+        background-color : #f8f8f8 }
+      ::-webkit-scrollbar {
+        width    : 2px;
+        position : fixed;
+      }
+      ::-webkit-scrollbar-track {
+        width         : 2px;
+        border-radius : 10px;
+      }
+      ::-webkit-scrollbar-thumb {
+        border-radius    : 10px;
+        background-color : #942f11;
+      }
+      body {
+        min-height : 1200px;
+        max-width  : 900px;
+      }
   body.container.dl-horizontal
     h1  Preface
-
-
     dt  Description:
     dd  There are synopsis which i've gathered from my some notes and pieces of the
       a(href="http://git-scm.com/book/en/v2")  GIT Book (v2.0).
-
-
     dt  Version:
     dd  2.0
-
     dt  Author:
     dd
       a(href="https://github.com/AlexNeodim") Alex Neodim
-
-
     hr
     H1 1.      Getting started.
     H2(data-toggle="collapse" data-target="#13" aria-expanded="false" aria-controls="13").
-        1.3.    Git Basics.
+      1.3.    Git Basics.
     div(id="13").collapse
-      
       dt    Snapshots.
       dd.
-            Every time you commit, or save the state of your project in Git,
-            it basically takes a picture of what all your files look like at that moment
-            and stores a reference to that snapshot (if files have not changed,
+        Every time you commit, or save the state of your project in Git,
+        it basically takes a picture of what all your files look like at that moment
+        and stores a reference to that snapshot (if files have not changed,
       dd.
-            Git doesn't store the file again (like others VCSs),
-            just a link to the previous identical file it has already stored.)
+        Git doesn't store the file again (like others VCSs),
+        just a link to the previous identical file it has already stored.)
       dd    Git thinks about its data more like a stream of snapshots.
-      
       dt    Nearly Every Operation Is Local.
       dd.
-            Git only need local files and resources to operate unlike
-            other VCSs which have latency network overhead.
-      
+        Git only need local files and resources to operate unlike
+        other VCSs which have latency network overhead.
       dt    Git Has Integrity.
       dt    Git Generally Only Adds Data.
-
       dd    In Git, doing nearly all of actions, you only add data to the Git database.
       dd.
-            It is very difficult to lose your data,
-            especially if you regularly push your database to another repository.
+        It is very difficult to lose your data,
+        especially if you regularly push your database to another repository.
       dd.
-            Everything (files, dirs) in Git is check-summed before it's stored (to GIT) and
-            is then referred to by that checksum.
+        Everything (files, dirs) in Git is check-summed before it's stored (to GIT) and
+        is then referred to by that checksum.
       dd    This means it’s impossible to change the contents without Git knowing about it.
       dd    Git hash-mechanism: SHA-1
       dd    Git stored snapshots in DB by the hash.
-
     hr
     h1 2.      Git Basics.
     H2(data-toggle="collapse" data-target="#21" aria-expanded="false" aria-controls="21").
-        2.1.     Getting a Git Repository
+      2.1.     Getting a Git Repository
     div(id="21").collapse
       p.
       dt   Git initializing in an Existing Directory
       dd    Init in a current directory: [$ git init]
-
       dt   Cloning an Existing Repository.
       dd    You clone a repository with: [$ git clone [url]].
-
-    
     H2(data-toggle="collapse" data-target="#22" aria-expanded="false" aria-controls="22").
-        2.2.    Recording Changes to the Repository
+      2.2.    Recording Changes to the Repository
     div(id="22").collapse
       dt    Recording Changes to the Repository
       dd
@@ -133,82 +112,61 @@ html(lang="en")
             li       unmodified
             li       modified
             li       staged
-
-      
-
       dt  Checking the Status of Your Files
       dd      Check status of files in current dir: [$ git status]
-      
       dt   Tracking New Files
       dd      Begin tracking new file:[ $ git add [file]]
-      
       dt  Staging Modified Files
       dd      Git add is a multipurpose command – you use it to begin tracking new files,
       dd      to stage files, and to do other things like marking merge-conflicted files as resolved.
-      
       dt  Ignoring Files
       dd      See .gitignore
-      
       dt  Viewing Your Staged and Unstaged Changes
       dd      [$ git diff] - shows you the exact lines added and removed – the patch, as it were.
-      
       dt  Removing Files
       dd.
-          Command: [$ git rm [file | dir]]
-          This command simply delete tracked file.
-      
+        Command: [$ git rm [file | dir]]
+        This command simply delete tracked file.
       dt   Moving Files (Renaming)
       dd.
-          If you want to rename a file in Git, you can run something like:
-          [$ git mv file_from file_to]
-    
+        If you want to rename a file in Git, you can run something like:
+        [$ git mv file_from file_to]
     H2(data-toggle="collapse" data-target="#23" aria-expanded="false" aria-controls="23").
       2.3.   Viewing the Commit History.
     div(id="23").collapse
-      
       dt    Viewing the Commit History
       dd    To do this you need type the [$ git log] command.
       dd    One of the more helpful options is [-p], which shows the difference introduced in each commit.
       dd    You can also use [-2], which limits the output.
-
-
       dd    If you want to see some abbreviated stats for each commit, you can use the [--stat] option.
       dd    Another really useful option is [--pretty=oneline|short|full|fuller|format:]
       dd    Show graph: [$ git log --graph]
       dd    e.g.: [$ git log --pretty=format:"%h - %an, %ar : %s"]
       dd    More info available on the above link.
-
       dd    To see only the commits of a certain author: git log --author=bob
-
       dd    Different between committer and author is the author is the person who originally wrote the work,
       dd    whereas the committer is the person who last applied the work.
-      
       dt      Limiting Log Output
       dd.
-            With: [-<n>] where n is any integer to show the last n commits.
-            The time-limiting options such as --since and --until.
-            See other command in reference.
-
-    
+        With: [-<n>] where n is any integer to show the last n commits.
+        The time-limiting options such as --since and --until.
+        See other command in reference.
     H2(data-toggle="collapse" data-target="#24" aria-expanded="false" aria-controls="24").
       2.4.    Undoing Things
     div(id="24").collapse
       dt    Undoing Things
       dd    [$ git commit --amend]
-
       dt    Unstaging a Staged File
       dd    To unstage content in current dir, you can use: [$ git reset HEAD <file>] command:
-
       dt    Unmodifying a Modified File
       dd    You can replace local changes using the command:
       dd    [$ git checkout -- [file]] - be careful - is a dangerous command.
       dd    This kept files already added to the index,(new files).
       dd    Remember, anything that is committed in Git can almost always be recovered.
       dd.
-            If you instead want to drop all your local changes, use:
-            [$ git fetch origin]. It fetch the latest history
-            from the server and point your local master branch.
-    
+        If you instead want to drop all your local changes, use:
+        [$ git fetch origin]. It fetch the latest history
+        from the server and point your local master branch.
     H2(data-toggle="collapse" data-target="#25" aria-expanded="false" aria-controls="25").
       2.5.     Working with Remotes
     div(id="25").collapse
@@ -216,76 +174,58 @@ html(lang="en")
       dd    that are hosted on the Internet or network somewhere.
       dd    Remotes enable you collaborate on any project remotely.
       dd    It is them porpose.
-
       dt    Showing Your Remotes
       dd    To see which remote servers you have configured, you can run the [$ git remote]
-
       dt    Adding Remote Repositories
       dd    [$ git remote add [shortname] [url]]
-
       dt    Fetching and Pulling from Your Remotes
       dd    As you just saw, to get data from your remote projects,
       dd    you can run:[$ git fetch [remote-name]]
-
       dd    For example, if you want to fetch all the information that remote repo has
       dd    but that you don’t yet have in your repository, you can run [$ git fetch [shortname]]
       dd    If you have a branch set up to track a remote branch, you can use
       dd    the [$ git pull] command to automatically fetch and then merge a remote branch into your current branch.
-
-
       dt    Pushing to Your Remotes
       dd    When you have your project at a point that you want to share,
       dd    you have to push it upstream. The command for this is simple:
       dd    [git push [remote-name] [branch-name]]
-
       dt    Inspecting a Remote
       dd    If you want to see more information about a particular remote:
       dd    [$ git remote show [remote-name] ]
-
-    
     H2(data-toggle="collapse" data-target="#26" aria-expanded="false" aria-controls="26").
       2.6.    Tagging
     div(id="26").collapse
       h2
       dt    Tagging
       dd      Typically people use this functionality to mark release points (v1.0, and so on).
-
       dt    Listing Your Tags
       dd      [$ git tag]
       dd    You can also search for tags with a particualar pattern like this
       dd    [$ git tag -l 'v1.*']
-
       dt    Creating Tags
       dd    Git uses two main types of tags:
         li lightweight
         li annotated.
-
       dd    A lightweight tag is very much like a branch that doesn’t change – it’s just a pointer to a specific commit.
       dd    Annotated tags, are stored as full objects in the Git database
       dd    (including the tagger name, e-mail, date;
       dd    a tagging message; and can be signed / verified with GNU Privacy Guard (GPG).)
-
       dt    Annotated Tags
       dd    The easiest way is to specify [-a | -m | -s ]: [$ git -a ]
       dd    e.g.: [$ git tag -a v.1.4 - 'my version 1.4']
       dd    To see tag data along with commit that was tagged, use: [$ git show [tagname]]
-
       dt    Lightweight Tags
       dd    To create a lightweight tag, don’t supply the -a, -s, or -m option, i.e:
       dd    [$ git tag v1.4-lw]
-
       dt    Tagging later
       dd    [$ git tag -a [tagName] [commit]] i.e.:
       dd    [$ git tag -a v1.2 9fceb02]
-
       dt    Sharing Tags
       dd    Just run: [$ git push origin [tagname]
       dd    By default the [$ git push] command doesn’t transfer tags to remote servers.
       dd    To push up at once a lot of tags you can use the:[$ git push --tags]
-
       dt    Checking out Tags
       dd    You can create a new branch at a specific tag:[$ git checkout -b [branchname] [tag(v.2 etc)]]
-    
     H2(data-toggle="collapse" data-target="#27" aria-expanded="false" aria-controls="27").
       2.7.	Git Aliases
     div(id="27").collapse
@@ -297,125 +237,136 @@ html(lang="en")
       dd    e.g.: [$ git config --global alias.visual "!gitk"]
     hr
     h1 3. Git Branching
-      H2(data-toggle="collapse" data-target="#31" aria-expanded="false" aria-controls="31").
-        3.1.	Branching in a Nutshell.
-      div(id="31").collapse
-        dd    Branching means you diverge from the main line of development
-        dd    and continue to do work without messing with that main line.
+    H2(data-toggle="collapse" data-target="#31" aria-expanded="false" aria-controls="31").
+      3.1.	Branching in a Nutshell.
+    div(id="31").collapse
+      dd    Branching means you diverge from the main line of development
+      dd    and continue to do work without messing with that main line.
+      dt    Branching in a Nutshell
+      dd    When you make a commit, Git stores a commit object that
+      dd    contains a pointer to the snapshot of the content you staged.
+      dt    Creating a New Branch
+      dd    [$ git branch [branch name]]
+      dd    How does Git know what branch you’re currently on?
+      dd    It keeps a special pointer called HEAD.
+      dd    Note that this is a lot different than the concept of HEAD
+      dd    in other VCSs you may be used to, such as Subversion or CVS.
+      dd    The git branch command only created a new branch – it didn’t switch to that branch.
+      br
+      dd    To see where the point of your HEAD, use:
+      dd    [$ git log --oneline --decorate]
+      dd    [$ git checkout [branch name]]
+      dd    That command did two things.
+      dd    It moved the HEAD pointer back to point to the [branch name] branch,
+      dd    and it reverted the files in your working directory
+      dd    back to the snapshot that master points to.
+      dd    [git log --oneline --decorate --graph --all]
+    H2(data-toggle="collapse" data-target="#32" aria-expanded="false" aria-controls="32").
+      3.2.	Basic Branching and Merging
+    div(id="32").collapse
+      dt    Basic Branching and Merging
+      dd    At this stage, you’ll receive a call that another issue
+      dd    is critical and you need a hotfix. You’ll do the following:
+        ol
+          li Switch to your production branch.
+          li Create a branch to add the hotfix.
+          li After it’s tested, merge the hotfix branch, and push to production.
+          li Switch back to your original story and continue working.
+      dt    Basic Merging
+      dd    It’s worth pointing out that Git determines the best common ancestor to use
+      dd    for its merge base; this is different than older tools like CVS or Subversion (before version 1.5)
+    h2(data-toggle="collapse" data-target="#33" aria-expanded="false" aria-controls="33").
+      3.3.	Branch Management
+    div(id="33").collapse
+      dd Notice the <b>*</b> indicates the branch (HEAD) that you currently have checked out .
+      dd See last commit on each branch: [$ git branch -v]
+    h2(data-toggle="collapse" data-target="#34" aria-expanded="false" aria-controls="34").
+      3.3.	Branching Workflows
+    div(id="34").collapse
+      dt
+        a(href="http://git-scm.com/book/en/v2/Git-Branching-Branching-Workflows#Long-Running-Branches") Long-Running Branches
+      dd    This means you can have several branches that are always open (ie master) and
+      dd    that you use for different stages of your development cycle;
+      dd    you can merge regularly from some of them into others.
+      dt
+      dt
+        a(href="http://git-scm.com/book/en/v2/Git-Branching-Branching-Workflows#Topic Branches") Topic Branches
+      dd    Topic branches, however, are useful in projects of any size.
+      dd    A topic branch is a short-lived branch that you create and
+      dd    for a single particular feature or related work.
+    h2(data-toggle="collapse" data-target="#35" aria-expanded="false" aria-controls="35").
+      3.5.	Remote Branches
+    div(id="35").collapse
+      dt
+        a(href="http://git-scm.com/book/en/v2/Git-Branching-Remote-Branches") Remote Branches
+      dd    Remote branches are references (pointers) to the state of branches in your remote repositories.
+      dd    They’re local branches that you can’t move;
+      dd    they’re moved automatically for you whenever you do any network communication.
+      dt
+        a(href="http://git-scm.com/book/en/v2/Git-Branching-Remote-Branches#Tracking-Branches") Tracking Branches
+      dd    Checking out a local branch from a remote branch automatically creates what is called
+      dd    a “tracking branch” (or sometimes an “upstream branch”).
+      dd    Tracking branches are local branches that have a direct relationship to a remote branch.
+      dt
+        a(href="http://git-scm.com/book/en/v2/Git-Branching-Remote-Branches#Deleting-Remote-Branches") Deleting Remote Branches
+      dd  If you want to delete your branch from the server, you run the following:
+      dd  [$ git push [remote name] --delete [branch name]]
+    h2(data-toggle="collapse" data-target="#36" aria-expanded="false" aria-controls="36").
+      3.6.	Rebasing
+    div(id="36").collapse
+      dd In Git, there are two main ways to integrate changes from one branch into another:
+        ol
+          li the merge
+          li the rebase.
+      dt    The Basic Rebase
+      dd    There is no difference in the end product (in comparing with merge tool)
+      dd    of the integration, but rebasing makes for a cleaner history.
+      dt
+        a(href="http://git-scm.com/book/en/v2/Git-Branching-Rebasing#The-Basic-Rebase") The Basic Rebase
+      dd
+        |   Commands:
+        |   [$ git
+        a(href="http://git-scm.com/docs/git-rebase")    rebase
+        |   --onto <newbase>]
+      dt
+        a(href="http://git-scm.com/book/en/v2/Git-Branching-Rebasing#The-Perils-of-Rebasing") The Perils of Rebasing
+      dd Do not rebase commits that exist outside your repository.
+      dt
+        a(href="http://git-scm.com/book/en/v2/Git-Branching-Rebasing#Rebase-When-You-Rebase") Rebase When You Rebase
 
-        dt    Branching in a Nutshell
-        dd    When you make a commit, Git stores a commit object that
-        dd    contains a pointer to the snapshot of the content you staged.
-
-        dt    Creating a New Branch
-        dd    [$ git branch [branch name]]
-        dd    How does Git know what branch you’re currently on?
-        dd    It keeps a special pointer called HEAD.
-        dd    Note that this is a lot different than the concept of HEAD
-        dd    in other VCSs you may be used to, such as Subversion or CVS.
-        dd    The git branch command only created a new branch – it didn’t switch to that branch.
-
-        br
-        dd    To see where the point of your HEAD, use:
-        dd    [$ git log --oneline --decorate]
-
-        dd    [$ git checkout [branch name]]
-        dd    That command did two things.
-        dd    It moved the HEAD pointer back to point to the [branch name] branch,
-        dd    and it reverted the files in your working directory
-        dd    back to the snapshot that master points to.
-
-        dd    [git log --oneline --decorate --graph --all]
+      dd
+    hr
+    h1 4. Git on the Server
+    h2(data-toggle="collapse" data-target="#41" aria-expanded="false" aria-controls="41").
+      4.1.	The Protocols
+    div(id="41").collapse
+      dd    Therefore, the preferred method for collaborating with someone
+      dd    is to set up an intermediate repository that you both have access to, and push to and pull from that.
 
 
-      H2(data-toggle="collapse" data-target="#32" aria-expanded="false" aria-controls="32").
-        3.2.	Basic Branching and Merging
-      div(id="32").collapse
-        dt    Basic Branching and Merging
-        dd    At this stage, you’ll receive a call that another issue
-        dd    is critical and you need a hotfix. You’ll do the following:
-          ol
-            li Switch to your production branch.
-            li Create a branch to add the hotfix.
-            li After it’s tested, merge the hotfix branch, and push to production.
-            li Switch back to your original story and continue working.
-        dt    Basic Merging
-        dd    It’s worth pointing out that Git determines the best common ancestor to use
-        dd    for its merge base; this is different than older tools like CVS or Subversion (before version 1.5)
-
-      h2(data-toggle="collapse" data-target="#33" aria-expanded="false" aria-controls="33").
-        3.3.	Branch Management
-      div(id="33").collapse
-        dd Notice the <b>*</b> indicates the branch (HEAD) that you currently have checked out .
-        dd See last commit on each branch: [$ git branch -v]
-
-
-      h2(data-toggle="collapse" data-target="#34" aria-expanded="false" aria-controls="34").
-        3.3.	Branching Workflows
-      div(id="34").collapse
-        dt
-          a(href="http://git-scm.com/book/en/v2/Git-Branching-Branching-Workflows#Long-Running-Branches") Long-Running Branches
-        dd    This means you can have several branches that are always open (ie master) and
-        dd    that you use for different stages of your development cycle;
-        dd    you can merge regularly from some of them into others.
-        dt
-        dt
-          a(href="http://git-scm.com/book/en/v2/Git-Branching-Branching-Workflows#Topic Branches") Topic Branches
-
-        dd    Topic branches, however, are useful in projects of any size.
-        dd    A topic branch is a short-lived branch that you create and
-        dd    for a single particular feature or related work.
-      h2(data-toggle="collapse" data-target="#35" aria-expanded="false" aria-controls="35").
-        3.5.	Remote Branches
-      div(id="35").collapse
-        dt
-          a(href="http://git-scm.com/book/en/v2/Git-Branching-Remote-Branches") Remote Branches
-        dd    Remote branches are references (pointers) to the state of branches in your remote repositories.
-        dd    They’re local branches that you can’t move;
-        dd    they’re moved automatically for you whenever you do any network communication.
-        dt
-          a(href="http://git-scm.com/book/en/v2/Git-Branching-Remote-Branches#Tracking-Branches") Tracking Branches
-        dd    Checking out a local branch from a remote branch automatically creates what is called
-        dd    a “tracking branch” (or sometimes an “upstream branch”).
-        dd    Tracking branches are local branches that have a direct relationship to a remote branch.
-        dt
-          a(href="http://git-scm.com/book/en/v2/Git-Branching-Remote-Branches#Deleting-Remote-Branches") Deleting Remote Branches
-        dd  If you want to delete your branch from the server, you run the following:
-        dd  [$ git push [remote name] --delete [branch name]]
-      h2(data-toggle="collapse" data-target="#36" aria-expanded="false" aria-controls="36").
-        3.6.	Rebasing
-      div(id="36").collapse
-        dd In Git, there are two main ways to integrate changes from one branch into another:
-          ol
-            li the merge
-            li the rebase.
-        dd
-
-      hr
-      h1  Misc
-      H2(data-toggle="collapse" data-target="#Misc" aria-expanded="false" aria-controls="Misc").
-        Misc
-      div(id="Misc").collapse
-        dt      GPG
-        dd      - GNU Privacy Guard
-        dd      Head  - points to the last commit i have made.
-        dd      Index - is the current state of file of current dir
-        dd      that will comprise next commit (in other words - staged area, or
-        dd      is the last snapshot of files in the current dir.
-        dt      Useful hints:
-        dd
-          ol
-            li  [$ gitk]                            - built-in git GUI
-            li  [$ git config color.ui true]        - use colorful git output
-            li  [$ git config format.pretty oneline]- show log on just one line per commit
-            li  [$ git add -i]                      - use interactive adding
-        dt      Other
-        dd
-          ul
-            li   adding for tracking(or staging) : git add [dir]
-            li   dChecking status                : git status
-            li   dChecking status (short)        : git status -s
-
+    hr
+    h1  Misc
+    H2(data-toggle="collapse" data-target="#Misc" aria-expanded="false" aria-controls="Misc").
+      Misc
+    div(id="Misc").collapse
+      dt      GPG
+      dd      - GNU Privacy Guard
+      dd      Head  - points to the last commit i have made.
+      dd      Index - is the current state of file of current dir
+      dd      that will comprise next commit (in other words - staged area, or
+      dd      is the last snapshot of files in the current dir.
+      dt      Useful hints:
+      dd
+        ol
+          li  [$ gitk]                            - built-in git GUI
+          li  [$ git config color.ui true]        - use colorful git output
+          li  [$ git config format.pretty oneline]- show log on just one line per commit
+          li  [$ git add -i]                      - use interactive adding
+      dt      Other
+      dd
+        ul
+          li   adding for tracking(or staging) : git add [dir]
+          li   dChecking status                : git status
+          li   dChecking status (short)        : git status -s
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
     script(src="js/bootstrap.min.js")
-
