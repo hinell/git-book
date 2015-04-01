@@ -50,7 +50,7 @@ html(lang="en")
   body.container.dl-horizontal
     h1  Preface
     dt  Description:
-    dd  There are synopsis which i've gathered from my some notes and pieces of the
+    dd  There are the mini-review which i've gathered from my some notes and pieces of the
       a(href="http://git-scm.com/book/en/v2")  GIT Book (v2.0).
     dt  Version:
     dd  2.0
@@ -336,12 +336,41 @@ html(lang="en")
 
       dd
     hr
+
+
     h1 4. Git on the Server
     h2(data-toggle="collapse" data-target="#41" aria-expanded="false" aria-controls="41").
       4.1.	The Protocols
     div(id="41").collapse
       dd    Therefore, the preferred method for collaborating with someone
       dd    is to set up an intermediate repository that you both have access to, and push to and pull from that.
+      dt    The Protocols
+      dd    Git can use four major protocols to transfer data:
+        ul
+          li Local
+          li HTTP
+          li Secure Shell (SSH)
+          li Git
+      dt
+        a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-The-Protocols#Local-Protocol") Local Protocol
+      dd
+    h2(data-toggle="collapse" data-target="#42" aria-expanded="false" aria-controls="42").
+       4.2. Getting Git on a Server
+    div(id="42").collapse
+      dt
+        a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-Getting-Git-on-a-Server") Getting Git on a Server
+      dd    In order to initially set up any Git server,
+      dd    you have to export an existing repository into a new bare repository –
+      dd    a repository that doesn’t contain a working directory.
+      dd    This is generally straightforward to do.
+      dd    By convention, bare repository directories end in .git
+      dd    In order to clone repo, you run clone command with --bare:
+      dd    [$ git clone --bare [url to repo] [cloned repo name].git ]
+      dd    This is roughly equivalent to something like
+      dd    [$ cp -Rf my_repo/.git my_local_repo.git]
+      dt
+        a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-Getting-Git-on-a-Server#Small-Setups") Small Setups
+      dd    One of the most complicated aspects of setting up a Git server is user management.
 
 
     hr
@@ -351,7 +380,7 @@ html(lang="en")
     div(id="Misc").collapse
       dt      GPG
       dd      - GNU Privacy Guard
-      dd      Head  - points to the last commit i have made.
+      dd      Head  is the pointer that points to the current branch or any a commit.
       dd      Index - is the current state of file of current dir
       dd      that will comprise next commit (in other words - staged area, or
       dd      is the last snapshot of files in the current dir.
