@@ -54,52 +54,52 @@ html(lang="en")
         max-width  : 900px;
       }
   body.container.dl-horizontal
-    h1  SUMMARY
+    h1      SUMMARY
     H2(data-toggle="collapse" data-target="#Preface"  aria-controls="Preface").
-      Preface
+            Preface
     div(id="Preface").collapse
-      dt  Description:
+      dt    Description:
       dd
-        | Here a small review of my some collected notes based on the
+        |   Here a small review of my some collected notes based on the
         a(href="http://git-scm.com/book/en/v2")  GIT Book (v2.0),
-      dt  Version:
-      dd  2.0
-      dt  Author:
+      dt    Version:
+      dd    2.0
+      dt    Author:
       dd
         a(href="https://github.com/AlexNeodim") Alex Neodim
-    H1 1.      Getting started.
+    H1      1.      Getting started.
     H2(data-toggle="collapse" data-target="#13"  aria-controls="13").
-      1.3.    Git Basics.
+            1.3.    Git Basics.
     div(id="13").collapse
       dt    Snapshots.
       dd.
-        Every time you commit, or save the state of your project in Git,
-        it basically takes a picture of what all your files look like at that moment
-        and stores a reference to that snapshot (if files have not changed,
+            Every time you commit, or save the state of your project in Git,
+            it basically takes a picture of what all your files look like at that moment
+            and stores a reference to that snapshot (if files have not changed,
       dd.
-        Git doesn't store the file again (like others VCSs),
-        just a link to the previous identical file it has already stored.)
+            Git doesn't store the file again (like others VCSs),
+            just a link to the previous identical file it has already stored.)
       dd    Git thinks about its data more like a stream of snapshots.
       dt    Nearly Every Operation Is Local.
       dd.
-        Git only need local files and resources to operate unlike
-        other VCSs which have latency network overhead.
+            Git only need local files and resources to operate unlike
+            other VCSs which have latency network overhead.
       dt    Git Has Integrity.
       dt    Git Generally Only Adds Data.
       dd    In Git, doing nearly all of actions, you only add data to the Git database.
       dd.
-        It is very difficult to lose your data,
-        especially if you regularly push your database to another repository.
+            It is very difficult to lose your data,
+            especially if you regularly push your database to another repository.
       dd.
-        Everything (files, dirs) in Git is check-summed before it's stored (to GIT) and
-        is then referred to by that checksum.
+            Everything (files, dirs) in Git is check-summed before it's stored (to GIT) and
+            is then referred to by that checksum.
       dd    This means it’s impossible to change the contents without Git knowing about it.
       dd    Git hash-mechanism: SHA-1
       dd    Git stored snapshots in DB by the hash.
     
-    h1 2.      Git Basics.
+    h1      2.      Git Basics.
     H2(data-toggle="collapse" data-target="#21"  aria-controls="21").
-      2.1.     Getting a Git Repository
+            2.1.     Getting a Git Repository
     div(id="21").collapse
       p.
       dt   Git initializing in an Existing Directory
@@ -107,7 +107,7 @@ html(lang="en")
       dt   Cloning an Existing Repository.
       dd    You clone a repository with: [$ git clone [url]].
     H2(data-toggle="collapse" data-target="#22"  aria-controls="22").
-      2.2.    Recording Changes to the Repository
+            2.2.    Recording Changes to the Repository
     div(id="22").collapse
       dt    Recording Changes to the Repository
       dd
@@ -118,30 +118,30 @@ html(lang="en")
             li     tracked  (отслеживаемые, in last snapshot)
         ul   Tracked files are files that were of the last snapshot; their states:
           ul
-            li       unmodified
-            li       modified
-            li       staged
-      dt  Checking the Status of Your Files
-      dd      Check status of files in current dir: [$ git status]
-      dt   Tracking New Files
-      dd      Begin tracking new file:[ $ git add [file]]
-      dt  Staging Modified Files
-      dd      Git add is a multipurpose command – you use it to begin tracking new files,
-      dd      to stage files, and to do other things like marking merge-conflicted files as resolved.
-      dt  Ignoring Files
-      dd      See .gitignore
-      dt  Viewing Your Staged and Unstaged Changes
-      dd      [$ git diff] - shows you the exact lines added and removed – the patch, as it were.
-      dt  Removing Files
+            li unmodified
+            li modified
+            li staged
+      dt    Checking the Status of Your Files
+      dd        Check status of files in current dir: [$ git status]
+      dt     Tracking New Files
+      dd        Begin tracking new file:[ $ git add [file]]
+      dt    Staging Modified Files
+      dd        Git add is a multipurpose command – you use it to begin tracking new files,
+      dd        to stage files, and to do other things like marking merge-conflicted files as resolved.
+      dt    Ignoring Files
+      dd        See .gitignore
+      dt    Viewing Your Staged and Unstaged Changes
+      dd        [$ git diff] - shows you the exact lines added and removed – the patch, as it were.
+      dt    Removing Files
       dd.
-        Command: [$ git rm [file | dir]]
-        This command simply delete tracked file.
+            Command: [$ git rm [file | dir]]
+            This command simply delete tracked file.
       dt   Moving Files (Renaming)
       dd.
-        If you want to rename a file in Git, you can run something like:
-        [$ git mv file_from file_to]
+            If you want to rename a file in Git, you can run something like:
+            [$ git mv file_from file_to]
     H2(data-toggle="collapse" data-target="#23"  aria-controls="23").
-      2.3.   Viewing the Commit History.
+            2.3.   Viewing the Commit History.
     div(id="23").collapse
       dt    Viewing the Commit History
       dd    To do this you need type the [$ git log] command.
@@ -155,13 +155,13 @@ html(lang="en")
       dd    To see only the commits of a certain author: git log --author=bob
       dd    Different between committer and author is the author is the person who originally wrote the work,
       dd    whereas the committer is the person who last applied the work.
-      dt      Limiting Log Output
+      dt    Limiting Log Output
       dd.
-        With: [-<n>] where n is any integer to show the last n commits.
-        The time-limiting options such as --since and --until.
-        See other command in reference.
+            With: [-<n>] where n is any integer to show the last n commits.
+            The time-limiting options such as --since and --until.
+            See other command in reference.
     H2(data-toggle="collapse" data-target="#24"  aria-controls="24").
-      2.4.    Undoing Things
+            2.4.    Undoing Things
     div(id="24").collapse
       dt    Undoing Things
       dd    [$ git commit --amend]
@@ -173,11 +173,11 @@ html(lang="en")
       dd    This kept files already added to the index,(new files).
       dd    Remember, anything that is committed in Git can almost always be recovered.
       dd.
-        If you instead want to drop all your local changes, use:
-        [$ git fetch origin]. It fetch the latest history
-        from the server and point your local master branch.
+            If you instead want to drop all your local changes, use:
+            [$ git fetch origin]. It fetch the latest history
+            from the server and point your local master branch.
     H2(data-toggle="collapse" data-target="#25"  aria-controls="25").
-      2.5.     Working with Remotes
+            2.5.     Working with Remotes
     div(id="25").collapse
       dd    Remote repositories are versions of your project
       dd    that are hosted on the Internet or network somewhere.
@@ -202,7 +202,7 @@ html(lang="en")
       dd    If you want to see more information about a particular remote:
       dd    [$ git remote show [remote-name] ]
     H2(data-toggle="collapse" data-target="#26"  aria-controls="26").
-      2.6.    Tagging
+            2.6.    Tagging
     div(id="26").collapse
       h2
       dt    Tagging
@@ -213,8 +213,8 @@ html(lang="en")
       dd    [$ git tag -l 'v1.*']
       dt    Creating Tags
       dd    Git uses two main types of tags:
-        li lightweight
-        li annotated.
+        li      lightweight
+        li      annotated.
       dd    A lightweight tag is very much like a branch that doesn’t change – it’s just a pointer to a specific commit.
       dd    Annotated tags, are stored as full objects in the Git database
       dd    (including the tagger name, e-mail, date;
@@ -236,7 +236,7 @@ html(lang="en")
       dt    Checking out Tags
       dd    You can create a new branch at a specific tag:[$ git checkout -b [branchname] [tag(v.2 etc)]]
     H2(data-toggle="collapse" data-target="#27"  aria-controls="27").
-      2.7.	Git Aliases
+            2.7.	Git Aliases
     div(id="27").collapse
       dd    You can easily set up an alias for each command using git config:
       dd    [$ git config --global alias.[nameOfNewCommand] ["git.command]"]
@@ -245,9 +245,9 @@ html(lang="en")
       dd    you start the command with a ! character.
       dd    e.g.: [$ git config --global alias.visual "!gitk"]
     
-    h1 3. Git Branching
+    h1      3. Git Branching
     H2(data-toggle="collapse" data-target="#31"  aria-controls="31").
-      3.1.	Branching in a Nutshell.
+            3.1.	Branching in a Nutshell.
     div(id="31").collapse
       dd    Branching means you diverge from the main line of development
       dd    and continue to do work without messing with that main line.
@@ -271,7 +271,7 @@ html(lang="en")
       dd    back to the snapshot that master points to.
       dd    [git log --oneline --decorate --graph --all]
     H2(data-toggle="collapse" data-target="#32"  aria-controls="32").
-      3.2.	Basic Branching and Merging
+            3.2.	Basic Branching and Merging
     div(id="32").collapse
       dt    Basic Branching and Merging
       dd    At this stage, you’ll receive a call that another issue
@@ -285,12 +285,12 @@ html(lang="en")
       dd    It’s worth pointing out that Git determines the best common ancestor to use
       dd    for its merge base; this is different than older tools like CVS or Subversion (before version 1.5)
     h2(data-toggle="collapse" data-target="#33"  aria-controls="33").
-      3.3.	Branch Management
+            3.3.	Branch Management
     div(id="33").collapse
-      dd Notice the <b>*</b> indicates the branch (HEAD) that you currently have checked out .
-      dd See last commit on each branch: [$ git branch -v]
+      dd    Notice the <b>*</b> indicates the branch (HEAD) that you currently have checked out .
+      dd    See last commit on each branch: [$ git branch -v]
     h2(data-toggle="collapse" data-target="#34"  aria-controls="34").
-      3.3.	Branching Workflows
+            3.3.	Branching Workflows
     div(id="34").collapse
       dt
         a(href="http://git-scm.com/book/en/v2/Git-Branching-Branching-Workflows#Long-Running-Branches") Long-Running Branches
@@ -304,7 +304,7 @@ html(lang="en")
       dd    A topic branch is a short-lived branch that you create and
       dd    for a single particular feature or related work.
     h2(data-toggle="collapse" data-target="#35"  aria-controls="35").
-      3.5.	Remote Branches
+            3.5.	Remote Branches
     div(id="35").collapse
       dt
         a(href="http://git-scm.com/book/en/v2/Git-Branching-Remote-Branches") Remote Branches
@@ -318,12 +318,12 @@ html(lang="en")
       dd    Tracking branches are local branches that have a direct relationship to a remote branch.
       dt
         a(href="http://git-scm.com/book/en/v2/Git-Branching-Remote-Branches#Deleting-Remote-Branches") Deleting Remote Branches
-      dd  If you want to delete your branch from the server, you run the following:
-      dd  [$ git push [remote name] --delete [branch name]]
+      dd    If you want to delete your branch from the server, you run the following:
+      dd    [$ git push [remote name] --delete [branch name]]
     h2(data-toggle="collapse" data-target="#36"  aria-controls="36").
-      3.6.	Rebasing
+            3.6.	Rebasing
     div(id="36").collapse
-      dd In Git, there are two main ways to integrate changes from one branch into another:
+      dd    In Git, there are two main ways to integrate changes from one branch into another:
         ol
           li the merge
           li the rebase.
@@ -347,9 +347,9 @@ html(lang="en")
     
 
 
-    h1 4. Git on the Server
+    h1      4. Git on the Server
     h2(data-toggle="collapse" data-target="#41"  aria-controls="41").
-      4.1.	The Protocols
+            4.1.	The Protocols
     div(id="41").collapse
       dd    Therefore, the preferred method for collaborating with someone
       dd    is to set up an intermediate repository that you both have access to, and push to and pull from that.
@@ -366,7 +366,7 @@ html(lang="en")
             a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-The-Protocols#The-Git-Protocol") Git
       dd
     h2(data-toggle="collapse" data-target="#42"  aria-controls="42").
-       4.2. Getting Git on a Server
+            4.2. Getting Git on a Server
     div(id="42").collapse
       dt
         a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-Getting-Git-on-a-Server") Getting Git on a Server
@@ -385,7 +385,7 @@ html(lang="en")
 
       dt
         a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-Getting-Git-on-a-Server#Putting-the-Bare-Repository-on-a-Server").
-          Putting the Bare Repository on a Server
+            Putting the Bare Repository on a Server
 
       dd    Let’s say you’ve set up a server called git.example.com
       dd    Further you can set up your new repository by copying your bare repository over:
@@ -412,7 +412,7 @@ html(lang="en")
 
 
     h2(data-toggle="collapse" data-target="#43"  aria-controls="43").
-      4.3. Generating Your SSH Public Key
+            4.3. Generating Your SSH Public Key
     div(id="43").collapse
       dt
         a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-Generating-Your-SSH-Public-Key") Generation SSH key
@@ -433,7 +433,7 @@ html(lang="en")
 
 
     h2(data-toggle="collapse" data-target="#44"  aria-controls="44").
-      4.4. Setting Up the Server
+            4.4. Setting Up the Server
     div(id="44").collapse
       dt
         a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-Setting-Up-the-Server") Setting Up the Server
@@ -442,7 +442,7 @@ html(lang="en")
       dd    Now, you can set up an empty repository.
 
     h2(data-toggle="collapse" data-target="#45"  aria-controls="45").
-      4.5. Git Daemon
+            4.5. Git Daemon
     div(id="45").collapse
       dt
         a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-Git-Daemon") Git Daemon
@@ -455,21 +455,21 @@ html(lang="en")
       dd    and the path at the end tells the Git daemon where to look for repositories to export.
       dd
     h2(data-toggle="collapse" data-target="#46"  aria-controls="46").
-      4.6. Smart HTTP
+            4.6. Smart HTTP
     div(id="46").collapse
       dt
         a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-Smart-HTTP") Smart HTTP
-      dd  Setting up Smart HTTP is basically just enabling
-      dd  a CGI script that is provided with Git called [git-http-backend] on the server.
+      dd    Setting up Smart HTTP is basically just enabling
+      dd    a CGI script that is provided with Git called [git-http-backend] on the server.
     h2(data-toggle="collapse" data-target="#47"  aria-controls="47").
-      4.7. GitWeb
+            4.7. GitWeb
     div(id="47").collapse
       dt
         a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-GitWeb") GitWeb
       dd    Git comes with a CGI script called GitWeb that is
       dd    provided simple web-based visualizer.
     h2(data-toggle="collapse" data-target="#48"  aria-controls="48").
-      4.8. GitLab
+            4.8. GitLab
     div(id="48").collapse
       dd    If you’re looking for a more modern, fully featured Git server,
       dd    there are some several open source solutions out there that you can install instead.
@@ -481,7 +481,7 @@ html(lang="en")
       dd    a one-click installer from https://bitnami.com/stack/gitlab,
       dd    and tweak the configuration to match your particular environment.
     h2(data-toggle="collapse" data-target="#49"  aria-controls="49").
-      4.9. Third Party Hosted Options
+            4.9. Third Party Hosted Options
     div(id="49").collapse
       dt
         a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-Third-Party-Hosted-Options")
@@ -491,12 +491,62 @@ html(lang="en")
         a(href="https://git.wiki.kernel.org/index.php/GitHosting")   Git wiki
 
 
-    h1  5. Distributed Git
+    h1      5. Distributed Git
     h2(data-toggle="collapse" data-target="#51"  aria-controls="51").
-      5.1. Distributed Workflows
+            5.1. Distributed Workflows
     div(id="51").collapse
+      dt    Distributed Workflows
+      dd    Unlike another centralized VCS, GIT allows every developer to be
+      dd    on both a node and a hub states.
+      dd    So lets cover a few common paradigms of workflow:
       dt
+        a(href="http://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows#Centralized-Workflow") Centralized Workflow
       dd
+        img(src="http://www.shaney.net/git/images/centralized.png").img-responsive.img-rounded
+      dd    One central hub, or repository, can accept code, and everyone synchronizes their work to it.
+      dd    This is also not limited to small teams.
+
+      hr
+      dt
+        a(href="http://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows#Integration-Manager-Workflow") Integration-Manager Workflow
+      dd
+        img(src="http://git-scm.com/book/en/v2/book/05-distributed-git/images/integration-manager.png").img-responsive.img-rounded
+      dd
+      dd    Because Git allows you to have multiple remote repositories,
+      dd    it’s possible to have a workflow where each developer
+      dd    has write access to their own public repository and read access to everyone else’s.
+      dd    The process works as follows:
+      dd
+        ol
+          li The project maintainer pushes to their public repository.
+          li  A contributor clones that repository and makes changes.
+          li  The contributor pushes to their own public copy.
+          li  The contributor sends the maintainer an e-mail asking them to pull changes.
+          li  The maintainer adds the contributor’s repo as a remote and merges locally.
+          li  The maintainer pushes merged changes to the main repository.
+
+      dt
+        a(href="http://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows#Dictator-and-Lieutenants-Workflow") Dictator and Lieutenants Workflow
+      dd
+        img(src="http://git-scm.com/book/en/v2/book/05-distributed-git/images/benevolent-dictator.png").img-responsive.img-rounded
+
+      dd    This is a variant of a multiple-repository workflow.
+      dd    It’s generally used by huge projects with hundreds of collaborators;
+      dd    Various integration managers are in charge of certain parts of the repository;
+      dd    they’re called lieutenants.
+      dd    All the lieutenants have one integration manager known as the benevolent dictator.
+      dd    The process works like this:
+        ol
+          li Regular developers work on their topic branch and rebase their work on top of master. The master branch is that of the dictator.
+          li Lieutenants merge the developers’ topic branches into their master branch.
+          li The dictator merges the lieutenants’ master branches into the dictator’s master branch.
+          li The dictator pushes their master to the reference repository so the other developers can rebase on it.
+    h2(data-toggle="collapse" data-target="#52"  aria-controls="52").
+      5.2. Contributing to a Project
+    div(id="52").collapse
+      dt    Contributing to a Project
+      dd
+
 
 
 
