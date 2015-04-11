@@ -21,9 +21,13 @@ html(lang="en")
         font-size: 25px;
 
       }
-      .color-text-black {
+      .text-color-black {
         color:#000000;
       }
+      .text-whitespaces {
+        white-space : pre;
+      }
+
       .h2, h2 {
         font-size : 20px;
       }
@@ -157,7 +161,7 @@ html(lang="en")
       dd    whereas the committer is the person who last applied the work.
       dt    Limiting Log Output
       dd.
-            With: [-<n>] where n is any integer to show the last n commits.
+            With: [-n] where n is any integer to show the last n commits.
             The time-limiting options such as --since and --until.
             See other command in reference.
     H2(data-toggle="collapse" data-target="#24"  aria-controls="24").
@@ -545,7 +549,60 @@ html(lang="en")
       5.2. Contributing to a Project
     div(id="52").collapse
       dt    Contributing to a Project
+      dd    The main difficulty with describing how to contribute to a project
+      dd    is that there are a huge number of variations on how it’s done.
+      dt
+        a(href="http://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project#Commit-Guidelines").
+            Commit Guidelines
+      dd    Before we start looking at the specific use cases, here’s a quick note about commit messages.
+      dd    First, you don’t want to submit any whitespace errors.
+      dd    Before you commit, run [$ git diff --check] -
+      dd    It is identifies possible whitespace errors and lists them for you.
+      dd    Next, try to make each commit a logically separate changeset.
+      dd    If you can, try to make your changes digestible – don’t code for a whole weekend on five different issues
+      dd    and then submit them all as one massive commit on Monday.
+      dd    The last thing to keep in mind is the commit message.
+      dd    Here is a template originally written by Tim Pope:
+
       dd
+        blockquote.text-whitespaces.
+          Short (50 chars or less) summary of changes
+
+          More detailed explanatory text, if necessary.  Wrap it to
+          about 72 characters or so.  In some contexts, the first
+          line is treated as the subject of an email and the rest of
+          the text as the body.  The blank line separating the
+          summary from the body is critical (unless you omit the body
+          entirely); tools like rebase can get confused if you run
+          the two together.
+
+          Further paragraphs come after blank lines.
+
+            - Bullet points are okay, too
+
+            - Typically a hyphen or asterisk is used for the bullet,
+            preceded by a single space, with blank lines in
+            between, but conventions vary here
+      dt
+        a(href="http://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project#Private-Small-Team").
+            Private Small Team
+      dd    Before pushing changes from your local repo at the meantime as this doing another developers,
+      dd    you need fetch remote changes and then merge with your.
+      dt
+        a(href="http://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project#Private-Managed-Team").
+            Private Managed Team
+      dd    The ability of smaller subgroups of a team to collaborate via
+      dd    remote branches without necessarily having to involve or impede the entire team is a huge benefit of Git.
+      dt
+        a(href="http://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project#Forked-Public-Project").
+            Forked Public Project
+      dd    [$ git merge --no-commit --squash]
+      dd    The --squash option takes all the work on the merged branch
+      dd    and squashes it into one non-merge commit on top of the branch you’re on.
+      dt
+        a(href="http://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project#Public-Project-over-E-Mail").
+            Public Project over E-Mail
+      dd    You can generate e-mail versions of each commit series and e-mail them to the developer mailing list
 
 
 
@@ -566,6 +623,7 @@ html(lang="en")
           li  [$ git config color.ui true]        - use colorful git output
           li  [$ git config format.pretty oneline]- show log on just one line per commit
           li  [$ git add -i]                      - use interactive adding
+          li  [$ git gui]
       dt      Other
       dd
         ul
@@ -580,4 +638,4 @@ html(lang="en")
 
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
     script(src="js/bootstrap.min.js")
-    h1.color-text-black .
+    h1.text-color-black .
