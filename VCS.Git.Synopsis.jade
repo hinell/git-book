@@ -19,7 +19,20 @@ html(lang="en")
         color         : #F29C00;
         background-color: #000000;
         font-size: 25px;
+        position: relative;
 
+      }
+      .text-align-r{
+        left: 78% ;
+        position : fixed;
+        display: block;
+        font-size: 25px;
+      }
+      .layer-2 {
+        z-index : 1;
+      }
+      .text-align-r:hover{
+        opacity : 0.9;
       }
       .text-color-black {
         color:#000000;
@@ -27,7 +40,6 @@ html(lang="en")
       .text-whitespaces {
         white-space : pre;
       }
-
       .h2, h2 {
         font-size : 20px;
       }
@@ -57,8 +69,14 @@ html(lang="en")
         min-height : 1200px;
         max-width  : 900px;
       }
+      div {
+        display: block;
+      }
+
   body.container.dl-horizontal
-    h1      SUMMARY
+    h1 SUMMARY
+      span(id="Parts" title="Open/collapse all elements").glyphicon.glyphicon-resize-full.text-align-r.layer-2
+
     H2(data-toggle="collapse" data-target="#Preface"  aria-controls="Preface").
             Preface
     div(id="Preface").collapse
@@ -694,7 +712,7 @@ html(lang="en")
 
 
 
-    h1  6. GitHub
+    h1      6. GitHub
     H2(data-toggle="collapse" data-target="#61"  aria-controls="61").
       6.1. Account Setup and Configuration
     div(id="61").collapse
@@ -801,7 +819,7 @@ html(lang="en")
             Audit Log
       dd
     H2(data-toggle="collapse" data-target="#65"  aria-controls="65").
-      6.5. Managing an organization
+      6.5. Scripting GitHub
     div(id="65").collapse
       dt
         a(href="http://git-scm.com/book/en/v2/GitHub-Scripting-GitHub").
@@ -820,6 +838,40 @@ html(lang="en")
       dd    events that happen on your repositories, but what if you need more
       dd    information about these events? What if you need to automate
       dd    something like adding collaborators or labeling issues?
+      dd    This is where the GitHub API comes in handy.
+      dt
+        a(href="http://git-scm.com/book/en/v2/GitHub-Scripting-GitHub#Octokit").
+            Octokit
+      dd    For complete documentation on the entire API as well as guides for common tasks, check out
+            a(href="https://developer.github.com.")    developer.github.com
+
+    h1      7. Git Tools
+    H2(data-toggle="collapse" data-target="#71"  aria-controls="71").
+      7.1. Managing an organization
+    div(id="71").collapse
+      dt
+        a(href="http://git-scm.com/book/en/v2/Git-Tools-Revision-Selection").
+            Revision Selection
+      dd    Git allows you to specify specific commits or a range of commits in several ways.
+      dd    They aren’t necessarily obvious but are helpful to know.
+
+      dt    Single Revisions
+      dd    You can obviously refer to a commit by the SHA-1 hash that it’s given,
+      dd    but there are more human-friendly ways to refer to commits as well.
+      dd    This section outlines the various ways you can refer to a single commit.
+
+      dt    Short SHA-1
+      dd    Git can enough precisely to figure out what you had meant if
+      dd    your partial SHA-1 commit is typed at leas 4 characters and unambiguous.
+      dd    For example, the following commands are equivalent:
+      dd    [$ git show 1c002dd4b536e7479fe34593e72e6c6c1819e53b ]
+      dd    [$ git show 1c002dd4b536e7479f                       ]
+      dd    [$ git show 1c002d                                   ]
+
+
+
+
+
 
 
     h1  Related terms
@@ -853,4 +905,43 @@ html(lang="en")
 
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
     script(src="js/bootstrap.min.js")
-    h1.text-color-black .
+    script(type="text/javascript").
+
+      $("body").ready(function () {
+        var Parts = $("#Parts");
+            Parts.click(function () {
+              Parts.toggleClass("glyphicon-resize-small")
+              $(".collapse").collapse('toggle');
+            });
+      });
+
+
+    h1.text-color-black.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
