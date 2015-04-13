@@ -709,7 +709,7 @@ html(lang="en")
       dd    it will take you to a configuration page where you can choose to use
       dd    a phone app to generate your secondary code (a “time based one-time password”),
       dd    or you can have GitHub send you a code via SMS each time you need to log in.
-    H2(data-toggle="collapse" data-target="#61"  aria-controls="61").
+    H2(data-toggle="collapse" data-target="#62"  aria-controls="62").
       6.2. Contributing to a Project
     div(id="62").collapse
       dt
@@ -720,13 +720,106 @@ html(lang="en")
         a(href="http://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project#The-GitHub-Flow").
             The GitHub Flow
       dd    GitHub is designed around a particular collaboration workflow, centered on Pull Requests.
+      dd    Here’s how it generally works:
+      dd
+        ol
+          li Create a topic branch from master.
+          li Make some commits to improve the project.
+          li Push this branch to your GitHub project.
+          li Open a Pull Request on GitHub.
+          li Discuss, and optionally continue committing.
+          li The project owner merges or closes the Pull Request.
+      dt
+        a(href="http://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project#Advanced-Pull-Requests").
+            Advanced Pull Requests
+      dd
+      dt    Pull Requests as Patches
+      dd    Most GitHub projects think about Pull Request branches as
+      dd    iterative conversations around a proposed change,
+      dd    culminating in a unified diff that is applied by merging.
+
+      dt    Keeping up with Upstream
+      dd    If your Pull Request becomes out of date or otherwise
+      dd    doesn’t merge cleanly, you will want to fix it so
+      dd    the maintainer can easily merge it.
+
+      dd    If you want to merge in the target branch to make your Pull Request mergeable,
+      dd    you would add the original repository as a new remote, fetch from it,
+      dd    merge the main branch of that repository into your topic branch,
+      dd    fix any issues and finally push it back up to the same branch you opened the Pull Request on.
 
       dt
+        a(href="http://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project#Markdown").
+            Markdown
+      dd    You can create a task list like this:
+      dd
+        blockquote.text-whitespaces.
+          - [X] Write the code
+          - [ ] Write all the tests
+          - [ ] Document the code
+
+    H2(data-toggle="collapse" data-target="#63"  aria-controls="63").
+      6.3. Maintaining a Project
+    div(id="63").collapse
+      dt
+        a(href="http://git-scm.com/book/en/v2/GitHub-Maintaining-a-Project#Managing-Pull-Requests").
+            Managing Pull Requests
+      dd
+      dt    Pull Request Refs
+      dd    If you’re dealing with a lot of Pull Requests and don’t want to
+      dd    add a bunch of remotes or do one time pulls every time,
+      dd    there is a neat trick that GitHub allows you to do
+      dd    To demonstrate this, we’re going to use a low-level command:
+      dd    [$ git ls-remote [remote repo | remote name]]
+      dt    Special Files
+      dt
+        a(href="http://git-scm.com/book/en/v2/GitHub-Maintaining-a-Project#README").
+            README
       dd
 
       dt
+        a(href="http://git-scm.com/book/en/v2/GitHub-Maintaining-a-Project#CONTRIBUTING").
+            CONTRIBUTING
+      dd    If you have a file named CONTRIBUTING with any file extension, GitHub will show
+      dd    request to review its.
+      dt
+        a(href="http://git-scm.com/book/en/v2/GitHub-Maintaining-a-Project#Project-Administration").
+            Project Administration
+    H2(data-toggle="collapse" data-target="#64"  aria-controls="64").
+      6.4. Managing an organization
+    div(id="64").collapse
+      dt
+        a(href"http://git-scm.com/book/en/v2/GitHub-Managing-an-organization#Organization-Basics").
+            Organization Basics
       dd
-
+      dt
+        a(href"http://git-scm.com/book/en/v2/GitHub-Managing-an-organization#Teams").
+            Teams
+      dd
+      dt
+        a(href"http://git-scm.com/book/en/v2/GitHub-Managing-an-organization#Audit-Log").
+            Audit Log
+      dd
+    H2(data-toggle="collapse" data-target="#65"  aria-controls="65").
+      6.5. Managing an organization
+    div(id="65").collapse
+      dt
+        a(href="http://git-scm.com/book/en/v2/GitHub-Scripting-GitHub").
+            Services
+      dd    Most of them are for Continuous Integration services, bug and issue trackers, chat room systems and documentation systems.
+      dt
+        a(href="http://git-scm.com/book/en/v2/GitHub-Scripting-GitHub").
+            Hooks
+      dd    If you need something more specific or you want to integrate with a service or site that is not included in
+      dd    this list, you can instead use the more generic hooks system. GitHub repository hooks are pretty simple
+      dd    You specify a URL and GitHub will post an HTTP payload to that URL on any event you want.
+      dt
+        a(href="http://git-scm.com/book/en/v2/GitHub-Scripting-GitHub#The-GitHub-API").
+            The GitHub API
+      dd    Services and hooks give you a way to receive push notifications about
+      dd    events that happen on your repositories, but what if you need more
+      dd    information about these events? What if you need to automate
+      dd    something like adding collaborators or labeling issues?
 
 
     h1  Related terms
