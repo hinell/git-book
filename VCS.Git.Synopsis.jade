@@ -147,7 +147,9 @@ html(lang="en")
     H2(data-toggle="collapse" data-target="#23"  aria-controls="23").
             2.3.   Viewing the Commit History.
     div(id="23").collapse
-      dt    Viewing the Commit History
+      dt
+        a(href="http://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History").
+            Viewing the Commit History
       dd    To do this you need type the [$ git log] command.
       dd    One of the more helpful options is [-p], which shows the difference introduced in each commit.
       dd    You can also use [-2], which limits the output.
@@ -297,14 +299,18 @@ html(lang="en")
             3.3.	Branching Workflows
     div(id="34").collapse
       dt
-        a(href="http://git-scm.com/book/en/v2/Git-Branching-Branching-Workflows#Long-Running-Branches") Long-Running Branches
+        a(href="http://git-scm.com/book/en/v2/Git-Branching-Branching-Workflows#Long-Running-Branches").
+            Long-Running Branches
       dd    This means you can have several branches that are always open (ie master) and
       dd    that you use for different stages of your development cycle;
       dd    you can merge regularly from some of them into others.
       dt
       dt
-        a(href="http://git-scm.com/book/en/v2/Git-Branching-Branching-Workflows#Topic Branches") Topic Branches
+        a(href="http://git-scm.com/book/en/v2/Git-Branching-Branching-Workflows#Topic Branches").
+            Topic Branches
       dd    Topic branches, however, are useful in projects of any size.
+      dd    A topic branch is a short-lived branch that you create and
+      dd    use for a single particular feature or related work.
       dd    A topic branch is a short-lived branch that you create and
       dd    for a single particular feature or related work.
     h2(data-toggle="collapse" data-target="#35"  aria-controls="35").
@@ -586,13 +592,15 @@ html(lang="en")
       dt
         a(href="http://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project#Private-Small-Team").
             Private Small Team
-      dd    Before pushing changes from your local repo at the meantime as this doing another developers,
+      dd    Before pushing changes from your local repo at the
+      dd    meantime as this doing another developers,
       dd    you need fetch remote changes and then merge with your.
       dt
         a(href="http://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project#Private-Managed-Team").
             Private Managed Team
       dd    The ability of smaller subgroups of a team to collaborate via
-      dd    remote branches without necessarily having to involve or impede the entire team is a huge benefit of Git.
+      dd    remote branches without necessarily having to
+      dd    involve or impede the entire team is a huge benefit of Git.
       dt
         a(href="http://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project#Forked-Public-Project").
             Forked Public Project
@@ -602,8 +610,122 @@ html(lang="en")
       dt
         a(href="http://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project#Public-Project-over-E-Mail").
             Public Project over E-Mail
-      dd    You can generate e-mail versions of each commit series and e-mail them to the developer mailing list
+      dd    You can generate e-mail versions of each commit series
+      dd    and e-mail them to the developer mailing list
+    h2(data-toggle="collapse" data-target="#53"  aria-controls="53").
+      5.3. Maintaining a Project
+    div(id="53").collapse
+      dt    Contributing to a Project
+      dd
+      dt
+        a(href="http://git-scm.com/book/en/v2/Distributed-Git-Maintaining-a-Project#Applying-Patches-from-E-mail").
+            Applying Patches from E-mail
+      dd
+      dt
+        a(href="http://git-scm.com/book/en/v2/Distributed-Git-Maintaining-a-Project#Checking-Out-Remote-Branches").
+            Checking Out Remote Branches
+      dd    The other advantage of this approach is that
+      dd    you get the history of the commits as well.
 
+      dt
+        a(href="http://git-scm.com/book/en/v2/Distributed-Git-Maintaining-a-Project#Determining-What-Is-Introduced").
+            Determining What Is Introduced
+      dd    It’s often helpful to get a review of all the commits
+      dd    that are in this branch but that aren’t in your master branch.
+      dd    You can exclude commits in the master branch by
+      dd    adding the [--not] option before the branch name.
+      dd    This does the same thing as the [$ git log [branchname]..[branchname]] format that we used earlier.
+      dd    What you really want to see are the changes added to the topic branch –
+      dd    the work you’ll introduce if you merge this branch with master, you
+      dd    can do: [$ git merge-base [branchname] [branchname]]
+      dd    A bit more convenient: [$ git diff [branchname]...[branchname]]
+      dd    This command shows you only the work your current topic branch has introduced since its common ancestor
+
+      dt
+        a(href="http://git-scm.com/book/en/v2/Distributed-Git-Maintaining-a-Project#Integrating-Contributed-Work").
+            Integrating Contributed Work
+      dd    Main question is which overall workflow do you want
+      dd    to use to maintain your project? You have a number
+      dd    of choices, so we’ll cover a few of them.
+
+      dt    Merging Workflows
+      dd    If you have a more important project, you might want to
+      dd    use a two-phase merge cycle. In this scenario, you have two
+      dd    long-running branches, master and develop, in which you
+      dd    determine that master is updated only when a very stable
+      dd    release is cut and all new code is integrated into the develop branch.
+
+      dt    Large-Merging Workflows
+      dt    Rebasing and Cherry Picking Workflows
+      dd    he other way to move introduced work from one branch to another is
+      dd    to [$ git cherry-pick [target for merging wiht that you're currently on]].
+      dd    A cherry-pick in Git is like a rebase for a single commit.
+      dd    It takes the patch that was introduced in a commit and tries to reapply it on the branch you’re currently on.
+
+      dt    Rerere
+      dd    If you’re doing lots of merging and rebasing, or you’re maintaining
+      dd    a long-lived topic branch, Git has a feature called “rerere” that can help.
+      dd    Rerere stands for “reuse recorded resolution” – it’s a way of shortcutting manual conflict resolution.
+      dd    This feature comes in two parts: a configuration setting and a command.
+      dd    The configuration setting is rerere.enabled:
+      dd    [$ git config --global rerere.enabled true]
+      dd    Now, whenever you do a merge that resolves conflicts,
+      dd    the resolution will be recorded in the cache in case you need it in the future.
+
+      dt
+        a(href="http://git-scm.com/book/en/v2/Distributed-Git-Maintaining-a-Project#Tagging-Your-Releases").
+            Tagging Your Releases
+
+      dt    Generating a Build Number
+
+      dt    Preparing a Release
+      dd    One of the things you’ll want to do is create an archive of the latest snapshot
+      dd    of your code for those poor souls who don’t use Git. The command to do this is git archive:
+      dd    [$ git archive master --prefix='project/' | gzip > `git describe master`.tar.gz]
+
+      dt
+        a(href="http://git-scm.com/book/en/v2/Distributed-Git-Maintaining-a-Project#Tagging-Your-Releases").
+            The Shortlog
+      dd    It’s time to e-mail your mailing list of people who want to know what’s happening in your project.
+      dd    A nice way of quickly getting a sort of changelog
+      dd    is to use the [$ git shortlog]
+      dd    It summarizes all the commits in the range you give it; for example:
+      dd    [$ git shortlog --no-merges master --not v1.0.1                     ]
+
+
+
+    h1  6. GitHub
+    H2(data-toggle="collapse" data-target="#61"  aria-controls="61").
+      6.1. Account Setup and Configuration
+    div(id="61").collapse
+      dt
+        a(href="http://git-scm.com/book/en/v2/GitHub-Account-Setup-and-Configuration").
+            Account Setup and Configuration
+      dd
+      dt
+        a(href="http://git-scm.com/book/en/v2/GitHub-Account-Setup-and-Configuration#Two-Factor-Authentication").
+            Two Factor Authentication
+      dd    If you click on the “Set up two-factor authentication” button,
+      dd    it will take you to a configuration page where you can choose to use
+      dd    a phone app to generate your secondary code (a “time based one-time password”),
+      dd    or you can have GitHub send you a code via SMS each time you need to log in.
+    H2(data-toggle="collapse" data-target="#61"  aria-controls="61").
+      6.2. Contributing to a Project
+    div(id="62").collapse
+      dt
+        a(href="http://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project").
+            Forking Projects
+      dd
+      dt
+        a(href="http://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project#The-GitHub-Flow").
+            The GitHub Flow
+      dd    GitHub is designed around a particular collaboration workflow, centered on Pull Requests.
+
+      dt
+      dd
+
+      dt
+      dd
 
 
 
