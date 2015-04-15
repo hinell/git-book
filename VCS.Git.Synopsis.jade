@@ -23,10 +23,10 @@ html(lang="en")
 
       }
       .text-align-r{
-        left: 78% ;
-        position : fixed;
-        display: block;
-        font-size: 25px;
+        right: 0;
+        position : absolute;
+        /*display: block;*/
+        font-size: 20px;
       }
       .layer-2 {
         z-index : 1;
@@ -288,7 +288,7 @@ html(lang="en")
       br
       dd    To see where the point of your HEAD, use:
       dd    [$ git log --oneline --decorate]
-      dd    [$ git checkout [branch name]]
+      dd    [$ git checkout [branch name]
       dd    That command did two things.
       dd    It moved the HEAD pointer back to point to the [branch name] branch,
       dd    and it reverted the files in your working directory
@@ -867,12 +867,63 @@ html(lang="en")
       dd    [$ git show 1c002dd4b536e7479fe34593e72e6c6c1819e53b ]
       dd    [$ git show 1c002dd4b536e7479f                       ]
       dd    [$ git show 1c002d                                   ]
+      dt
+        a(href="http://git-scm.com/book/en/v2/Git-Tools-Revision-Selection#Branch-References").
+            Branch References
+      dd    You can use a name branch in any GIT command that expects a commit object or SHA-1 value.
+      dd    Specific SHA-1 points of any branch you can take with plumbing tool called [rev-parse].
+      dd    More info
+        a(href="http://git-scm.com/book/en/v2/ch10/_git_internals")   see here.
+
+      dt
+        a(href="http://git-scm.com/book/en/v2/Git-Tools-Revision-Selection#RefLog-Shortnames").
+            RefLog Shortnames
+      dd    While you are in workflow Git automatically keeps a "reflog" -
+      dd    log of where your HEAD and branch refs have been for the last few month.
+      dd    You can see thats with [$ git reflog] command.
+      dd    And you can specify older commits use @{n} reference that you see in the reflog output.
+      dd    You can also use this syntax to see where a branch was some specific amount of time ago:
+      dd    [$ git show master@{yesterday}]
+      dd    To see reflog information formatted like the git log output: [$ git log -g]
+      dd    All reflogs strictly local and after you clone a repo, you'll get an empty reflog.
 
 
+      dt
+        a(href="http://git-scm.com/book/en/v2/Git-Tools-Revision-Selection#Ancestry-References").
+            Ancestry References
+      dd    If you place "^" at the end of a reference (branch, HEAD, SHA-1), Git resolves it to means "the parent of that commit".
+      dd    Or if you pace "^n", GIT resolves it to means "N parent of reference".
+      dd    The other main ancestry specification is the "~".
+      dd    If "~" just plased at end ref, it equivalent "^".
+      dd    If you specify a number, "~2" it'll means "the first parent of the first parent"
+      dd    - it traverses the first parents the number of times you specify.
+      dd    You can also written something like "HEAD^^^" or (equivalent) "HEAD~3", or combine them "HEAD~3^2" and so on.
 
+      dt
+        a(href="http://git-scm.com/book/en/v2/Git-Tools-Revision-Selection#Commit-Ranges").
+            Commit Ranges
+      dd    Now that you can specify individual commits, let’s see how to specify ranges of commits.
 
+      dt    Double Dot
+      dd    [$ git log [refA]..[refB]]
+      dd    This basically asks Git to resolve a range of commits that
+      dd    are reachable from one commit but aren’t reachable from another.
+      dd    If the last ref unspecified - GIT substitutes its with HEAD.
 
+      dt    Multiple Points
+      dd    If you want to specify more than two branches to indicate your revision
+      dd    Git allows you to do this by using either the ^ character or
+      dd    --not before any reference from which you don’t want to see reachable commits.
+      dd    Thus these three commands are equivalent:
+      dd    [$ git log refA..refB ]
+      dd    [$ git log ^refA refB ]
+      dd    [$ git log refB --not refA ]
 
+      dt    Triple Dot
+      dd    [[$ git log [refA]...[refB]]]
+      dd    This syntax specifies all the commtis that are not common of two refs.
+      dd    You can also use the [--left-right] switch,
+      dd    which shows you which side of the range each commit is in.
 
     h1  Related terms
     H2(data-toggle="collapse" data-target="#Misc"  aria-controls="Misc").
