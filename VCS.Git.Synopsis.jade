@@ -180,10 +180,12 @@ html(lang="en")
       dd    Different between committer and author is the author is the person who originally wrote the work,
       dd    whereas the committer is the person who last applied the work.
       dt    Limiting Log Output
-      dd.
-            With: [-n] where n is any integer to show the last n commits.
-            The time-limiting options such as --since and --until.
-            See other command in reference.
+      dd
+      dd    With: [-n] where n is any integer to show the last n commits.
+      dd    The time-limiting options such as --since and --until.
+      dd    See other command in reference.
+      dd    Limiting with time: [$ git log --since=[date]]
+
     H2(data-toggle="collapse" data-target="#24"  aria-controls="24").
             2.4.    Undoing Things
     div(id="24").collapse
@@ -342,7 +344,7 @@ html(lang="en")
       dt
         a(href="http://git-scm.com/book/en/v2/Git-Branching-Remote-Branches#Tracking-Branches") Tracking Branches
       dd    Checking out a local branch from a remote branch automatically creates what is called
-      dd    a “tracking branch” (or sometimes an “upstream branch”).
+      dd    a “tracking branch" (or sometimes an “upstream branch").
       dd    Tracking branches are local branches that have a direct relationship to a remote branch.
       dt
         a(href="http://git-scm.com/book/en/v2/Git-Branching-Remote-Branches#Deleting-Remote-Branches") Deleting Remote Branches
@@ -682,8 +684,8 @@ html(lang="en")
 
       dt    Rerere
       dd    If you’re doing lots of merging and rebasing, or you’re maintaining
-      dd    a long-lived topic branch, Git has a feature called “rerere” that can help.
-      dd    Rerere stands for “reuse recorded resolution” – it’s a way of shortcutting manual conflict resolution.
+      dd    a long-lived topic branch, Git has a feature called “rerere" that can help.
+      dd    Rerere stands for “reuse recorded resolution" – it’s a way of shortcutting manual conflict resolution.
       dd    This feature comes in two parts: a configuration setting and a command.
       dd    The configuration setting is rerere.enabled:
       dd    [$ git config --global rerere.enabled true]
@@ -723,9 +725,9 @@ html(lang="en")
       dt
         a(href="http://git-scm.com/book/en/v2/GitHub-Account-Setup-and-Configuration#Two-Factor-Authentication").
             Two Factor Authentication
-      dd    If you click on the “Set up two-factor authentication” button,
+      dd    If you click on the “Set up two-factor authentication" button,
       dd    it will take you to a configuration page where you can choose to use
-      dd    a phone app to generate your secondary code (a “time based one-time password”),
+      dd    a phone app to generate your secondary code (a “time based one-time password"),
       dd    or you can have GitHub send you a code via SMS each time you need to log in.
     H2(data-toggle="collapse" data-target="#62"  aria-controls="62").
       6.2. Contributing to a Project
@@ -924,6 +926,184 @@ html(lang="en")
       dd    This syntax specifies all the commtis that are not common of two refs.
       dd    You can also use the [--left-right] switch,
       dd    which shows you which side of the range each commit is in.
+    H2(data-toggle="collapse" data-target="#72"  aria-controls="72").
+      7.2. Interactive Staging
+    div(id="72").collapse
+      dt
+        a(href="http://git-scm.com/book/en/v2/Git-Tools-Interactive-Staging#Staging-Patches").
+            Staging Patches
+      dd    [$ git add -i]
+
+    H2(data-toggle="collapse" data-target="#76"  aria-controls="76").
+      7.6. Rewriting History
+    div(id="76").collapse
+      dt
+        a(href="http://git-scm.com/book/en/v2/Git-Tools-Rewriting-History#Changing-Multiple-Commit-Messages").
+            Changing Multiple Commit Messages
+      dd    [$ git rebase -i [refs range]]
+      dd    With interactive rebase tool, you can then stop after each commit you
+      dd    you want to modify and change the message, add files, or do whatever you wish:
+      dd    [$ git rebase -i HEAD~3] - this will rebase you commits of range of three commits
+      dd    back from head you are.
+      dd    Remember: every commit that is rebasing will be rewritten,
+      dd    whether you change message or not.
+
+    H2(data-toggle="collapse" data-target="#77"  aria-controls="77").
+      7.7. Reset Demystified
+    div(id="77").collapse
+      dt
+        a(href="http://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified").
+          Reset Demystified
+      dd
+      dt
+        a(href="http://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified#The-Three-Trees").
+          The Three Trees
+      dd
+        table.table.table-striped
+          tbody
+            tr
+              th    Tree
+              th    Role
+            tr
+              td    HEAD
+              td    Last commit snapshot, next parent
+            tr
+              td    Index
+              td    Proposed next commit snapshot
+            tr
+              td    Working Directory
+              td    Sandbox
+      dd    By “tree" here we really mean “collection of files", not specifically the data structure.
+      dt
+        a(href="http://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified#The-Role-of-Reset").
+            The Role of Reset
+      dd
+      dt(title="(--soft)").
+            Step 1: Move HEAD (--soft)
+      dd    This isn’t the same as changing HEAD itself (which is what checkout does)
+      dd    reset moves the branch that HEAD is pointing to.
+
+      dt(title="the Index (--mixed)").
+            Step 2: Updating the Index (--mixed)
+      dd    This is the default option wher you run reset command.
+      dd    The next thing reset will do is to update the Index
+      dd    with the contents of whatever snapshot HEAD now points to.
+
+      dt(title="the Working Directory (--hard)").
+            Step 3: Updating the Working Directory (--hard)
+      dd    The third thing that reset will do
+      dd    is to make the Working Directory look like the Index.
+      dd    We could back our last commit with [$ git reflog] command.
+
+      dt
+        a(href="http://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified#Reset-With-a-Path").
+            Reset With a Path
+      dd    [$ git reset [path to file]] where
+      dd    is the just shortand for [$ git reset --mixed HEAD file.txt]
+      dd    So it essentially just copies file.txt from HEAD to the Index.
+      dd    This has the practical effect of unstaging the file.
+      dt
+        a(href="http://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified#Squashing").
+            Squashing
+      dd    You can "squash" your dirty commit with reset command.
+
+      dt
+        a(href="http://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified#Check-It-Out").
+            Check It Out
+      dd    Like reset, checkout manipulates the three trees, and it is a bit different
+      dd    depending on whether you give the command a file path or not.
+      dt    Without Paths
+      dd    [$ git checkout [branch] is pretty similar to running [$ git reset --hard [branch]]
+      dd    in that it updates all three trees for you to look like [branch]
+      dd    but there are two important differences:
+      dd
+        ol
+          li Checkout will check to make sure it’s not blowing away files that have changes to them.
+          li Checkout will move HEAD itself to point to another branch (ulike reset that will move the branch that HEAD points to)
+
+      dt    With Paths
+      dd    [$ git checkout [REF] file]
+      dd    In that case checkout updates the index with that file at that commit,
+      dd    but it also overwrites the file in the working directory.
+      dt
+        a(href="http://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified#Summary").
+            Cheat-sheet
+      dd    Pleas, checkout link for more info.
+
+    H2(data-toggle="collapse" data-target="#78"  aria-controls="78").
+      7.8. Advanced Merging
+    div(id="78").collapse
+      dt
+        a(href="http://git-scm.com/book/en/v2/Git-Tools-Advanced-Merging#Merge-Conflicts").
+            Merge Conflicts
+      dd    Before doing merging, try to make sure your working directory is clean.
+      dd    If you have work in progress, either commit it to a temporary branch or stash it.
+      dd    This makes it so that you can undo anything you try here.
+
+      dt    Aborting a Merge
+      dd    You can simply back out of the merge with [$ git merge --abort].
+      dd    Aborting merging no be able perfectly if you had unstashed, uncommited
+      dd    changes in your working directory.
+
+      dt    Ignoring Whitespace
+      dd    If you see that you have a lot of whitespace
+      dd    you can simply abort merge it and do it again with
+      dd    [$ git merge -Xignore-all-space] or [-Xignore-space-change] options (latest in priority).
+      dd    First option ignores whitespace completely when comparing lines
+      dd    Second treats sequences of one or more whitespace characters as equivalent.
+
+
+      dt    Manual File Re-merging
+      dd    As an example, let’s pretend that Git could not
+      dd    handle the whitespace change and we needed to do it by hand.
+
+      dt    Checking Out Conflicts
+      dd    [$ git checkout --conflict]
+      dd    Where [--conflict] will re-checkout the file again and replace the merge conflict markers.
+
+      dt
+        a(href="http://git-scm.com/book/en/v2/Git-Tools-Advanced-Merging#Undoing-Merges").
+            Undoing Merges
+      dd    There are two ways to approach this problem, depending on what your desired outcome is.
+
+      dt    Fix the references
+      dd    Ir your changes only exists on your local repository, the easies and best solution is:
+      dd    [$ git reset --hard HEAD~]
+      dt    The downside of this approach is that it’s rewriting history
+      dd    which can be problematic with a shared repository.
+      dd    If other people have the commits you’re rewriting, you should probably avoid reset
+      dd    This approach also won’t work if any other commits have been created since the merge
+      dd    moving the refs would effectively lose those changes.
+
+      dt    Reverse the commit
+      dd    [$ git revert -m 1 HEAD]
+      dd    The -m 1 flag indicates which parent is the “mainline” and should be kept.
+      dd    Git will get confused if you try to merge reverted branch with previous second branch that was merged.
+
+
+      dt    Subtree Merging
+      dd    The idea of the subtree merge is that you have two projects,
+      dd    and one of the projects maps to a subdirectory of the other one and vice versa.
+
+    H2(data-toggle="collapse" data-target="#79"  aria-controls="79").
+      7.9. Rerere
+    div(id="79").collapse
+      dt    Rerere
+      dd    Reuse recorded resolution
+      dd    To enable this functionality have run this config setting:
+      dd    [$ git config --global rerere.enabled true]
+
+      dd    This tool is allow your Git to remember how you had resolved a hunk
+      dd    conflict so that the next time it sees the same conflict,
+      dd    Git can automatically resolve it for you.
+
+      dd    For example, it might be really handy if you want to keep a branch
+      dd    rebased so you don’t have to deal with the same rebasing
+      dd    conflicts each time you do it.
+
+
+
+
 
     h1  Related terms
     H2(data-toggle="collapse" data-target="#Misc"  aria-controls="Misc").
