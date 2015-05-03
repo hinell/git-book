@@ -316,7 +316,7 @@ html(lang="en")
       dd    Notice the <b>*</b> indicates the branch (HEAD) that you currently have checked out .
       dd    See last commit on each branch: [$ git branch -v]
     h2(data-toggle="collapse" data-target="#34"  aria-controls="34").
-            3.3.	Branching Workflows
+            3.4.	Branching Workflows
     div(id="34").collapse
       dt
         a(href="http://git-scm.com/book/en/v2/Git-Branching-Branching-Workflows#Long-Running-Branches").
@@ -1101,8 +1101,25 @@ html(lang="en")
       dd    rebased so you don’t have to deal with the same rebasing
       dd    conflicts each time you do it.
 
+    H2(data-toggle="collapse" data-target="#710"  aria-controls="710").
+      7.10. Debugging with Git
+    div(id="710").collapse
+      dt    Debugging with Git
+      dd
+      dt
+        a(href="http://git-scm.com/book/en/v2/Git-Tools-Debugging-with-Git#File-Annotation").
+            File Annotation
 
-
+      dd    [$ git blame -L [range-min,range-max] [file]]
+      dd    If you want to know by whom in the particular file the bug was previously introduced ,
+      dd    this is often your best tool for do that.
+      dd
+      dt
+        a(href="http://git-scm.com/book/en/v2/Git-Tools-Debugging-with-Git#Binary-Search").
+            Binary Search
+      dd    [$ git bisect start]
+      dd    The bisect command does a binary search through your commit history to help
+      dd    you identify as quickly as possible which commit introduced an issue.
 
 
     h1  Related terms
