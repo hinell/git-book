@@ -1120,9 +1120,87 @@ html(lang="en")
       dd    [$ git bisect start]
       dd    The bisect command does a binary search through your commit history to help
       dd    you identify as quickly as possible which commit introduced an issue.
+    H2(data-toggle="collapse" data-target="#711"  aria-controls="711").
+      7.11. Submodules
+    div(id="711").collapse
+      dt    Submodules
+      dd    Submodules allow you to keep a Git repository as a subdirectory of another Git repository.
+      dd    This lets you clone another repository into your project and keep your commits separate.
+      dt
+        a(href="http://git-scm.com/book/en/v2/Git-Tools-Submodules#Starting-with-Submodules").
+            Starting with Submodules
+      dd    [$ git submodule add [REPOSITORY]]
+
+      dt    .gitmodules
+      dd    This is a configuration file that stores the mapping between
+      dd    the project’s URL and the local subdirectory you’ve pulled it into:
+
+      dd    Although DbConnector is a subdirectory in your working directory,
+      dd    Git sees it as a submodule and doesn’t track its contents when you’re not in that directory.
+      dd    Instead, Git sees it as a particular commit from that repository.
+
+      dt
+        a(href="http://git-scm.com/book/en/v2/Git-Tools-Submodules#Cloning-a-Project-with-Submodules").
+            Cloning a Project with Submodules
+
+      dd    When you clone such a project, by default you get the directories
+      dd    that contain submodules, but none of the files within them yet.
+      dd    You must run two commands:
+      dd
+        ol
+          li [$ git submodule init]     - to initialize your local configuration file.
+          li [$ git submodule update ]  - to fetch all the data from that project and check out the appropriate commit listed in your superproject.
 
 
-    h1  Related terms
+      dt
+        a(href="http://git-scm.com/book/en/v2/Git-Tools-Submodules#Working-on-a-Project-with-Submodules").
+            Working on a Project with Submodules
+      dd
+
+      dt    Pulling in Upstream Changes
+      dd    The simplest model  of using submodules in a project
+      dd    it consume a subproject as as like any other repo.ю
+      dd    [$ git submodule update --remote]
+      dd    By default it will update all of your submodules
+
+      dd    Another way to do that is passing --recursive to the git clone command.
+      dd    You can set default branch to your submodules by either in .gitmodules file
+      dd    or jus in your local .git/config:
+      dd    [$ git config -f .gitmodules submodule.NAME_OF_YOUR_SUBMODULE.branch [YOUR PREFER BRANCH NAME]]
+      dd    Further you can just update your submodules::
+      dd    [$ git submodule update --remote]
+
+      dd    If you set the configuration setting status.submodulesummary,
+      dd    Git will also show you a short summary of changes to your submodules
+      dd    [$ git config status.submodulesummary 1]
+
+      dt    Working on a Submodule
+      dd
+
+      dt    Publishing Submodule Changes
+      dd    [$ git push --recurse-submodules=check]
+      dd    [$ git push --recurse-submodules=on-demand]
+
+      dt    Merging Submodule Changes
+      dd
+
+
+
+      dt
+        a(href="http://git-scm.com/book/en/v2/Git-Tools-Submodules#Submodule-Tips").
+            Submodule Tips
+      dd    Click for more info. There are a few things you can do to make working a little easier.
+
+      dt
+        a(href="http://git-scm.com/book/en/v2/Git-Tools-Submodules#Issues-with-Submodules").
+            Issues with Submodules
+      dd    Using submodules isn’t without hiccups, however.
+
+
+
+
+
+h1  Related terms
     H2(data-toggle="collapse" data-target="#Misc"  aria-controls="Misc").
       Misc
     div(id="Misc").collapse
