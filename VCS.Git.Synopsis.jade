@@ -1184,8 +1184,6 @@ html(lang="en")
       dt    Merging Submodule Changes
       dd
 
-
-
       dt
         a(href="http://git-scm.com/book/en/v2/Git-Tools-Submodules#Submodule-Tips").
             Submodule Tips
@@ -1196,8 +1194,14 @@ html(lang="en")
             Issues with Submodules
       dd    Using submodules isn’t without hiccups, however.
 
-
-
+    H2(data-toggle="collapse" data-target="#712"  aria-controls="712").
+      7.12. Bundling
+    div(id="712").collapse
+      dt    Bundling
+      dd    [$ git bundle create [file name] [REF | ..]]
+      dd    Git is capable of “bundling” its data into a single file.
+      dd    To create repo from bundle: [$ git clone [path to .bundle file]]
+      dd    To import changes from bundle into an existing repo: [$ git fetch [path to .bundle file] [branch:branch_local] etc..]
 
 
 h1  Related terms
@@ -1214,7 +1218,7 @@ h1  Related terms
         ol
           li  [$ gitk]                            - built-in git GUI
           li  [$ git config color.ui true]        - use colorful git output
-          li  [$ git config format.pretty oneline]- show log on just one line per commit
+          li  [$ git config format.pretty oneline]- show log on just one line per commitM
           li  [$ git add -i]                      - use interactive adding
           li  [$ git gui]
       dt      Other
