@@ -1,0 +1,23 @@
+{
+  "name": "git-pro-synonpsis",
+  "version": "0.0.1",
+  "description": "The Live render serve to the VCS.Git.Pro.Syonpsis.jade",
+  "main": "Show.Synopsis.js",
+  "scripts": {
+    "start": "node index",
+    "deploy": "bower install && npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexNeodim/GIT-Book-synopsis.git"
+  },
+  "author": "al.neodim@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexNeodim/GIT-Book-synopsis/issues"
+  },
+  "homepage": "https://github.com/AlexNeodim/GIT-Book-synopsis#readme",
+  "devDependencies": {
+    "jade": "^1.9.2"
+  }
+}

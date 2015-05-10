@@ -1,0 +1,25 @@
+{
+  "name": "git-pro-synonpsis",
+  "version": "0.0.1",
+  "homepage": "https://github.com/AlexNeodim/GIT-Book-synopsis",
+  "authors": [
+    "Alex Neodim <al.neodim@gmail.com>"
+  ],
+  "description": "The Live render serve to the VCS.Git.Pro.Syonpsis.jade",
+  "main": "Show.Synopsis.js",
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "client_side",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.4"
+  }
+}

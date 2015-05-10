@@ -6,6 +6,7 @@ html(lang="en")
     meta(http-equiv="X-UA-Compatible" content="IE=edge")
     meta(name="viewport" content="width=device-width, initial-scale=1")
     link(href="css/bootstrap.min.css" rel="stylesheet")
+    //link(href="custom.styles" rel="stylesheet")
     style(type="text/css").
       .color-back-black {
         background-color : rgb(0, 0, 0);
@@ -805,6 +806,7 @@ html(lang="en")
       dt
         a(href="http://git-scm.com/book/en/v2/GitHub-Maintaining-a-Project#Project-Administration").
             Project Administration
+      dd
     H2(data-toggle="collapse" data-target="#64"  aria-controls="64").
       6.4. Managing an organization
     div(id="64").collapse
@@ -1245,19 +1247,9 @@ h1  Related terms
       dd      to the git-server authorization process. (chapter 4.4.)
       dd      For security reasons.
 
-    script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
-    script(src="js/bootstrap.min.js")
-    script(type="text/javascript").
-
-      $("body").ready(function () {
-        var Parts = $("#Parts");
-            Parts.click(function () {
-              Parts.toggleClass("glyphicon-resize-small")
-              $(".collapse").collapse('toggle');
-            });
-      });
-
-
+    //script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
+    //script(src="js/bootstrap.min.js")
+    script(src="bundle.js"     )
     h1.text-color-black.
 
 
