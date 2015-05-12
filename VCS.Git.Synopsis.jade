@@ -16,7 +16,8 @@ html(lang="en")
       h1, h2, h3 {
         margin-top    : 0;
         margin-bottom : 0;
-        color         : #942f11;
+        color         : #F29C00;
+        background-color: #000000;
       }
       .h2, h2 {
         font-size : 24px;
@@ -41,22 +42,25 @@ html(lang="en")
       }
       ::-webkit-scrollbar-thumb {
         border-radius    : 10px;
-        background-color : #942f11;
+        background-color : #F29C00;
       }
       body {
         min-height : 1200px;
         max-width  : 900px;
       }
   body.container.dl-horizontal
-    h1  Preface
-    dt  Description:
-    dd  There are the mini-review which i've gathered from my some notes and pieces of the
-      a(href="http://git-scm.com/book/en/v2")  GIT Book (v2.0).
-    dt  Version:
-    dd  2.0
-    dt  Author:
-    dd
-      a(href="https://github.com/AlexNeodim") Alex Neodim
+    h1  SUMMARY
+    H2(data-toggle="collapse" data-target="#Preface" aria-expanded="false" aria-controls="Preface").
+      Preface
+    div(id="Preface").collapse
+      dt  Description:
+      dd  There are the mini-review which i've gathered from my some notes and pieces of the
+        a(href="http://git-scm.com/book/en/v2")  GIT Book (v2.0).
+      dt  Version:
+      dd  2.0
+      dt  Author:
+      dd
+        a(href="https://github.com/AlexNeodim") Alex Neodim
     hr
     H1 1.      Getting started.
     H2(data-toggle="collapse" data-target="#13" aria-expanded="false" aria-controls="13").
@@ -87,7 +91,7 @@ html(lang="en")
       dd    This means it’s impossible to change the contents without Git knowing about it.
       dd    Git hash-mechanism: SHA-1
       dd    Git stored snapshots in DB by the hash.
-    hr
+    
     h1 2.      Git Basics.
     H2(data-toggle="collapse" data-target="#21" aria-expanded="false" aria-controls="21").
       2.1.     Getting a Git Repository
@@ -235,7 +239,7 @@ html(lang="en")
       dd    However, maybe you want to run an external command
       dd    you start the command with a ! character.
       dd    e.g.: [$ git config --global alias.visual "!gitk"]
-    hr
+    
     h1 3. Git Branching
     H2(data-toggle="collapse" data-target="#31" aria-expanded="false" aria-controls="31").
       3.1.	Branching in a Nutshell.
@@ -335,7 +339,7 @@ html(lang="en")
         a(href="http://git-scm.com/book/en/v2/Git-Branching-Rebasing#Rebase-When-You-Rebase") Rebase When You Rebase
 
       dd
-    hr
+    
 
 
     h1 4. Git on the Server
@@ -373,7 +377,7 @@ html(lang="en")
       dd    One of the most complicated aspects of setting up a Git server is user management.
 
 
-    hr
+    
     h1  Misc
     H2(data-toggle="collapse" data-target="#Misc" aria-expanded="false" aria-controls="Misc").
       Misc
