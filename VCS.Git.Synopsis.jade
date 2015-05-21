@@ -5,78 +5,11 @@ html(lang="en")
     meta(charset="utf-8")
     meta(http-equiv="X-UA-Compatible" content="IE=edge")
     meta(name="viewport" content="width=device-width, initial-scale=1")
-    link(href="css/bootstrap.min.css" rel="stylesheet")
-    //link(href="custom.styles" rel="stylesheet")
-    style(type="text/css").
-      .color-back-black {
-        background-color : rgb(0, 0, 0);
-      }
-      .color-text-white {
-        color : #ffffff;
-      }
-      h1, h2, h3 {
-        margin-top    : 0;
-        margin-bottom : 0;
-        color         : #F29C00;
-        background-color: #000000;
-        font-size: 25px;
-        position: relative;
-
-      }
-      .text-align-r{
-        right: 0;
-        position : absolute;
-        /*display: block;*/
-        font-size: 20px;
-      }
-      .layer-2 {
-        z-index : 1;
-      }
-      .text-align-r:hover{
-        opacity : 0.9;
-      }
-      .text-color-black {
-        color:#000000;
-      }
-      .text-whitespaces {
-        white-space : pre;
-      }
-      .h2, h2 {
-        font-size : 20px;
-      }
-      /*.collapsing{color : rgb(169, 169, 169) }*/
-      [data-toggle]:hover {
-        text-decoration : underline;
-      }
-      [data-toggle] {
-        color            : #ffffff;
-        background-color : #2d2d2d;
-      }
-      .collapse.in:hover {
-        background-color : #f8f8f8 }
-      ::-webkit-scrollbar {
-        width    : 2px;
-        position : fixed;
-      }
-      ::-webkit-scrollbar-track {
-        width         : 2px;
-        border-radius : 10px;
-      }
-      ::-webkit-scrollbar-thumb {
-        border-radius    : 10px;
-        background-color : #F29C00;
-      }
-      body {
-        min-height : 1200px;
-        max-width  : 900px;
-      }
-      div {
-        display: block;
-      }
+    link(href="/bundle.css" rel="stylesheet")
 
   body.container.dl-horizontal
     h1 SUMMARY
-      span(id="Parts" title="Open/collapse all elements").glyphicon.glyphicon-resize-full.text-align-r.layer-2
+      span(id="toggler" title="Open/collapse all elements").glyphicon.glyphicon-resize-full.text-align-r.layer-2
 
     H2(data-toggle="collapse" data-target="#Preface"  aria-controls="Preface").
             Preface
@@ -119,7 +52,7 @@ html(lang="en")
       dd    This means it’s impossible to change the contents without Git knowing about it.
       dd    Git hash-mechanism: SHA-1
       dd    Git stored snapshots in DB by the hash.
-    
+
     h1      2.      Git Basics.
     H2(data-toggle="collapse" data-target="#21"  aria-controls="21").
             2.1.     Getting a Git Repository
@@ -271,7 +204,7 @@ html(lang="en")
       dd    However, maybe you want to run an external command
       dd    you start the command with a ! character.
       dd    e.g.: [$ git config --global alias.visual "!gitk"]
-    
+
     h1      3. Git Branching
     H2(data-toggle="collapse" data-target="#31"  aria-controls="31").
             3.1.	Branching in a Nutshell.
@@ -375,7 +308,7 @@ html(lang="en")
         a(href="http://git-scm.com/book/en/v2/Git-Branching-Rebasing#Rebase-When-You-Rebase") Rebase When You Rebase
 
       dd
-    
+
 
 
     h1      4. Git on the Server
@@ -1246,10 +1179,7 @@ h1  Related terms
       dd      It is the shell that used instead the default system platform (bash) shell
       dd      to the git-server authorization process. (chapter 4.4.)
       dd      For security reasons.
-
-    //script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
-    //script(src="js/bootstrap.min.js")
-    script(src="bundle.js"     )
+    script(src="bundle.js")
     h1.text-color-black.
 
 

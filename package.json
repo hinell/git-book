@@ -4,8 +4,7 @@
   "description": "The Live render serve to the VCS.Git.Pro.Syonpsis.jade",
   "main": "Show.Synopsis.js",
   "scripts": {
-    "start": "node index",
-    "deploy": "bower install && npm install"
+    "start": "node index"
   },
   "repository": {
     "type": "git",
