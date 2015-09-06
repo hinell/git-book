@@ -1,18 +1,13 @@
 # GIT Pro Book - Synopsis
-My a lots notes about  [GIT Pro Book](http://git-scm.com/book/en/v2).
-May be used for a public purposes.
+My a few notes about  [GIT Pro Book](http://git-scm.com/book/en/v2).
 
 ## Usage
-Previously, ensure that you have installed
-[iojs](https://iojs.org/en/index.html) and [bower](http://bower.io/).
-
-## Deploy and Usage
-
+Before you have to install these tools:
+[iojs](https://iojs.org/en/index.html) and [bower](http://bower.io/)
+then:
 ```
 $ bower install
-$ npm   install
-$ npm   start
+$ npm   i
+$ npm   run start
 ```
-
-
-Then open up [127.0.0.1](http://127.0.0.1) page in your browser.
+and open up [127.0.0.1](http://127.0.0.1) page in your browser.
