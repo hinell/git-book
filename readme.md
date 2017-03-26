@@ -6,7 +6,7 @@ My collection of short notes taken from [GIT Pro book](http://git-scm.com/book/e
 1) To start reading you need to have these tools being installed on your computer:
 [nodejs](https://nodejs.org/en/) and [bower](http://bower.io/)
 
-2) Run these commands in your (console](https://en.wikipedia.org/wiki/Command-line_interface) 
+2) Run these commands in your [console](https://en.wikipedia.org/wiki/Command-line_interface) 
 ```
 $ bower install
 $ npm   i
