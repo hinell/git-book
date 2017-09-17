@@ -1,22 +1,39 @@
 {
-  "name": "git-pro-synonpsis",
-  "version": "0.0.1",
-  "description": "The Live render serve to the VCS.Git.Pro.Syonpsis.jade",
-  "main": "Show.Synopsis.js",
-  "scripts": {
-    "start": "node index"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/AlexNeodim/GIT-Book-synopsis.git"
-  },
-  "author": "al.neodim@gmail.com",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/AlexNeodim/GIT-Book-synopsis/issues"
-  },
-  "homepage": "https://github.com/AlexNeodim/GIT-Book-synopsis#readme",
-  "devDependencies": {
-    "jade": "^1.9.2"
-  }
+ "name": "application-name",
+ "version": "0.0.1",
+ "description": "",
+ "main": "",
+ "scripts": {
+  "pack": "bash -c 'webpack --bail --progress --config webpack.js'",
+  "pack.watch": "bash -c 'webpack --bail -w --progress --config webpack.js'",
+  "start": "webpack-dev-server --config webpack.js",
+  "build": "tsc"
+ },
+ "dependencies": {
+  "bootstrap": ">=4.0.0-beta",
+  "pug": ">=2.0.0-rc.4",
+  "tslib": ""
+ },
+ "devDependencies": {
+  "@types/node": ">=8.0.28",
+  "css-loader": ">=0.28.7",
+  "fork-ts-checker-webpack-plugin": ">=0.2.8",
+  "node-sass": ">=4.5.3",
+  "sass-loader": ">=6.0.6",
+  "style-loader": ">=0.18.2",
+  "ts-loader": ">=2.3.7",
+  "typescript": ">=2.5.2",
+  "uglifyjs-webpack-plugin": ">=0.4.6",
+  "val-loader": "^1.0.2",
+  "webpack": "^3.6.0"
+ },
+ "keywords": [],
+ "author": "hinell@github.com",
+ "license": "MIT",
+ "babel": {
+  "plugins": [],
+  "presets": [
+   "es2015"
+  ]
+ }
 }

@@ -1,3 +1,0 @@
-[submodule "filesStream"]
-	path = files.stream
-	url = git@github.com:hinell/files-stream.git
