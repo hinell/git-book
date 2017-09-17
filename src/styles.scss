@@ -1,65 +1,209 @@
-.color-back-black {
-    background-color : rgb(0, 0, 0);
-}
-.color-text-white {
-    color : #ffffff;
-}
-h1, h2, h3 {
-    margin-top    : 0;
-    margin-bottom : 0;
-    color         : #F29C00;
-    background-color: #000000;
-    font-size: 25px;
-    position: relative;
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
+@import "../node_modules/bootstrap/scss/print";
+@import "../node_modules/bootstrap/scss/reboot";
+@import "../node_modules/bootstrap/scss/type";
+@import "../node_modules/bootstrap/scss/grid";
+@import "../node_modules/bootstrap/scss/bootstrap-reboot.scss";
+
+body {
 
 }
-.text-align-r{
-    right: 0;
-    position : absolute;
-    /*display: block;*/
-    font-size: 20px;
+
+// COMMON STYLES
+// Variables
+$main_color: hsla(11, 91%, 56%, 1);
+.body { line-height: normal; }
+h1, .h1, h2, h3, h4 {
+    margin-top    : 0;
+    margin-bottom : 0;
 }
-.layer-2 {
-    z-index : 1;
-}
-.text-align-r:hover{
-    opacity : 0.9;
-}
-.text-color-black {
-    color:#000000;
-}
-.text-whitespaces {
-    white-space : pre;
+h1, .h1 {
+  color : $main_color;
+  text-transform: uppercase;
+  position: relative;
+  font-size: 1.5rem;
+  // @media screen and (max-width: 768px ) { font-size : 1.75rem; }
+  // @media screen and (max-width: 576px ) { font-size : 2rem; }
 }
 .h2, h2 {
-    font-size : 20px;
+  color            : #ffffff;
+  background-color : #484440;
+  font-size        : 1.25rem;
+  transition       : text-shadow 0.3s ease-in-out;
+  // @media screen and (max-width: 768px ) { font-size : 1.5rem; }
+  // @media screen and (max-width: 576px ) { font-size : 1.75rem; }
+
 }
-/*.collapsing{color : rgb(169, 169, 169) }*/
-[data-toggle]:hover {
-    text-decoration : underline;
+
+h2:hover {
+    text-shadow : 2px 0 0px #fff;
 }
-[data-toggle] {
-    color            : #ffffff;
-    background-color : #2d2d2d;
+h3 {
+  font-size : 1rem ;
+  // @media screen and (max-width: 768px ) { font-size : 1.25rem; }
+  // @media screen and (max-width: 576px ) { font-size : 1.5rem; }
 }
-.collapse.in:hover {
-    background-color : #f8f8f8 }
+.img-fluid { width: 100% }
+// CONTAINER
+.container, .container-fluid {
+  // padding : 0;
+  @media screen and (max-width: 1140px ) {
+    overflow-x: hidden;
+    flex-direction: column;
+  }
+  @media screen and (max-width: 540px ) { padding: 0 }
+
+}
+
+// HEADER
+.header {
+  display         : flex;
+  flex-direction  : row;
+  justify-content : flex-start;
+  align-items     : flex-end;
+
+  background-color: #484440;
+  padding         : 2px;
+  min-height      : 4rem;
+  max-height      : 4rem;
+
+  @media screen and (max-width: 768px ) {
+    flex-direction: column;
+    justify-content: flex-end;
+    background-image: url('/public/Git-Icon-White.png');
+    background-attachment : scroll;
+    background-position: center right ;
+    background-repeat : no-repeat;
+    background-size: 60%;
+    //margin-left: 0;
+
+  }
+
+}
+.git-logo {
+  display: flex;
+  justify-content :center;
+  align-self: center;
+
+  img { max-height : 4rem; max-width : 4rem; }
+
+  @media screen and (min-width: 1025px) {}
+  @media screen and (max-width: 768px) {
+    display: none
+  }
+}
+.git-btn-follow {
+  height: 20px;
+  width : 106px;
+  @media screen and (max-width: 960px ) { margin-right: .5rem}
+
+}
+.git-btn-fork   {
+  height: 20px;
+  width : 52px;
+  @media screen and (max-width: 960px ) { margin-right: .5rem}
+
+}
+.git-btn-like   {
+  height: 20px;
+  width : 75px;
+  @media screen and (max-width: 960px ) { margin-right: .5rem}
+
+}
+
+// CONTENT
+// this class is inserted JS
+.content-table {
+  display: block;
+
+  min-width :15rem;
+  color : $main_color;
+  margin: 0 0 1rem 0;
+
+  // links are blocks
+  & > aside { top: 1rem ; position : sticky;}
+  & > aside > a {
+    color : $main_color;
+    background : transparent;
+    display: block;
+    margin-bottom : .05rem ;
+  }
+  & > aside > a:hover {
+    background-color : #484440;
+    color: white;
+  }
+
+  @media screen and (max-width: 576px ) {
+    display : flex;
+    justify-content : center;
+  }
+  @media screen and (max-width: 768px ) { min-width: 50%;}
+  @media screen and (max-width: 1101px  ) {
+    top: auto;
+    margin-bottom : 10px;
+    position: relative;
+    & > a { margin-bottom : .25rem; }
+  }
+}
+.content-main {
+  // anchor is inserted by js
+  h1 .anchor {
+    color: $main_color;
+    margin-left: -20px;
+    opacity: 0;
+    &:hover { opacity: 1 }
+
+  }
+  div p { margin: 0 0 .25rem auto }
+  @media screen and (min-width: 1102px  ) {
+    div p {
+      margin-left: .5rem
+    }
+  }
+  @media screen and (max-width: 1101px  ) {
+    margin-top : 10px;
+  }
+}
+
+// GO TO TOP BUTTON
+.go-to-top {
+  position: fixed;
+  bottom : 15px;
+  right : 15px;
+  border: 0 solid white ;
+  border-radius: 2px;
+  background-color: white;
+  width: 40px;
+  text-align: center;
+  font-weight: 400;
+  box-shadow: 0 1px 2px hsla(0, 0%, 0%, 0.5);
+  transition: box-shadow .1s ease-in, transform .1s ease-in;
+  opacity: .30 ;
+  font-size : 16px;
+  &:hover { opacity : .85 ; cursor: pointer}
+  &:active {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 1px 3px hsla(0, 0%, 0%, 0.25);
+  }
+  a {color: black}
+  a:hover,a:active { text-decoration: none; }
+}
+
+// SCROLL BAR
 ::-webkit-scrollbar {
-    width    : 2px;
+    width    : 5px;
     position : fixed;
 }
 ::-webkit-scrollbar-track {
-    width         : 2px;
-    border-radius : 10px;
+    width         : 5px;
+    border-radius : 5px;
 }
+
 ::-webkit-scrollbar-thumb {
-    border-radius    : 10px;
-    background-color : #F29C00;
+    width: 5px ;
+    border-radius    : 1px;
+    background-color : $main_color;
 }
-body {
-    min-height : 1200px;
-    max-width  : 900px;
-}
-div {
-    display: block;
-}
+::-webkit-scrollbar-thumb:hover { width: 10px; background-color : #350d00;}

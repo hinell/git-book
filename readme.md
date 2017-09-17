@@ -5,20 +5,11 @@
 My collection of short notes taken from [GIT Pro book](http://git-scm.com/book/en/v2) (2014).
 
 ### GETTING STARTED
-> Before you start make sure [nodejs](https://nodejs.org/en/), [bower](http://bower.io/) and ``git`` are installed and available in your global `$PATH`!
-```
-$ git clone --recursive git@github.com:hinell/git-book.git
-$ cd git-book
-```
-Run these commands in your [console](https://en.wikipedia.org/wiki/Command-line_interface) 
-```
-$ bower install
-$ npm   i
-$ npm   run start
-```
-<br>Follow to [localhost](http://localhost) page in your most favourite browser. 
+Just follow to [hinell.github.io/git-book](http://hinell.github.io/git-book). No setup required.
 <br>Enjoy!
 
 ### ACKNOWLEDGMENT
-The authors of **GIT Pro Book** which was used by this synopsys are Scott Chacon and Ben Straub.
-<br>This synopsys wouldn't be possible wihtout them .
+The authors of **GIT Pro Book** which was used by this synopsis are Scott Chacon and Ben Straub.
+<br>This synopsis wouldn't be possible wihtout them.
+
+[![forthebadge](http://forthebadge.com/images/badges/check-it-out.svg)](http://forthebadge.com)[![forthebadge](http://forthebadge.com/images/badges/made-with-pug.svg)](http://forthebadge.com)[![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com)

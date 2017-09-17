@@ -1,1211 +1,1124 @@
-﻿doctype html
-html(lang="en")
-  head
-    title VCS Git Synopsis
-    meta(charset="utf-8")
-    meta(http-equiv="X-UA-Compatible" content="IE=edge")
-    meta(name="viewport" content="width=device-width, initial-scale=1")
-    link(href="/bundle.css" rel="stylesheet")
-
-  body.container.dl-horizontal
-    h1 SUMMARY
-      span(id="toggler" title="Open/collapse all elements").glyphicon.glyphicon-resize-full.text-align-r.layer-2
-
-    H2(data-toggle="collapse" data-target="#Preface"  aria-controls="Preface").
-            Preface
-    div(id="Preface").collapse
-      dt    Description:
-      dd
-        |   Here a small review of my some collected notes based on the
-        a(href="http://git-scm.com/book/en/v2")  GIT Book (v2.0),
-      dt    Version:
-      dd    2.0
-      dt    Author:
-      dd
-        a(href="https://github.com/hinell") Hinell
-    H1      1.      Getting started.
-    H2(data-toggle="collapse" data-target="#13"  aria-controls="13").
-            1.3.    Git Basics.
-    div(id="13").collapse
-      dt    Snapshots.
-      dd.
-            Every time you commit, or save the state of your project in Git,
-            it basically takes a picture of what all your files look like at that moment
-            and stores a reference to that snapshot (if files have not changed,
-      dd.
-            Git doesn't store the file again (like others VCSs),
-            just a link to the previous identical file it has already stored.)
-      dd    Git thinks about its data more like a stream of snapshots.
-      dt    Nearly Every Operation Is Local.
-      dd.
-            Git only need local files and resources to operate unlike
-            other VCSs which have latency network overhead.
-      dt    Git Has Integrity.
-      dt    Git Generally Only Adds Data.
-      dd    In Git, doing nearly all of actions, you only add data to the Git database.
-      dd.
-            It is very difficult to lose your data,
-            especially if you regularly push your database to another repository.
-      dd.
-            Everything (files, dirs) in Git is check-summed before it's stored (to GIT) and
-            is then referred to by that checksum.
-      dd    This means it’s impossible to change the contents without Git knowing about it.
-      dd    Git hash-mechanism: SHA-1
-      dd    Git stored snapshots in DB by the hash.
-
-    h1      2.      Git Basics.
-    H2(data-toggle="collapse" data-target="#21"  aria-controls="21").
-            2.1.     Getting a Git Repository
-    div(id="21").collapse
-      p.
-      dt   Git initializing in an Existing Directory
-      dd    Init in a current directory: [$ git init]
-      dt   Cloning an Existing Repository.
-      dd    You clone a repository with: [$ git clone [url]].
-    H2(data-toggle="collapse" data-target="#22"  aria-controls="22").
-            2.2.    Recording Changes to the Repository
-    div(id="22").collapse
-      dt    Recording Changes to the Repository
-      dd
-        p   Current dir - directory where git had initialized.
-        ul  Each file in the current directory may have two states:
-          ul
-            li     untracked(не отслеживаемые)
-            li     tracked  (отслеживаемые, in last snapshot)
-        ul   Tracked files are files that were of the last snapshot; their states:
-          ul
-            li unmodified
-            li modified
-            li staged
-      dt    Checking the Status of Your Files
-      dd        Check status of files in current dir: [$ git status]
-      dt     Tracking New Files
-      dd        Begin tracking new file:[ $ git add [file]]
-      dt    Staging Modified Files
-      dd        Git add is a multipurpose command – you use it to begin tracking new files,
-      dd        to stage files, and to do other things like marking merge-conflicted files as resolved.
-      dt    Ignoring Files
-      dd        See .gitignore
-      dt    Viewing Your Staged and Unstaged Changes
-      dd        [$ git diff] - shows you the exact lines added and removed – the patch, as it were.
-      dt    Removing Files
-      dd.
-            Command: [$ git rm [file | dir]]
-            This command simply delete tracked file.
-      dt   Moving Files (Renaming)
-      dd.
-            If you want to rename a file in Git, you can run something like:
-            [$ git mv file_from file_to]
-    H2(data-toggle="collapse" data-target="#23"  aria-controls="23").
-            2.3.   Viewing the Commit History.
-    div(id="23").collapse
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History").
-            Viewing the Commit History
-      dd    To do this you need type the [$ git log] command.
-      dd    One of the more helpful options is [-p], which shows the difference introduced in each commit.
-      dd    You can also use [-2], which limits the output.
-      dd    If you want to see some abbreviated stats for each commit, you can use the [--stat] option.
-      dd    Another really useful option is [--pretty=oneline|short|full|fuller|format:]
-      dd    Show graph: [$ git log --graph]
-      dd    e.g.: [$ git log --pretty=format:"%h - %an, %ar : %s"]
-      dd    More info available on the above link.
-      dd    To see only the commits of a certain author: git log --author=bob
-      dd    Different between committer and author is the author is the person who originally wrote the work,
-      dd    whereas the committer is the person who last applied the work.
-      dt    Limiting Log Output
-      dd
-      dd    With: [-n] where n is any integer to show the last n commits.
-      dd    The time-limiting options such as --since and --until.
-      dd    See other command in reference.
-      dd    Limiting with time: [$ git log --since=[date]]
-
-    H2(data-toggle="collapse" data-target="#24"  aria-controls="24").
-            2.4.    Undoing Things
-    div(id="24").collapse
-      dt    Undoing Things
-      dd    [$ git commit --amend]
-      dt    Unstaging a Staged File
-      dd    To unstage content in current dir, you can use: [$ git reset HEAD <file>] command:
-      dt    Unmodifying a Modified File
-      dd    You can replace local changes using the command:
-      dd    [$ git checkout -- [file]] - be careful - is a dangerous command.
-      dd    This kept files already added to the index,(new files).
-      dd    Remember, anything that is committed in Git can almost always be recovered.
-      dd.
-            If you instead want to drop all your local changes, use:
-            [$ git fetch origin]. It fetch the latest history
-            from the server and point your local master branch.
-    H2(data-toggle="collapse" data-target="#25"  aria-controls="25").
-            2.5.     Working with Remotes
-    div(id="25").collapse
-      dd    Remote repositories are versions of your project
-      dd    that are hosted on the Internet or network somewhere.
-      dd    Remotes enable you collaborate on any project remotely.
-      dd    It is them porpose.
-      dt    Showing Your Remotes
-      dd    To see which remote servers you have configured, you can run the [$ git remote]
-      dt    Adding Remote Repositories
-      dd    [$ git remote add [shortname] [url]]
-      dt    Fetching and Pulling from Your Remotes
-      dd    As you just saw, to get data from your remote projects,
-      dd    you can run:[$ git fetch [remote-name]]
-      dd    For example, if you want to fetch all the information that remote repo has
-      dd    but that you don’t yet have in your repository, you can run [$ git fetch [shortname]]
-      dd    If you have a branch set up to track a remote branch, you can use
-      dd    the [$ git pull] command to automatically fetch and then merge a remote branch into your current branch.
-      dt    Pushing to Your Remotes
-      dd    When you have your project at a point that you want to share,
-      dd    you have to push it upstream. The command for this is simple:
-      dd    [git push [remote-name] [branch-name]]
-      dt    Inspecting a Remote
-      dd    If you want to see more information about a particular remote:
-      dd    [$ git remote show [remote-name] ]
-    H2(data-toggle="collapse" data-target="#26"  aria-controls="26").
-            2.6.    Tagging
-    div(id="26").collapse
-      h2
-      dt    Tagging
-      dd      Typically people use this functionality to mark release points (v1.0, and so on).
-      dt    Listing Your Tags
-      dd      [$ git tag]
-      dd    You can also search for tags with a particualar pattern like this
-      dd    [$ git tag -l 'v1.*']
-      dt    Creating Tags
-      dd    Git uses two main types of tags:
-        li      lightweight
-        li      annotated.
-      dd    A lightweight tag is very much like a branch that doesn’t change – it’s just a pointer to a specific commit.
-      dd    Annotated tags, are stored as full objects in the Git database
-      dd    (including the tagger name, e-mail, date;
-      dd    a tagging message; and can be signed / verified with GNU Privacy Guard (GPG).)
-      dt    Annotated Tags
-      dd    The easiest way is to specify [-a | -m | -s ]: [$ git -a ]
-      dd    e.g.: [$ git tag -a v.1.4 - 'my version 1.4']
-      dd    To see tag data along with commit that was tagged, use: [$ git show [tagname]]
-      dt    Lightweight Tags
-      dd    To create a lightweight tag, don’t supply the -a, -s, or -m option, i.e:
-      dd    [$ git tag v1.4-lw]
-      dt    Tagging later
-      dd    [$ git tag -a [tagName] [commit]] i.e.:
-      dd    [$ git tag -a v1.2 9fceb02]
-      dt    Sharing Tags
-      dd    Just run: [$ git push origin [tagname]
-      dd    By default the [$ git push] command doesn’t transfer tags to remote servers.
-      dd    To push up at once a lot of tags you can use the:[$ git push --tags]
-      dt    Checking out Tags
-      dd    You can create a new branch at a specific tag:[$ git checkout -b [branchname] [tag(v.2 etc)]]
-    H2(data-toggle="collapse" data-target="#27"  aria-controls="27").
-            2.7.	Git Aliases
-    div(id="27").collapse
-      dd    You can easily set up an alias for each command using git config:
-      dd    [$ git config --global alias.[nameOfNewCommand] ["git.command]"]
-      dd    i.e.: [$ git config --global alias.co checkout]
-      dd    However, maybe you want to run an external command
-      dd    you start the command with a ! character.
-      dd    e.g.: [$ git config --global alias.visual "!gitk"]
-
-    h1      3. Git Branching
-    H2(data-toggle="collapse" data-target="#31"  aria-controls="31").
-            3.1.	Branching in a Nutshell.
-    div(id="31").collapse
-      dd    Branching means you diverge from the main line of development
-      dd    and continue to do work without messing with that main line.
-      dt    Branching in a Nutshell
-      dd    When you make a commit, Git stores a commit object that
-      dd    contains a pointer to the snapshot of the content you staged.
-      dt    Creating a New Branch
-      dd    [$ git branch [branch name]]
-      dd    How does Git know what branch you’re currently on?
-      dd    It keeps a special pointer called HEAD.
-      dd    Note that this is a lot different than the concept of HEAD
-      dd    in other VCSs you may be used to, such as Subversion or CVS.
-      dd    The git branch command only created a new branch – it didn’t switch to that branch.
-      br
-      dd    To see where the point of your HEAD, use:
-      dd    [$ git log --oneline --decorate]
-      dd    [$ git checkout [branch name]
-      dd    That command did two things.
-      dd    It moved the HEAD pointer back to point to the [branch name] branch,
-      dd    and it reverted the files in your working directory
-      dd    back to the snapshot that master points to.
-      dd    [git log --oneline --decorate --graph --all]
-    H2(data-toggle="collapse" data-target="#32"  aria-controls="32").
-            3.2.	Basic Branching and Merging
-    div(id="32").collapse
-      dt    Basic Branching and Merging
-      dd    At this stage, you’ll receive a call that another issue
-      dd    is critical and you need a hotfix. You’ll do the following:
-        ol
-          li Switch to your production branch.
-          li Create a branch to add the hotfix.
-          li After it’s tested, merge the hotfix branch, and push to production.
-          li Switch back to your original story and continue working.
-      dt    Basic Merging
-      dd    It’s worth pointing out that Git determines the best common ancestor to use
-      dd    for its merge base; this is different than older tools like CVS or Subversion (before version 1.5)
-    h2(data-toggle="collapse" data-target="#33"  aria-controls="33").
-            3.3.	Branch Management
-    div(id="33").collapse
-      dd    Notice the <b>*</b> indicates the branch (HEAD) that you currently have checked out .
-      dd    See last commit on each branch: [$ git branch -v]
-    h2(data-toggle="collapse" data-target="#34"  aria-controls="34").
-            3.4.	Branching Workflows
-    div(id="34").collapse
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-Branching-Branching-Workflows#Long-Running-Branches").
-            Long-Running Branches
-      dd    This means you can have several branches that are always open (ie master) and
-      dd    that you use for different stages of your development cycle;
-      dd    you can merge regularly from some of them into others.
-      dt
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-Branching-Branching-Workflows#Topic Branches").
-            Topic Branches
-      dd    Topic branches, however, are useful in projects of any size.
-      dd    A topic branch is a short-lived branch that you create and
-      dd    use for a single particular feature or related work.
-      dd    A topic branch is a short-lived branch that you create and
-      dd    for a single particular feature or related work.
-    h2(data-toggle="collapse" data-target="#35"  aria-controls="35").
-            3.5.	Remote Branches
-    div(id="35").collapse
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-Branching-Remote-Branches") Remote Branches
-      dd    Remote branches are references (pointers) to the state of branches in your remote repositories.
-      dd    They’re local branches that you can’t move;
-      dd    they’re moved automatically for you whenever you do any network communication.
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-Branching-Remote-Branches#Tracking-Branches") Tracking Branches
-      dd    Checking out a local branch from a remote branch automatically creates what is called
-      dd    a “tracking branch" (or sometimes an “upstream branch").
-      dd    Tracking branches are local branches that have a direct relationship to a remote branch.
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-Branching-Remote-Branches#Deleting-Remote-Branches") Deleting Remote Branches
-      dd    If you want to delete your branch from the server, you run the following:
-      dd    [$ git push [remote name] --delete [branch name]]
-    h2(data-toggle="collapse" data-target="#36"  aria-controls="36").
-            3.6.	Rebasing
-    div(id="36").collapse
-      dd    In Git, there are two main ways to integrate changes from one branch into another:
-        ol
-          li the merge
-          li the rebase.
-      dt    The Basic Rebase
-      dd    There is no difference in the end product (in comparing with merge tool)
-      dd    of the integration, but rebasing makes for a cleaner history.
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-Branching-Rebasing#The-Basic-Rebase") The Basic Rebase
-      dd
-        |   Commands:
-        |   [$ git
-        a(href="http://git-scm.com/docs/git-rebase")    rebase
-        |   --onto <newbase>]
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-Branching-Rebasing#The-Perils-of-Rebasing") The Perils of Rebasing
-      dd Do not rebase commits that exist outside your repository.
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-Branching-Rebasing#Rebase-When-You-Rebase") Rebase When You Rebase
-
-      dd
-
-
-
-    h1      4. Git on the Server
-    h2(data-toggle="collapse" data-target="#41"  aria-controls="41").
-            4.1.	The Protocols
-    div(id="41").collapse
-      dd    Therefore, the preferred method for collaborating with someone
-      dd    is to set up an intermediate repository that you both have access to, and push to and pull from that.
-      dt    The Protocols
-      dd    Git can use four major protocols to transfer data:
-        ul
-          li
-            a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-The-Protocols#Local-Protocol") Local
-          li
-            a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-The-Protocols#The-HTTP-Protocols") HTTP
-          li
-            a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-The-Protocols#The-SSH-Protocol") Secure Shell (SSH)
-          li
-            a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-The-Protocols#The-Git-Protocol") Git
-      dd
-    h2(data-toggle="collapse" data-target="#42"  aria-controls="42").
-            4.2. Getting Git on a Server
-    div(id="42").collapse
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-Getting-Git-on-a-Server") Getting Git on a Server
-      dd    In order to initially set up any Git server,
-      dd    you have to export an existing repository into a new bare repository –
-      dd    a repository that doesn’t contain a working directory.
-      dd    This is generally straightforward to do.
-      dd    By convention, bare repository directories end in .git
-      dd    In order to clone repo, you run clone command with --bare:
-      dd    [$ git clone --bare [url to repo] [cloned repo name].git ]
-      dd    This is roughly equivalent to something like
-      dd    [$ cp -Rf my_repo/.git my_local_repo.git]
-      dd    Git will automatically add group write permissions to a repository properly
-      dd    if you run the git init command with the --shared option:
-      dd    [$ git init --bare --shared]
-
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-Getting-Git-on-a-Server#Putting-the-Bare-Repository-on-a-Server").
-            Putting the Bare Repository on a Server
-
-      dd    Let’s say you’ve set up a server called git.example.com
-      dd    Further you can set up your new repository by copying your bare repository over:
-      dd    [$ scp -r my_project.git user@git.example.com:[/path/to/new/repo]]
-      dd    After all, now, user's who have SSH acsess to the same serve
-      dd    can clone your repository by running
-      dd    [$ git clone user@git.example.com:[/path/to/new/repo].git]
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-Getting-Git-on-a-Server#Small-Setups").
-          Small Setups
-      dd    One of the most complicated aspects of setting up a Git server is user management.
-      dt    SSH Access
-      dd    There are a few ways you can give access to everyone on your team:
-        ul
-          li  Just set up accounts (obviously system) for everybody.
-          li.
-              Create a signle git user on the machine and ask every user who
-              is to have write access to send you an SSH public key,
-              and add that key to the ~/.ssh/authorized_keys
-          li.
-              Another way to do it is to have your SSH server
-              authenticate from an LDAP server or some other
-              centralized authentication source that you may already have set up.
-
-
-    h2(data-toggle="collapse" data-target="#43"  aria-controls="43").
-            4.3. Generating Your SSH Public Key
-    div(id="43").collapse
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-Generating-Your-SSH-Public-Key") Generation SSH key
-      dd    First, you should check to make sure you don’t already have a key.
-      dd    By default, a user's SSH key are stored in that user's ~/.ssh directory
-      dd    and key's files named like id_dsa or id_rsa and a matching file with a
-      dd    .pub extension.
-      dd    If you don't have these files, you can create them by program called ssh-keygen:
-      dd    [$ ssh-keygend -t rsa -C "your@email.com"];
-      dd    which  provided on almost all current system platform (Linux/Mac, on NT with MSysGit package).
-      dd    Now, each user that does this has to send their public key to the Git server
-      dd    (assuming you’re using an SSH server setup that requires public keys).
-      dd    All they have to do is compy the content of the .pub file and send it.
-      dt
-        a(href="https://help.github.com/articles/generating-ssh-keys.") GitHub article
-      dd    Click to open up help for SSH key generation on GitHub Help service.
-
-
-
-    h2(data-toggle="collapse" data-target="#44"  aria-controls="44").
-            4.4. Setting Up the Server
-    div(id="44").collapse
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-Setting-Up-the-Server") Setting Up the Server
-      dd    First, you create (on Nix-systems - you also should create a git user) a .ssh directory for that user.
-      dd    Next, you need to add some developer SSH public keys to the ~/.ssh/authorized_keys directory.
-      dd    Now, you can set up an empty repository.
-
-    h2(data-toggle="collapse" data-target="#45"  aria-controls="45").
-            4.5. Git Daemon
-    div(id="45").collapse
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-Git-Daemon") Git Daemon
-      dd    In any case, the Git protocol is relatively easy to set up.
-      dd    Basically, you need to run this command in a daemonized manner:
-      dd    Remember that since it’s not an authenticated service,
-      dd    anything you serve over this protocol is public within its network.
-      dd    --reuseaddr allows the server to restart without waiting for old connections to time out
-      dd    --base-path option allows people to clone projects without specifying the entire path
-      dd    and the path at the end tells the Git daemon where to look for repositories to export.
-      dd
-    h2(data-toggle="collapse" data-target="#46"  aria-controls="46").
-            4.6. Smart HTTP
-    div(id="46").collapse
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-Smart-HTTP") Smart HTTP
-      dd    Setting up Smart HTTP is basically just enabling
-      dd    a CGI script that is provided with Git called [git-http-backend] on the server.
-    h2(data-toggle="collapse" data-target="#47"  aria-controls="47").
-            4.7. GitWeb
-    div(id="47").collapse
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-GitWeb") GitWeb
-      dd    Git comes with a CGI script called GitWeb that is
-      dd    provided simple web-based visualizer.
-    h2(data-toggle="collapse" data-target="#48"  aria-controls="48").
-            4.8. GitLab
-    div(id="48").collapse
-      dd    If you’re looking for a more modern, fully featured Git server,
-      dd    there are some several open source solutions out there that you can install instead.
-
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-GitLab#Installation") Installation
-      dd    GitLab is a database-backed web application
-      dd    To get something up and running quickly, you can download a virtual machine image or
-      dd    a one-click installer from https://bitnami.com/stack/gitlab,
-      dd    and tweak the configuration to match your particular environment.
-    h2(data-toggle="collapse" data-target="#49"  aria-controls="49").
-            4.9. Third Party Hosted Options
-    div(id="49").collapse
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-Third-Party-Hosted-Options")
-        |   Third Party Hosted Options
-      dd    These days, you have a huge number of hosting options to choose from.
-      dd    To see an up-to-date list, check out the GitHosting page on the main
-        a(href="https://git.wiki.kernel.org/index.php/GitHosting")   Git wiki
-
-
-    h1      5. Distributed Git
-    h2(data-toggle="collapse" data-target="#51"  aria-controls="51").
-            5.1. Distributed Workflows
-    div(id="51").collapse
-      dt    Distributed Workflows
-      dd    Unlike another centralized VCS, GIT allows every developer to be
-      dd    on both a node and a hub states.
-      dd    So lets cover a few common paradigms of workflow:
-      dt
-        a(href="http://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows#Centralized-Workflow") Centralized Workflow
-      dd
-        img(src="http://www.shaney.net/git/images/centralized.png").img-responsive.img-rounded
-      dd    One central hub, or repository, can accept code, and everyone synchronizes their work to it.
-      dd    This is also not limited to small teams.
-
-      hr
-      dt
-        a(href="http://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows#Integration-Manager-Workflow") Integration-Manager Workflow
-      dd
-        img(src="http://git-scm.com/book/en/v2/book/05-distributed-git/images/integration-manager.png").img-responsive.img-rounded
-      dd
-      dd    Because Git allows you to have multiple remote repositories,
-      dd    it’s possible to have a workflow where each developer
-      dd    has write access to their own public repository and read access to everyone else’s.
-      dd    The process works as follows:
-      dd
-        ol
-          li The project maintainer pushes to their public repository.
-          li  A contributor clones that repository and makes changes.
-          li  The contributor pushes to their own public copy.
-          li  The contributor sends the maintainer an e-mail asking them to pull changes.
-          li  The maintainer adds the contributor’s repo as a remote and merges locally.
-          li  The maintainer pushes merged changes to the main repository.
-
-      dt
-        a(href="http://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows#Dictator-and-Lieutenants-Workflow") Dictator and Lieutenants Workflow
-      dd
-        img(src="http://git-scm.com/book/en/v2/book/05-distributed-git/images/benevolent-dictator.png").img-responsive.img-rounded
-
-      dd    This is a variant of a multiple-repository workflow.
-      dd    It’s generally used by huge projects with hundreds of collaborators;
-      dd    Various integration managers are in charge of certain parts of the repository;
-      dd    they’re called lieutenants.
-      dd    All the lieutenants have one integration manager known as the benevolent dictator.
-      dd    The process works like this:
-        ol
-          li Regular developers work on their topic branch and rebase their work on top of master. The master branch is that of the dictator.
-          li Lieutenants merge the developers’ topic branches into their master branch.
-          li The dictator merges the lieutenants’ master branches into the dictator’s master branch.
-          li The dictator pushes their master to the reference repository so the other developers can rebase on it.
-    h2(data-toggle="collapse" data-target="#52"  aria-controls="52").
-      5.2. Contributing to a Project
-    div(id="52").collapse
-      dt    Contributing to a Project
-      dd    The main difficulty with describing how to contribute to a project
-      dd    is that there are a huge number of variations on how it’s done.
-      dt
-        a(href="http://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project#Commit-Guidelines").
-            Commit Guidelines
-      dd    Before we start looking at the specific use cases, here’s a quick note about commit messages.
-      dd    First, you don’t want to submit any whitespace errors.
-      dd    Before you commit, run [$ git diff --check] -
-      dd    It is identifies possible whitespace errors and lists them for you.
-      dd    Next, try to make each commit a logically separate changeset.
-      dd    If you can, try to make your changes digestible – don’t code for a whole weekend on five different issues
-      dd    and then submit them all as one massive commit on Monday.
-      dd    The last thing to keep in mind is the commit message.
-      dd    Here is a template originally written by Tim Pope:
-
-      dd
-        blockquote.text-whitespaces.
-          Short (50 chars or less) summary of changes
-
-          More detailed explanatory text, if necessary.  Wrap it to
-          about 72 characters or so.  In some contexts, the first
-          line is treated as the subject of an email and the rest of
-          the text as the body.  The blank line separating the
-          summary from the body is critical (unless you omit the body
-          entirely); tools like rebase can get confused if you run
-          the two together.
-
-          Further paragraphs come after blank lines.
-
-            - Bullet points are okay, too
-
-            - Typically a hyphen or asterisk is used for the bullet,
-            preceded by a single space, with blank lines in
-            between, but conventions vary here
-      dt
-        a(href="http://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project#Private-Small-Team").
-            Private Small Team
-      dd    Before pushing changes from your local repo at the
-      dd    meantime as this doing another developers,
-      dd    you need fetch remote changes and then merge with your.
-      dt
-        a(href="http://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project#Private-Managed-Team").
-            Private Managed Team
-      dd    The ability of smaller subgroups of a team to collaborate via
-      dd    remote branches without necessarily having to
-      dd    involve or impede the entire team is a huge benefit of Git.
-      dt
-        a(href="http://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project#Forked-Public-Project").
-            Forked Public Project
-      dd    [$ git merge --no-commit --squash]
-      dd    The --squash option takes all the work on the merged branch
-      dd    and squashes it into one non-merge commit on top of the branch you’re on.
-      dt
-        a(href="http://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project#Public-Project-over-E-Mail").
-            Public Project over E-Mail
-      dd    You can generate e-mail versions of each commit series
-      dd    and e-mail them to the developer mailing list
-    h2(data-toggle="collapse" data-target="#53"  aria-controls="53").
-      5.3. Maintaining a Project
-    div(id="53").collapse
-      dt    Contributing to a Project
-      dd
-      dt
-        a(href="http://git-scm.com/book/en/v2/Distributed-Git-Maintaining-a-Project#Applying-Patches-from-E-mail").
-            Applying Patches from E-mail
-      dd
-      dt
-        a(href="http://git-scm.com/book/en/v2/Distributed-Git-Maintaining-a-Project#Checking-Out-Remote-Branches").
-            Checking Out Remote Branches
-      dd    The other advantage of this approach is that
-      dd    you get the history of the commits as well.
-
-      dt
-        a(href="http://git-scm.com/book/en/v2/Distributed-Git-Maintaining-a-Project#Determining-What-Is-Introduced").
-            Determining What Is Introduced
-      dd    It’s often helpful to get a review of all the commits
-      dd    that are in this branch but that aren’t in your master branch.
-      dd    You can exclude commits in the master branch by
-      dd    adding the [--not] option before the branch name.
-      dd    This does the same thing as the [$ git log [branchname]..[branchname]] format that we used earlier.
-      dd    What you really want to see are the changes added to the topic branch –
-      dd    the work you’ll introduce if you merge this branch with master, you
-      dd    can do: [$ git merge-base [branchname] [branchname]]
-      dd    A bit more convenient: [$ git diff [branchname]...[branchname]]
-      dd    This command shows you only the work your current topic branch has introduced since its common ancestor
-
-      dt
-        a(href="http://git-scm.com/book/en/v2/Distributed-Git-Maintaining-a-Project#Integrating-Contributed-Work").
-            Integrating Contributed Work
-      dd    Main question is which overall workflow do you want
-      dd    to use to maintain your project? You have a number
-      dd    of choices, so we’ll cover a few of them.
-
-      dt    Merging Workflows
-      dd    If you have a more important project, you might want to
-      dd    use a two-phase merge cycle. In this scenario, you have two
-      dd    long-running branches, master and develop, in which you
-      dd    determine that master is updated only when a very stable
-      dd    release is cut and all new code is integrated into the develop branch.
-
-      dt    Large-Merging Workflows
-      dt    Rebasing and Cherry Picking Workflows
-      dd    he other way to move introduced work from one branch to another is
-      dd    to [$ git cherry-pick [target for merging wiht that you're currently on]].
-      dd    A cherry-pick in Git is like a rebase for a single commit.
-      dd    It takes the patch that was introduced in a commit and tries to reapply it on the branch you’re currently on.
-
-      dt    Rerere
-      dd    If you’re doing lots of merging and rebasing, or you’re maintaining
-      dd    a long-lived topic branch, Git has a feature called “rerere" that can help.
-      dd    Rerere stands for “reuse recorded resolution" – it’s a way of shortcutting manual conflict resolution.
-      dd    This feature comes in two parts: a configuration setting and a command.
-      dd    The configuration setting is rerere.enabled:
-      dd    [$ git config --global rerere.enabled true]
-      dd    Now, whenever you do a merge that resolves conflicts,
-      dd    the resolution will be recorded in the cache in case you need it in the future.
-
-      dt
-        a(href="http://git-scm.com/book/en/v2/Distributed-Git-Maintaining-a-Project#Tagging-Your-Releases").
-            Tagging Your Releases
-
-      dt    Generating a Build Number
-
-      dt    Preparing a Release
-      dd    One of the things you’ll want to do is create an archive of the latest snapshot
-      dd    of your code for those poor souls who don’t use Git. The command to do this is git archive:
-      dd    [$ git archive master --prefix='project/' | gzip > `git describe master`.tar.gz]
-
-      dt
-        a(href="http://git-scm.com/book/en/v2/Distributed-Git-Maintaining-a-Project#Tagging-Your-Releases").
-            The Shortlog
-      dd    It’s time to e-mail your mailing list of people who want to know what’s happening in your project.
-      dd    A nice way of quickly getting a sort of changelog
-      dd    is to use the [$ git shortlog]
-      dd    It summarizes all the commits in the range you give it; for example:
-      dd    [$ git shortlog --no-merges master --not v1.0.1                     ]
-
-
-
-    h1      6. GitHub
-    H2(data-toggle="collapse" data-target="#61"  aria-controls="61").
-      6.1. Account Setup and Configuration
-    div(id="61").collapse
-      dt
-        a(href="http://git-scm.com/book/en/v2/GitHub-Account-Setup-and-Configuration").
-            Account Setup and Configuration
-      dd
-      dt
-        a(href="http://git-scm.com/book/en/v2/GitHub-Account-Setup-and-Configuration#Two-Factor-Authentication").
-            Two Factor Authentication
-      dd    If you click on the “Set up two-factor authentication" button,
-      dd    it will take you to a configuration page where you can choose to use
-      dd    a phone app to generate your secondary code (a “time based one-time password"),
-      dd    or you can have GitHub send you a code via SMS each time you need to log in.
-    H2(data-toggle="collapse" data-target="#62"  aria-controls="62").
-      6.2. Contributing to a Project
-    div(id="62").collapse
-      dt
-        a(href="http://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project").
-            Forking Projects
-      dd
-      dt
-        a(href="http://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project#The-GitHub-Flow").
-            The GitHub Flow
-      dd    GitHub is designed around a particular collaboration workflow, centered on Pull Requests.
-      dd    Here’s how it generally works:
-      dd
-        ol
-          li Create a topic branch from master.
-          li Make some commits to improve the project.
-          li Push this branch to your GitHub project.
-          li Open a Pull Request on GitHub.
-          li Discuss, and optionally continue committing.
-          li The project owner merges or closes the Pull Request.
-      dt
-        a(href="http://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project#Advanced-Pull-Requests").
-            Advanced Pull Requests
-      dd
-      dt    Pull Requests as Patches
-      dd    Most GitHub projects think about Pull Request branches as
-      dd    iterative conversations around a proposed change,
-      dd    culminating in a unified diff that is applied by merging.
-
-      dt    Keeping up with Upstream
-      dd    If your Pull Request becomes out of date or otherwise
-      dd    doesn’t merge cleanly, you will want to fix it so
-      dd    the maintainer can easily merge it.
-
-      dd    If you want to merge in the target branch to make your Pull Request mergeable,
-      dd    you would add the original repository as a new remote, fetch from it,
-      dd    merge the main branch of that repository into your topic branch,
-      dd    fix any issues and finally push it back up to the same branch you opened the Pull Request on.
-
-      dt
-        a(href="http://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project#Markdown").
-            Markdown
-      dd    You can create a task list like this:
-      dd
-        blockquote.text-whitespaces.
-          - [X] Write the code
-          - [ ] Write all the tests
-          - [ ] Document the code
-
-    H2(data-toggle="collapse" data-target="#63"  aria-controls="63").
-      6.3. Maintaining a Project
-    div(id="63").collapse
-      dt
-        a(href="http://git-scm.com/book/en/v2/GitHub-Maintaining-a-Project#Managing-Pull-Requests").
-            Managing Pull Requests
-      dd
-      dt    Pull Request Refs
-      dd    If you’re dealing with a lot of Pull Requests and don’t want to
-      dd    add a bunch of remotes or do one time pulls every time,
-      dd    there is a neat trick that GitHub allows you to do
-      dd    To demonstrate this, we’re going to use a low-level command:
-      dd    [$ git ls-remote [remote repo | remote name]]
-      dt    Special Files
-      dt
-        a(href="http://git-scm.com/book/en/v2/GitHub-Maintaining-a-Project#README").
-            README
-      dd
-
-      dt
-        a(href="http://git-scm.com/book/en/v2/GitHub-Maintaining-a-Project#CONTRIBUTING").
-            CONTRIBUTING
-      dd    If you have a file named CONTRIBUTING with any file extension, GitHub will show
-      dd    request to review its.
-      dt
-        a(href="http://git-scm.com/book/en/v2/GitHub-Maintaining-a-Project#Project-Administration").
-            Project Administration
-      dd
-    H2(data-toggle="collapse" data-target="#64"  aria-controls="64").
-      6.4. Managing an organization
-    div(id="64").collapse
-      dt
-        a(href"http://git-scm.com/book/en/v2/GitHub-Managing-an-organization#Organization-Basics").
-            Organization Basics
-      dd
-      dt
-        a(href"http://git-scm.com/book/en/v2/GitHub-Managing-an-organization#Teams").
-            Teams
-      dd
-      dt
-        a(href"http://git-scm.com/book/en/v2/GitHub-Managing-an-organization#Audit-Log").
-            Audit Log
-      dd
-    H2(data-toggle="collapse" data-target="#65"  aria-controls="65").
-      6.5. Scripting GitHub
-    div(id="65").collapse
-      dt
-        a(href="http://git-scm.com/book/en/v2/GitHub-Scripting-GitHub").
-            Services
-      dd    Most of them are for Continuous Integration services, bug and issue trackers, chat room systems and documentation systems.
-      dt
-        a(href="http://git-scm.com/book/en/v2/GitHub-Scripting-GitHub").
-            Hooks
-      dd    If you need something more specific or you want to integrate with a service or site that is not included in
-      dd    this list, you can instead use the more generic hooks system. GitHub repository hooks are pretty simple
-      dd    You specify a URL and GitHub will post an HTTP payload to that URL on any event you want.
-      dt
-        a(href="http://git-scm.com/book/en/v2/GitHub-Scripting-GitHub#The-GitHub-API").
-            The GitHub API
-      dd    Services and hooks give you a way to receive push notifications about
-      dd    events that happen on your repositories, but what if you need more
-      dd    information about these events? What if you need to automate
-      dd    something like adding collaborators or labeling issues?
-      dd    This is where the GitHub API comes in handy.
-      dt
-        a(href="http://git-scm.com/book/en/v2/GitHub-Scripting-GitHub#Octokit").
-            Octokit
-      dd    For complete documentation on the entire API as well as guides for common tasks, check out
-            a(href="https://developer.github.com.")    developer.github.com
-
-    h1      7. Git Tools
-    H2(data-toggle="collapse" data-target="#71"  aria-controls="71").
-      7.1. Managing an organization
-    div(id="71").collapse
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-Tools-Revision-Selection").
-            Revision Selection
-      dd    Git allows you to specify specific commits or a range of commits in several ways.
-      dd    They aren’t necessarily obvious but are helpful to know.
-
-      dt    Single Revisions
-      dd    You can obviously refer to a commit by the SHA-1 hash that it’s given,
-      dd    but there are more human-friendly ways to refer to commits as well.
-      dd    This section outlines the various ways you can refer to a single commit.
-
-      dt    Short SHA-1
-      dd    Git can enough precisely to figure out what you had meant if
-      dd    your partial SHA-1 commit is typed at leas 4 characters and unambiguous.
-      dd    For example, the following commands are equivalent:
-      dd    [$ git show 1c002dd4b536e7479fe34593e72e6c6c1819e53b ]
-      dd    [$ git show 1c002dd4b536e7479f                       ]
-      dd    [$ git show 1c002d                                   ]
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-Tools-Revision-Selection#Branch-References").
-            Branch References
-      dd    You can use a name branch in any GIT command that expects a commit object or SHA-1 value.
-      dd    Specific SHA-1 points of any branch you can take with plumbing tool called [rev-parse].
-      dd    More info
-        a(href="http://git-scm.com/book/en/v2/ch10/_git_internals")   see here.
-
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-Tools-Revision-Selection#RefLog-Shortnames").
-            RefLog Shortnames
-      dd    While you are in workflow Git automatically keeps a "reflog" -
-      dd    log of where your HEAD and branch refs have been for the last few month.
-      dd    You can see thats with [$ git reflog] command.
-      dd    And you can specify older commits use @{n} reference that you see in the reflog output.
-      dd    You can also use this syntax to see where a branch was some specific amount of time ago:
-      dd    [$ git show master@{yesterday}]
-      dd    To see reflog information formatted like the git log output: [$ git log -g]
-      dd    All reflogs strictly local and after you clone a repo, you'll get an empty reflog.
-
-
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-Tools-Revision-Selection#Ancestry-References").
-            Ancestry References
-      dd    If you place "^" at the end of a reference (branch, HEAD, SHA-1), Git resolves it to means "the parent of that commit".
-      dd    Or if you pace "^n", GIT resolves it to means "N parent of reference".
-      dd    The other main ancestry specification is the "~".
-      dd    If "~" just plased at end ref, it equivalent "^".
-      dd    If you specify a number, "~2" it'll means "the first parent of the first parent"
-      dd    - it traverses the first parents the number of times you specify.
-      dd    You can also written something like "HEAD^^^" or (equivalent) "HEAD~3", or combine them "HEAD~3^2" and so on.
-
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-Tools-Revision-Selection#Commit-Ranges").
-            Commit Ranges
-      dd    Now that you can specify individual commits, let’s see how to specify ranges of commits.
-
-      dt    Double Dot
-      dd    [$ git log [refA]..[refB]]
-      dd    This basically asks Git to resolve a range of commits that
-      dd    are reachable from one commit but aren’t reachable from another.
-      dd    If the last ref unspecified - GIT substitutes its with HEAD.
-
-      dt    Multiple Points
-      dd    If you want to specify more than two branches to indicate your revision
-      dd    Git allows you to do this by using either the ^ character or
-      dd    --not before any reference from which you don’t want to see reachable commits.
-      dd    Thus these three commands are equivalent:
-      dd    [$ git log refA..refB ]
-      dd    [$ git log ^refA refB ]
-      dd    [$ git log refB --not refA ]
-
-      dt    Triple Dot
-      dd    [[$ git log [refA]...[refB]]]
-      dd    This syntax specifies all the commtis that are not common of two refs.
-      dd    You can also use the [--left-right] switch,
-      dd    which shows you which side of the range each commit is in.
-    H2(data-toggle="collapse" data-target="#72"  aria-controls="72").
-      7.2. Interactive Staging
-    div(id="72").collapse
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-Tools-Interactive-Staging#Staging-Patches").
-            Staging Patches
-      dd    [$ git add -i]
-
-    H2(data-toggle="collapse" data-target="#76"  aria-controls="76").
-      7.6. Rewriting History
-    div(id="76").collapse
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-Tools-Rewriting-History#Changing-Multiple-Commit-Messages").
-            Changing Multiple Commit Messages
-      dd    [$ git rebase -i [refs range]]
-      dd    With interactive rebase tool, you can then stop after each commit you
-      dd    you want to modify and change the message, add files, or do whatever you wish:
-      dd    [$ git rebase -i HEAD~3] - this will rebase you commits of range of three commits
-      dd    back from head you are.
-      dd    Remember: every commit that is rebasing will be rewritten,
-      dd    whether you change message or not.
-
-    H2(data-toggle="collapse" data-target="#77"  aria-controls="77").
-      7.7. Reset Demystified
-    div(id="77").collapse
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified").
-          Reset Demystified
-      dd
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified#The-Three-Trees").
-          The Three Trees
-      dd
-        table.table.table-striped
-          tbody
-            tr
-              th    Tree
-              th    Role
-            tr
-              td    HEAD
-              td    Last commit snapshot, next parent
-            tr
-              td    Index
-              td    Proposed next commit snapshot
-            tr
-              td    Working Directory
-              td    Sandbox
-      dd    By “tree" here we really mean “collection of files", not specifically the data structure.
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified#The-Role-of-Reset").
-            The Role of Reset
-      dd
-      dt(title="(--soft)").
-            Step 1: Move HEAD (--soft)
-      dd    This isn’t the same as changing HEAD itself (which is what checkout does)
-      dd    reset moves the branch that HEAD is pointing to.
-
-      dt(title="the Index (--mixed)").
-            Step 2: Updating the Index (--mixed)
-      dd    This is the default option wher you run reset command.
-      dd    The next thing reset will do is to update the Index
-      dd    with the contents of whatever snapshot HEAD now points to.
-
-      dt(title="the Working Directory (--hard)").
-            Step 3: Updating the Working Directory (--hard)
-      dd    The third thing that reset will do
-      dd    is to make the Working Directory look like the Index.
-      dd    We could back our last commit with [$ git reflog] command.
-
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified#Reset-With-a-Path").
-            Reset With a Path
-      dd    [$ git reset [path to file]] where
-      dd    is the just shortand for [$ git reset --mixed HEAD file.txt]
-      dd    So it essentially just copies file.txt from HEAD to the Index.
-      dd    This has the practical effect of unstaging the file.
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified#Squashing").
-            Squashing
-      dd    You can "squash" your dirty commit with reset command.
-
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified#Check-It-Out").
-            Check It Out
-      dd    Like reset, checkout manipulates the three trees, and it is a bit different
-      dd    depending on whether you give the command a file path or not.
-      dt    Without Paths
-      dd    [$ git checkout [branch] is pretty similar to running [$ git reset --hard [branch]]
-      dd    in that it updates all three trees for you to look like [branch]
-      dd    but there are two important differences:
-      dd
-        ol
-          li Checkout will check to make sure it’s not blowing away files that have changes to them.
-          li Checkout will move HEAD itself to point to another branch (ulike reset that will move the branch that HEAD points to)
-
-      dt    With Paths
-      dd    [$ git checkout [REF] file]
-      dd    In that case checkout updates the index with that file at that commit,
-      dd    but it also overwrites the file in the working directory.
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified#Summary").
-            Cheat-sheet
-      dd    Pleas, checkout link for more info.
-
-    H2(data-toggle="collapse" data-target="#78"  aria-controls="78").
-      7.8. Advanced Merging
-    div(id="78").collapse
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-Tools-Advanced-Merging#Merge-Conflicts").
-            Merge Conflicts
-      dd    Before doing merging, try to make sure your working directory is clean.
-      dd    If you have work in progress, either commit it to a temporary branch or stash it.
-      dd    This makes it so that you can undo anything you try here.
-
-      dt    Aborting a Merge
-      dd    You can simply back out of the merge with [$ git merge --abort].
-      dd    Aborting merging no be able perfectly if you had unstashed, uncommited
-      dd    changes in your working directory.
-
-      dt    Ignoring Whitespace
-      dd    If you see that you have a lot of whitespace
-      dd    you can simply abort merge it and do it again with
-      dd    [$ git merge -Xignore-all-space] or [-Xignore-space-change] options (latest in priority).
-      dd    First option ignores whitespace completely when comparing lines
-      dd    Second treats sequences of one or more whitespace characters as equivalent.
-
-
-      dt    Manual File Re-merging
-      dd    As an example, let’s pretend that Git could not
-      dd    handle the whitespace change and we needed to do it by hand.
-
-      dt    Checking Out Conflicts
-      dd    [$ git checkout --conflict]
-      dd    Where [--conflict] will re-checkout the file again and replace the merge conflict markers.
-
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-Tools-Advanced-Merging#Undoing-Merges").
-            Undoing Merges
-      dd    There are two ways to approach this problem, depending on what your desired outcome is.
-
-      dt    Fix the references
-      dd    Ir your changes only exists on your local repository, the easies and best solution is:
-      dd    [$ git reset --hard HEAD~]
-      dt    The downside of this approach is that it’s rewriting history
-      dd    which can be problematic with a shared repository.
-      dd    If other people have the commits you’re rewriting, you should probably avoid reset
-      dd    This approach also won’t work if any other commits have been created since the merge
-      dd    moving the refs would effectively lose those changes.
-
-      dt    Reverse the commit
-      dd    [$ git revert -m 1 HEAD]
-      dd    The -m 1 flag indicates which parent is the “mainline” and should be kept.
-      dd    Git will get confused if you try to merge reverted branch with previous second branch that was merged.
-
-
-      dt    Subtree Merging
-      dd    The idea of the subtree merge is that you have two projects,
-      dd    and one of the projects maps to a subdirectory of the other one and vice versa.
-
-    H2(data-toggle="collapse" data-target="#79"  aria-controls="79").
-      7.9. Rerere
-    div(id="79").collapse
-      dt    Rerere
-      dd    Reuse recorded resolution
-      dd    To enable this functionality have run this config setting:
-      dd    [$ git config --global rerere.enabled true]
-
-      dd    This tool is allow your Git to remember how you had resolved a hunk
-      dd    conflict so that the next time it sees the same conflict,
-      dd    Git can automatically resolve it for you.
-
-      dd    For example, it might be really handy if you want to keep a branch
-      dd    rebased so you don’t have to deal with the same rebasing
-      dd    conflicts each time you do it.
-
-    H2(data-toggle="collapse" data-target="#710"  aria-controls="710").
-      7.10. Debugging with Git
-    div(id="710").collapse
-      dt    Debugging with Git
-      dd
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-Tools-Debugging-with-Git#File-Annotation").
-            File Annotation
-
-      dd    [$ git blame -L [range-min,range-max] [file]]
-      dd    If you want to know by whom in the particular file the bug was previously introduced ,
-      dd    this is often your best tool for do that.
-      dd
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-Tools-Debugging-with-Git#Binary-Search").
-            Binary Search
-      dd    [$ git bisect start]
-      dd    The bisect command does a binary search through your commit history to help
-      dd    you identify as quickly as possible which commit introduced an issue.
-    H2(data-toggle="collapse" data-target="#711"  aria-controls="711").
-      7.11. Submodules
-    div(id="711").collapse
-      dt    Submodules
-      dd    Submodules allow you to keep a Git repository as a subdirectory of another Git repository.
-      dd    This lets you clone another repository into your project and keep your commits separate.
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-Tools-Submodules#Starting-with-Submodules").
-            Starting with Submodules
-      dd    [$ git submodule add [REPOSITORY]]
-
-      dt    .gitmodules
-      dd    This is a configuration file that stores the mapping between
-      dd    the project’s URL and the local subdirectory you’ve pulled it into:
-
-      dd    Although DbConnector is a subdirectory in your working directory,
-      dd    Git sees it as a submodule and doesn’t track its contents when you’re not in that directory.
-      dd    Instead, Git sees it as a particular commit from that repository.
-
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-Tools-Submodules#Cloning-a-Project-with-Submodules").
-            Cloning a Project with Submodules
-
-      dd    When you clone such a project, by default you get the directories
-      dd    that contain submodules, but none of the files within them yet.
-      dd    You must run two commands:
-      dd
-        ol
-          li [$ git submodule init]     - to initialize your local configuration file.
-          li [$ git submodule update ]  - to fetch all the data from that project and check out the appropriate commit listed in your superproject.
-
-
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-Tools-Submodules#Working-on-a-Project-with-Submodules").
-            Working on a Project with Submodules
-      dd
-
-      dt    Pulling in Upstream Changes
-      dd    The simplest model  of using submodules in a project
-      dd    it consume a subproject as as like any other repo.ю
-      dd    [$ git submodule update --remote]
-      dd    By default it will update all of your submodules
-
-      dd    Another way to do that is passing --recursive to the git clone command.
-      dd    You can set default branch to your submodules by either in .gitmodules file
-      dd    or jus in your local .git/config:
-      dd    [$ git config -f .gitmodules submodule.NAME_OF_YOUR_SUBMODULE.branch [YOUR PREFER BRANCH NAME]]
-      dd    Further you can just update your submodules::
-      dd    [$ git submodule update --remote]
-
-      dd    If you set the configuration setting status.submodulesummary,
-      dd    Git will also show you a short summary of changes to your submodules
-      dd    [$ git config status.submodulesummary 1]
-
-      dt    Working on a Submodule
-      dd
-
-      dt    Publishing Submodule Changes
-      dd    [$ git push --recurse-submodules=check]
-      dd    [$ git push --recurse-submodules=on-demand]
-
-      dt    Merging Submodule Changes
-      dd
-
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-Tools-Submodules#Submodule-Tips").
-            Submodule Tips
-      dd    Click for more info. There are a few things you can do to make working a little easier.
-
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-Tools-Submodules#Issues-with-Submodules").
-            Issues with Submodules
-      dd    Using submodules isn’t without hiccups, however.
-
-    H2(data-toggle="collapse" data-target="#712"  aria-controls="712").
-      7.12. Bundling
-    div(id="712").collapse
-      dt    Bundling
-      dd    [$ git bundle create [file name] [REF | ..]]
-      dd    Git is capable of “bundling” its data into a single file.
-      dd    To create repo from bundle: [$ git clone [path to .bundle file]]
-      dd    To import changes from bundle into an existing repo: [$ git fetch [path to .bundle file] [branch:branch_local] etc..]
-
-    H2(data-toggle="collapse" data-target="#713"  aria-controls="713").
-      7.13. Replace
-    div(id="713").collapse
-      dt
-        a(href="http://git-scm.com/book/en/v2/Git-Tools-Replace").
-            Replace
-      dd    The replace command lets you specify an object in Git
-      dd    and say “every time you see this, pretend it’s this other thing”.
-    h1 8.1 Customizing Git
+﻿h1 Introduction
+
+div(id="Preface")
+  h2    Description:
+  p
+    != 'This synopsis contains some notes collected from the <a href="http://git-scm.com/book/en/v2" >GIT Book</a>.'
+  h2    Author:
+  p
+    a(href="https://github.com/hinell") Hinell
+  p It is was started at Mar 21, 2015 and ended on May 8, 2015
+  p Redesigned during beginning of September 2017.
+  
+  
+H1 1.      Getting started.
+H2 1.3.    Git Basics.
+div(id="13")
+  h3    Snapshots.
+  p
+        Every time you commit, or save the state of your project in Git,
+        it basically takes a picture of what all your files look like at that moment
+        and stores a reference to that snapshot (if files have not changed,
+  p
+        Git doesn't store the file again (like others VCSs),
+        just a link to the previous identical file it has already stored.)
+  p    Git thinks about its data more like a stream of snapshots.
+  h3    Nearly Every Operation Is Local.
+  p
+        Git only need local files and resources to operate unlike
+        other VCSs which have latency network overhead.
+  h3    Git Has Integrity.
+  h3    Git Generally Only Aps Data.
+  p    In Git, doing nearly all of actions, you only ap data to the Git database.
+  p
+        It is very difficult to lose your data,
+        especially if you regularly push your database to another repository.
+  p
+        Everything (files, dirs) in Git is check-summed before it's stored (to GIT) and
+        is then referred to by that checksum.
+  p    This means it’s impossible to change the contents without Git knowing about it.
+  p    Git hash-mechanism: SHA-1
+  p    Git stored snapshots in DB by the hash.
+
+h1      2.      Git Basics.
+H2      2.1.     Getting a Git Repository
+div(id="21")
+  p
+  h3   Git initializing in an Existing Directory
+  p    Init in a current directory: [$ git init]
+  h3   Cloning an Existing Repository.
+  p    You clone a repository with: [$ git clone [url]].
+H2      2.2.    Recording Changes to the Repository
+div(id="22")
+  h3    Recording Changes to the Repository
+  p
+    p   Current dir - directory where git had initialized.
+    ul  Each file in the current directory may have two states:
+      ul
+        li     untracked
+        li     tracked
+    ul   Tracked files are files that were of the last snapshot; their states:
+      ul
+        li unmodified
+        li modified
+        li staged
+  h3    Checking the Status of Your Files
+  p        Check status of files in current dir: [$ git status]
+  h3     Tracking New Files
+  p        Begin tracking new file:[ $ git ap [file]]
+  h3    Staging Modified Files
+  p        Git ap is a multipurpose command – you use it to begin tracking new files,
+  p        to stage files, and to do other things like marking merge-conflicted files as resolved.
+  h3    Ignoring Files
+  p        See .gitignore
+  h3    Viewing Your Staged and Unstaged Changes
+  p        [$ git diff] - shows you the exact lines aped and removed – the patch, as it were.
+  h3    Removing Files
+  p     Command: [$ git rm [file | dir]]
+  |     This command simply delete tracked file.
+  h3   Moving Files (Renaming)
+  p     If you want to rename a file in Git, you can run something like:
+  |     [$ git mv file_from file_to]
+H2      2.3.   Viewing the Commit History.
+div(id="23")
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History").
+        Viewing the Commit History
+  p    To do this you need type the [$ git log] command.
+  p    One of the more helpful options is [-p], which shows the difference introduced in each commit.
+  p    You can also use [-2], which limits the output.
+  p    If you want to see some abbreviated stats for each commit, you can use the [--stat] option.
+  p    Another really useful option is [--pretty=oneline|short|full|fuller|format:]
+  p    Show graph: [$ git log --graph]
+  p    e.g.: [$ git log --pretty=format:"%h - %an, %ar : %s"]
+  p    More info available on the above link.
+  p    To see only the commits of a certain author: git log --author=bob
+  p    Different between committer and author is the author is the person who originally wrote the work,
+  p    whereas the committer is the person who last applied the work.
+  h3    Limiting Log Output
+  p
+  p    With: [-n] where n is any integer to show the last n commits.
+  p    The time-limiting options such as --since and --until.
+  p    See other command in reference.
+  p    Limiting with time: [$ git log --since=[date]]
+
+H2      2.4.    Undoing Things
+div(id="24")
+  h3    Undoing Things
+  p    [$ git commit --amend]
+  h3    Unstaging a Staged File
+  p    To unstage content in current dir, you can use: [$ git reset HEAD <file>] command:
+  h3    Unmodifying a Modified File
+  p    You can replace local changes using the command:
+  p    [$ git checkout -- [file]] - be careful - is a dangerous command.
+  p    This kept files already aped to the index,(new files).
+  p    Remember, anything that is committed in Git can almost always be recovered.
+  p
+  |     If you instead want to drop all your local changes, use:
+  |     [$ git fetch origin]. It fetch the latest history
+  |     from the server and point your local master branch.
+H2      2.5.     Working with Remotes
+div(id="25")
+  p    Remote repositories are versions of your project
+  p    that are hosted on the Internet or network somewhere.
+  p    Remotes enable you collaborate on any project remotely.
+  p    It is them porpose.
+  h3    Showing Your Remotes
+  p    To see which remote servers you have configured, you can run the [$ git remote]
+  h3    Aping Remote Repositories
+  p    [$ git remote ap [shortname] [url]]
+  h3    Fetching and Pulling from Your Remotes
+  p    As you just saw, to get data from your remote projects,
+  p    you can run:[$ git fetch [remote-name]]
+  p    For example, if you want to fetch all the information that remote repo has
+  p    but that you don’t yet have in your repository, you can run [$ git fetch [shortname]]
+  p    If you have a branch set up to track a remote branch, you can use
+  p    the [$ git pull] command to automatically fetch and then merge a remote branch into your current branch.
+  h3    Pushing to Your Remotes
+  p    When you have your project at a point that you want to share,
+  p    you have to push it upstream. The command for this is simple:
+  p    [git push [remote-name] [branch-name]]
+  h3    Inspecting a Remote
+  p    If you want to see more information about a particular remote:
+  p    [$ git remote show [remote-name] ]
+H2      2.6.    Tagging
+div(id="26")
+  h3    Tagging
+  p      Typically people use this functionality to mark release points (v1.0, and so on).
+  h3    Listing Your Tags
+  p      [$ git tag]
+  p    You can also search for tags with a particualar pattern like this
+  p    [$ git tag -l 'v1.*']
+  h3    Creating Tags
+  p    Git uses two main types of tags:
+    li      lightweight
+    li      annotated.
+  p    A lightweight tag is very much like a branch that doesn’t change – it’s just a pointer to a specific commit.
+  p    Annotated tags, are stored as full objects in the Git database
+  p    (including the tagger name, e-mail, date;
+  p    a tagging message; and can be signed / verified with GNU Privacy Guard (GPG).)
+  h3    Annotated Tags
+  p    The easiest way is to specify [-a | -m | -s ]: [$ git -a ]
+  p    e.g.: [$ git tag -a v.1.4 - 'my version 1.4']
+  p    To see tag data along with commit that was tagged, use: [$ git show [tagname]]
+  h3    Lightweight Tags
+  p    To create a lightweight tag, don’t supply the -a, -s, or -m option, i.e:
+  p    [$ git tag v1.4-lw]
+  h3    Tagging later
+  p    [$ git tag -a [tagName] [commit]] i.e.:
+  p    [$ git tag -a v1.2 9fceb02]
+  h3    Sharing Tags
+  p    Just run: [$ git push origin [tagname]
+  p    By default the [$ git push] command doesn’t transfer tags to remote servers.
+  p    To push up at once a lot of tags you can use the:[$ git push --tags]
+  h3    Checking out Tags
+  p    You can create a new branch at a specific tag:[$ git checkout -b [branchname] [tag(v.2 etc)]]
+H2      2.7.	Git Aliases
+div(id="27")
+  p    You can easily set up an alias for each command using git config:
+  p    [$ git config --global alias.[nameOfNewCommand] ["git.command]"]
+  p    i.e.: [$ git config --global alias.co checkout]
+  p    However, maybe you want to run an external command
+  p    you start the command with a ! character.
+  p    e.g.: [$ git config --global alias.visual "!gitk"]
+
+h1      3. Git Branching
+H2      3.1.	Branching in a Nutshell.
+div(id="31")
+  p    Branching means you diverge from the main line of development
+  p    and continue to do work without messing with that main line.
+  h3    Branching in a Nutshell
+  p    When you make a commit, Git stores a commit object that
+  p    contains a pointer to the snapshot of the content you staged.
+  h3    Creating a New Branch
+  p    [$ git branch [branch name]]
+  p    How does Git know what branch you’re currently on?
+  p    It keeps a special pointer called HEAD.
+  p    Note that this is a lot different than the concept of HEAD
+  p    in other VCSs you may be used to, such as Subversion or CVS.
+  p    The git branch command only created a new branch – it didn’t switch to that branch.
+  br
+  p    To see where the point of your HEAD, use:
+  p    [$ git log --oneline --decorate]
+  p    [$ git checkout [branch name]
+  p    That command did two things.
+  p    It moved the HEAD pointer back to point to the [branch name] branch,
+  p    and it reverted the files in your working directory
+  p    back to the snapshot that master points to.
+  p    [git log --oneline --decorate --graph --all]
+H2      3.2.	Basic Branching and Merging
+div(id="32")
+  h3    Basic Branching and Merging
+  p    At this stage, you’ll receive a call that another issue
+  p    is critical and you need a hotfix. You’ll do the following:
+    ol
+      li Switch to your production branch.
+      li Create a branch to ap the hotfix.
+      li After it’s tested, merge the hotfix branch, and push to production.
+      li Switch back to your original story and continue working.
+  h3    Basic Merging
+  p    It’s worth pointing out that Git determines the best common ancestor to use
+  p    for its merge base; this is different than older tools like CVS or Subversion (before version 1.5)
+H2      3.3.	Branch Management
+div(id="33")
+  p    Notice the <b>*</b> indicates the branch (HEAD) that you currently have checked out .
+  p    See last commit on each branch: [$ git branch -v]
+H2      3.4.	Branching Workflows
+div(id="34")
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-Branching-Branching-Workflows#Long-Running-Branches").
+        Long-Running Branches
+  p    This means you can have several branches that are always open (ie master) and
+  p    that you use for different stages of your development cycle;
+  p    you can merge regularly from some of them into others.
+  h3
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-Branching-Branching-Workflows#Topic Branches").
+        Topic Branches
+  p    Topic branches, however, are useful in projects of any size.
+  p    A topic branch is a short-lived branch that you create and
+  p    use for a single particular feature or related work.
+  p    A topic branch is a short-lived branch that you create and
+  p    for a single particular feature or related work.
+H2      3.5.	Remote Branches
+div(id="35")
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-Branching-Remote-Branches") Remote Branches
+  p    Remote branches are references (pointers) to the state of branches in your remote repositories.
+  p    They’re local branches that you can’t move;
+  p    they’re moved automatically for you whenever you do any network communication.
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-Branching-Remote-Branches#Tracking-Branches") Tracking Branches
+  p    Checking out a local branch from a remote branch automatically creates what is called
+  p    a “tracking branch" (or sometimes an “upstream branch").
+  p    Tracking branches are local branches that have a direct relationship to a remote branch.
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-Branching-Remote-Branches#Deleting-Remote-Branches") Deleting Remote Branches
+  p    If you want to delete your branch from the server, you run the following:
+  p    [$ git push [remote name] --delete [branch name]]
+H2      3.6.	Rebasing
+div(id="36")
+  p    In Git, there are two main ways to integrate changes from one branch into another:
+    ol
+      li the merge
+      li the rebase.
+  h3    The Basic Rebase
+  p    There is no difference in the end product (in comparing with merge tool)
+  p    of the integration, but rebasing makes for a cleaner history.
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-Branching-Rebasing#The-Basic-Rebase") The Basic Rebase
+  p
+    |   Commands:
+    |   [$ git
+    a(href="http://git-scm.com/docs/git-rebase")    rebase
+    |   --onto <newbase>]
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-Branching-Rebasing#The-Perils-of-Rebasing") The Perils of Rebasing
+  p Do not rebase commits that exist outside your repository.
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-Branching-Rebasing#Rebase-When-You-Rebase") Rebase When You Rebase
+
+  p
+
+
+
+h1      4. Git on the Server
+H2      4.1.	The Protocols
+div(id="41")
+  p    Therefore, the preferred method for collaborating with someone
+  p    is to set up an intermediate repository that you both have access to, and push to and pull from that.
+  h3    The Protocols
+  p    Git can use four major protocols to transfer data:
+    ul
+      li
+        a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-The-Protocols#Local-Protocol") Local
+      li
+        a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-The-Protocols#The-HTTP-Protocols") HTTP
+      li
+        a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-The-Protocols#The-SSH-Protocol") Secure Shell (SSH)
+      li
+        a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-The-Protocols#The-Git-Protocol") Git
+  p
+H2      4.2. Getting Git on a Server
+div(id="42")
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-Getting-Git-on-a-Server") Getting Git on a Server
+  p    In order to initially set up any Git server,
+  p    you have to export an existing repository into a new bare repository –
+  p    a repository that doesn’t contain a working directory.
+  p    This is generally straightforward to do.
+  p    By convention, bare repository directories end in .git
+  p    In order to clone repo, you run clone command with --bare:
+  p    [$ git clone --bare [url to repo] [cloned repo name].git ]
+  p    This is roughly equivalent to something like
+  p    [$ cp -Rf my_repo/.git my_local_repo.git]
+  p    Git will automatically ap group write permissions to a repository properly
+  p    if you run the git init command with the --shared option:
+  p    [$ git init --bare --shared]
+
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-Getting-Git-on-a-Server#Putting-the-Bare-Repository-on-a-Server").
+        Putting the Bare Repository on a Server
+
+  p    Let’s say you’ve set up a server called git.example.com
+  p    Further you can set up your new repository by copying your bare repository over:
+  p    [$ scp -r my_project.git user@git.example.com:[/path/to/new/repo]]
+  p    After all, now, user's who have SSH acsess to the same serve
+  p    can clone your repository by running
+  p    [$ git clone user@git.example.com:[/path/to/new/repo].git]
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-Getting-Git-on-a-Server#Small-Setups").
+      Small Setups
+  p    One of the most complicated aspects of setting up a Git server is user management.
+  h3    SSH Access
+  p    There are a few ways you can give access to everyone on your team:
+    ul
+      li  Just set up accounts (obviously system) for everybody.
+      li.
+          Create a signle git user on the machine and ask every user who
+          is to have write access to send you an SSH public key,
+          and ap that key to the ~/.ssh/authorized_keys
+      li.
+          Another way to do it is to have your SSH server
+          authenticate from an LDAP server or some other
+          centralized authentication source that you may already have set up
+
+
+H2      4.3. Generating Your SSH Public Key
+div(id="43")
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-Generating-Your-SSH-Public-Key") Generation SSH key
+  p    First, you should check to make sure you don’t already have a key.
+  p    By default, a user's SSH key are stored in that user's ~/.ssh directory
+  p    and key's files named like id_dsa or id_rsa and a matching file with a
+  p    .pub extension.
+  p    If you don't have these files, you can create them by program called ssh-keygen:
+  p    [$ ssh-keygend -t rsa -C "your@email.com"];
+  p    which  provided on almost all current system platform (Linux/Mac, on NT with MSysGit package).
+  p    Now, each user that does this has to send their public key to the Git server
+  p    (assuming you’re using an SSH server setup that requires public keys).
+  p    All they have to do is compy the content of the .pub file and send it.
+  h3
+    a(href="https://help github.com/articles/generating-ssh-keys.") GitHub article
+  p    Click to open up help for SSH key generation on GitHub Help service.
+
+
+
+H2      4.4. Setting Up the Server
+div(id="44")
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-Setting-Up-the-Server") Setting Up the Server
+  p    First, you create (on Nix-systems - you also should create a git user) a .ssh directory for that user.
+  p    Next, you need to ap some developer SSH public keys to the ~/.ssh/authorized_keys directory.
+  p    Now, you can set up an empty repository.
+
+H2      4.5. Git Daemon
+div(id="45")
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-Git-Daemon") Git Daemon
+  p    In any case, the Git protocol is relatively easy to set up
+  p    Basically, you need to run this command in a daemonized manner:
+  p    Remember that since it’s not an authenticated service,
+  p    anything you serve over this protocol is public within its network.
+  p    --reuseapr allows the server to restart without waiting for old connections to time out
+  p    --base-path option allows people to clone projects without specifying the entire path
+  p    and the path at the end tells the Git daemon where to look for repositories to export.
+  p
+H2      4.6. Smart HTTP
+div(id="46")
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-Smart-HTTP") Smart HTTP
+  p    Setting up Smart HTTP is basically just enabling
+  p    a CGI script that is provided with Git called [git-http-backend] on the server.
+H2      4.7. GitWeb
+div(id="47")
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-GitWeb") GitWeb
+  p    Git comes with a CGI script called GitWeb that is
+  p    provided simple web-based visualizer.
+H2      4.8. GitLab
+div(id="48")
+  p    If you’re looking for a more modern, fully featured Git server,
+  p    there are some several open source solutions out there that you can install instead.
+
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-GitLab#Installation") Installation
+  p    GitLab is a database-backed web application
+  p    To get something up and running quickly, you can download a virtual machine image or
+  p    a one-click installer from https://bitnami.com/stack/gitlab,
+  p    and tweak the configuration to match your particular environment.
+H2      4.9. Third Party Hosted Options
+div(id="49")
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-on-the-Server-Third-Party-Hosted-Options")
+    |   Third Party Hosted Options
+  p    These days, you have a huge number of hosting options to choose from.
+  p    To see an up-to-date list, check out the GitHosting page on the main
+    a(href="https://git.wiki.kernel.org/index.php/GitHosting")   Git wiki
+
+
+h1      5. Distributed Git
+H2      5.1. Distributed Workflows
+div(id="51")
+  h3    Distributed Workflows
+  p    Unlike another centralized VCS, GIT allows every developer to be
+  p    on both a node and a hub states.
+  p    So lets cover a few common paradigms of workflow:
+  h3
+    a(href="http://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows#Centralized-Workflow") Centralized Workflow
+  p
+    img(src="http://www.shaney.net/git/images/centralized.png").img-fluid
+  p    One central hub, or repository, can accept code, and everyone synchronizes their work to it.
+  p    This is also not limited to small teams.
+
+  hr
+  h3
+    a(href="http://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows#Integration-Manager-Workflow") Integration-Manager Workflow
+  p
+    img(src="http://git-scm.com/book/en/v2/book/05-distributed-git/images/integration-manager.png").img-fluid
+  p
+  p    Because Git allows you to have multiple remote repositories,
+  p    it’s possible to have a workflow where each developer
+  p    has write access to their own public repository and read access to everyone else’s.
+  p    The process works as follows:
+  p
+    ol
+      li The project maintainer pushes to their public repository.
+      li  A contributor clones that repository and makes changes.
+      li  The contributor pushes to their own public copy.
+      li  The contributor sends the maintainer an e-mail asking them to pull changes.
+      li  The maintainer aps the contributor’s repo as a remote and merges locally.
+      li  The maintainer pushes merged changes to the main repository.
+
+  h3
+    a(href="http://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows#Dictator-and-Lieutenants-Workflow") Dictator and Lieutenants Workflow
+  p
+    img(src="http://git-scm.com/book/en/v2/book/05-distributed-git/images/benevolent-dictator.png").img-fluid
+
+  p    This is a variant of a multiple-repository workflow.
+  p    It’s generally used by huge projects with hundreds of collaborators;
+  p    Various integration managers are in charge of certain parts of the repository;
+  p    they’re called lieutenants.
+  p    All the lieutenants have one integration manager known as the benevolent dictator.
+  p    The process works like this:
+    ol
+      li Regular developers work on their topic branch and rebase their work on top of master. The master branch is that of the dictator.
+      li Lieutenants merge the developers’ topic branches into their master branch.
+      li The dictator merges the lieutenants’ master branches into the dictator’s master branch.
+      li The dictator pushes their master to the reference repository so the other developers can rebase on it.
+h2    5.2. Contributing to a Project
+div(id="52")
+  h3    Contributing to a Project
+  p    The main difficulty with describing how to contribute to a project
+  p    is that there are a huge number of variations on how it’s done.
+  h3
+    a(href="http://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project#Commit-Guidelines").
+        Commit Guidelines
+  p    Before we start looking at the specific use cases, here’s a quick note about commit messages.
+  p    First, you don’t want to submit any whitespace errors.
+  p    Before you commit, run [$ git diff --check] -
+  p    It is identifies possible whitespace errors and lists them for you.
+  p    Next, try to make each commit a logically separate changeset.
+  p    If you can, try to make your changes digestible – don’t code for a whole weekend on five different issues
+  p    and then submit them all as one massive commit on Monday.
+  p    The last thing to keep in mind is the commit message.
+  p    Here is a template originally written by Tim Pope:
+
+  p
+    blockquote.text-whitespaces.
+      Short (50 chars or less) summary of changes
+
+      More detailed explanatory text, if necessary.  Wrap it to
+      about 72 characters or so.  In some contexts, the first
+      line is treated as the subject of an email and the rest of
+      the text as the body.  The blank line separating the
+      summary from the body is critical (unless you omit the body
+      entirely); tools like rebase can get confused if you run
+      the two together.
+
+      Further paragraphs come after blank lines.
+
+        - Bullet points are okay, too
+
+        - Typically a hyphen or asterisk is used for the bullet,
+        preceded by a single space, with blank lines in
+        between, but conventions vary here
+  h3
+    a(href="http://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project#Private-Small-Team").
+        Private Small Team
+  p    Before pushing changes from your local repo at the
+  p    meantime as this doing another developers,
+  p    you need fetch remote changes and then merge with your.
+  h3
+    a(href="http://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project#Private-Managed-Team").
+        Private Managed Team
+  p    The ability of smaller subgroups of a team to collaborate via
+  p    remote branches without necessarily having to
+  p    involve or impede the entire team is a huge benefit of Git.
+  h3
+    a(href="http://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project#Forked-Public-Project").
+        Forked Public Project
+  p    [$ git merge --no-commit --squash]
+  p    The --squash option takes all the work on the merged branch
+  p    and squashes it into one non-merge commit on top of the branch you’re on.
+  h3
+    a(href="http://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project#Public-Project-over-E-Mail").
+        Public Project over E-Mail
+  p    You can generate e-mail versions of each commit series
+  p    and e-mail them to the developer mailing list
+h2  5.3. Maintaining a Project
+div(id="53")
+  h3    Contributing to a Project
+  p
+  h3
+    a(href="http://git-scm.com/book/en/v2/Distributed-Git-Maintaining-a-Project#Applying-Patches-from-E-mail").
+        Applying Patches from E-mail
+  p
+  h3
+    a(href="http://git-scm.com/book/en/v2/Distributed-Git-Maintaining-a-Project#Checking-Out-Remote-Branches").
+        Checking Out Remote Branches
+  p    The other advantage of this approach is that
+  p    you get the history of the commits as well.
+
+  h3
+    a(href="http://git-scm.com/book/en/v2/Distributed-Git-Maintaining-a-Project#Determining-What-Is-Introduced").
+        Determining What Is Introduced
+  p    It’s often helpful to get a review of all the commits
+  p    that are in this branch but that aren’t in your master branch.
+  p    You can exclude commits in the master branch by
+  p    aping the [--not] option before the branch name.
+  p    This does the same thing as the [$ git log [branchname]..[branchname]] format that we used earlier.
+  p    What you really want to see are the changes aped to the topic branch –
+  p    the work you’ll introduce if you merge this branch with master, you
+  p    can do: [$ git merge-base [branchname] [branchname]]
+  p    A bit more convenient: [$ git diff [branchname]...[branchname]]
+  p    This command shows you only the work your current topic branch has introduced since its common ancestor
+
+  h3
+    a(href="http://git-scm.com/book/en/v2/Distributed-Git-Maintaining-a-Project#Integrating-Contributed-Work").
+        Integrating Contributed Work
+  p    Main question is which overall workflow do you want
+  p    to use to maintain your project? You have a number
+  p    of choices, so we’ll cover a few of them.
+
+  h3    Merging Workflows
+  p    If you have a more important project, you might want to
+  p    use a two-phase merge cycle. In this scenario, you have two
+  p    long-running branches, master and develop, in which you
+  p    determine that master is updated only when a very stable
+  p    release is cut and all new code is integrated into the develop branch.
+
+  h3    Large-Merging Workflows
+  h3    Rebasing and Cherry Picking Workflows
+  p    he other way to move introduced work from one branch to another is
+  p    to [$ git cherry-pick [target for merging wiht that you're currently on]].
+  p    A cherry-pick in Git is like a rebase for a single commit.
+  p    It takes the patch that was introduced in a commit and tries to reapply it on the branch you’re currently on.
+
+  h3    Rerere
+  p    If you’re doing lots of merging and rebasing, or you’re maintaining
+  p    a long-lived topic branch, Git has a feature called “rerere" that can help
+  p    Rerere stands for “reuse recorded resolution" – it’s a way of shortcutting manual conflict resolution.
+  p    This feature comes in two parts: a configuration setting and a command.
+  p    The configuration setting is rerere.enabled:
+  p    [$ git config --global rerere.enabled true]
+  p    Now, whenever you do a merge that resolves conflicts,
+  p    the resolution will be recorded in the cache in case you need it in the future.
+
+  h3
+    a(href="http://git-scm.com/book/en/v2/Distributed-Git-Maintaining-a-Project#Tagging-Your-Releases").
+        Tagging Your Releases
+
+  h3    Generating a Build Number
+
+  h3    Preparing a Release
+  p    One of the things you’ll want to do is create an archive of the latest snapshot
+  p    of your code for those poor souls who don’t use Git. The command to do this is git archive:
+  p    [$ git archive master --prefix='project/' | gzip > `git describe master`.tar.gz]
+
+  h3
+    a(href="http://git-scm.com/book/en/v2/Distributed-Git-Maintaining-a-Project#Tagging-Your-Releases").
+        The Shortlog
+  p    It’s time to e-mail your mailing list of people who want to know what’s happening in your project.
+  p    A nice way of quickly getting a sort of changelog
+  p    is to use the [$ git shortlog]
+  p    It summarizes all the commits in the range you give it; for example:
+  p    [$ git shortlog --no-merges master --not v1.0.1                     ]
+
+
+
+h1      6. GitHub
+H2      6.1. Account Setup and Configuration
+div(id="61")
+  h3
+    a(href="http://git-scm.com/book/en/v2/GitHub-Account-Setup-and-Configuration").
+        Account Setup and Configuration
+  p
+  h3
+    a(href="http://git-scm.com/book/en/v2/GitHub-Account-Setup-and-Configuration#Two-Factor-Authentication").
+        Two Factor Authentication
+  p    If you click on the “Set up two-factor authentication" button,
+  p    it will take you to a configuration page where you can choose to use
+  p    a phone app to generate your secondary code (a “time based one-time password"),
+  p    or you can have GitHub send you a code via SMS each time you need to log in.
+H2      6.2. Contributing to a Project
+div(id="62")
+  h3
+    a(href="http://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project").
+        Forking Projects
+  p
+  h3
+    a(href="http://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project#The-GitHub-Flow").
+        The GitHub Flow
+  p    GitHub is designed around a particular collaboration workflow, centered on Pull Requests.
+  p    Here’s how it generally works:
+  p
+    ol
+      li Create a topic branch from master.
+      li Make some commits to improve the project.
+      li Push this branch to your GitHub project.
+      li Open a Pull Request on GitHub.
+      li Discuss, and optionally continue committing.
+      li The project owner merges or closes the Pull Request.
+  h3
+    a(href="http://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project#Advanced-Pull-Requests").
+        Advanced Pull Requests
+  p
+  h3    Pull Requests as Patches
+  p    Most GitHub projects think about Pull Request branches as
+  p    iterative conversations around a proposed change,
+  p    culminating in a unified diff that is applied by merging.
+
+  h3    Keeping up with Upstream
+  p    If your Pull Request becomes out of date or otherwise
+  p    doesn’t merge cleanly, you will want to fix it so
+  p    the maintainer can easily merge it.
+
+  p    If you want to merge in the target branch to make your Pull Request mergeable,
+  p    you would ap the original repository as a new remote, fetch from it,
+  p    merge the main branch of that repository into your topic branch,
+  p    fix any issues and finally push it back up to the same branch you opened the Pull Request on.
+
+  h3
+    a(href="http://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project#Markdown").
+        Markdown
+  p    You can create a task list like this:
+  p
+    blockquote.text-whitespaces.
+      - [X] Write the code
+      - [ ] Write all the tests
+      - [ ] Document the code
+
+H2      6.3. Maintaining a Project
+div(id="63")
+  h3
+    a(href="http://git-scm.com/book/en/v2/GitHub-Maintaining-a-Project#Managing-Pull-Requests").
+        Managing Pull Requests
+  p
+  h3    Pull Request Refs
+  p    If you’re dealing with a lot of Pull Requests and don’t want to
+  p    ap a bunch of remotes or do one time pulls every time,
+  p    there is a neat trick that GitHub allows you to do
+  p    To demonstrate this, we’re going to use a low-level command:
+  p    [$ git ls-remote [remote repo | remote name]]
+  h3    Special Files
+  h3
+    a(href="http://git-scm.com/book/en/v2/GitHub-Maintaining-a-Project#README").
+        README
+  p
+
+  h3
+    a(href="http://git-scm.com/book/en/v2/GitHub-Maintaining-a-Project#CONTRIBUTING").
+        CONTRIBUTING
+  p    If you have a file named CONTRIBUTING with any file extension, GitHub will show
+  p    request to review its.
+  h3
+    a(href="http://git-scm.com/book/en/v2/GitHub-Maintaining-a-Project#Project-Administration").
+        Project Administration
+  p
+H2      6.4. Managing an organization
+div(id="64")
+  h3
+    a(href"http://git-scm.com/book/en/v2/GitHub-Managing-an-organization#Organization-Basics").
+        Organization Basics
+  p
+  h3
+    a(href"http://git-scm.com/book/en/v2/GitHub-Managing-an-organization#Teams").
+        Teams
+  p
+  h3
+    a(href"http://git-scm.com/book/en/v2/GitHub-Managing-an-organization#Audit-Log").
+        Audit Log
+  p
+H2      6.5. Scripting GitHub
+div(id="65")
+  h3
+    a(href="http://git-scm.com/book/en/v2/GitHub-Scripting-GitHub").
+        Services
+  p    Most of them are for Continuous Integration services, bug and issue trackers, chat room systems and documentation systems.
+  h3
+    a(href="http://git-scm.com/book/en/v2/GitHub-Scripting-GitHub").
+        Hooks
+  p    If you need something more specific or you want to integrate with a service or site that is not included in
+  p    this list, you can instead use the more generic hooks system. GitHub repository hooks are pretty simple
+  p    You specify a URL and GitHub will post an HTTP payload to that URL on any event you want.
+  h3
+    a(href="http://git-scm.com/book/en/v2/GitHub-Scripting-GitHub#The-GitHub-API").
+        The GitHub API
+  p    Services and hooks give you a way to receive push notifications about
+  p    events that happen on your repositories, but what if you need more
+  p    information about these events? What if you need to automate
+  p    something like aping collaborators or labeling issues?
+  p    This is where the GitHub API comes in handy.
+  h3
+    a(href="http://git-scm.com/book/en/v2/GitHub-Scripting-GitHub#Octokit").
+        Octokit
+  p    For complete documentation on the entire API as well as guides for common tasks, check out
+        a(href="https://developer.github.com.")    developer.github.com
+
+h1      7. Git Tools
+H2      7.1. Managing an organization
+div(id="71")
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-Tools-Revision-Selection").
+        Revision Selection
+  p    Git allows you to specify specific commits or a range of commits in several ways.
+  p    They aren’t necessarily obvious but are helpful to know.
+
+  h3    Single Revisions
+  p    You can obviously refer to a commit by the SHA-1 hash that it’s given,
+  p    but there are more human-friendly ways to refer to commits as well.
+  p    This section outlines the various ways you can refer to a single commit.
+
+  h3    Short SHA-1
+  p    Git can enough precisely to figure out what you had meant if
+  p    your partial SHA-1 commit is typed at leas 4 characters and unambiguous.
+  p    For example, the following commands are equivalent:
+  p    [$ git show 1c002p4b536e7479fe34593e72e6c6c1819e53b ]
+  p    [$ git show 1c002p4b536e7479f                       ]
+  p    [$ git show 1c002d                                   ]
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-Tools-Revision-Selection#Branch-References").
+        Branch References
+  p    You can use a name branch in any GIT command that expects a commit object or SHA-1 value.
+  p    Specific SHA-1 points of any branch you can take with plumbing tool called [rev-parse].
+  p    More info
+    a(href="http://git-scm.com/book/en/v2/ch10/_git_internals")   see here.
+
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-Tools-Revision-Selection#RefLog-Shortnames").
+        RefLog Shortnames
+  p    While you are in workflow Git automatically keeps a "reflog" -
+  p    log of where your HEAD and branch refs have been for the last few month.
+  p    You can see thats with [$ git reflog] command.
+  p    And you can specify older commits use @{n} reference that you see in the reflog output.
+  p    You can also use this syntax to see where a branch was some specific amount of time ago:
+  p    [$ git show master@{yesterday}]
+  p    To see reflog information formatted like the git log output: [$ git log -g]
+  p    All reflogs strictly local and after you clone a repo, you'll get an empty reflog.
+
+
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-Tools-Revision-Selection#Ancestry-References").
+        Ancestry References
+  p    If you place "^" at the end of a reference (branch, HEAD, SHA-1), Git resolves it to means "the parent of that commit".
+  p    Or if you pace "^n", GIT resolves it to means "N parent of reference".
+  p    The other main ancestry specification is the "~".
+  p    If "~" just plased at end ref, it equivalent "^".
+  p    If you specify a number, "~2" it'll means "the first parent of the first parent"
+  p    - it traverses the first parents the number of times you specify.
+  p    You can also written something like "HEAD^^^" or (equivalent) "HEAD~3", or combine them "HEAD~3^2" and so on.
+
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-Tools-Revision-Selection#Commit-Ranges").
+        Commit Ranges
+  p    Now that you can specify individual commits, let’s see how to specify ranges of commits.
+
+  h3    Double Dot
+  p    [$ git log [refA]..[refB]]
+  p    This basically asks Git to resolve a range of commits that
+  p    are reachable from one commit but aren’t reachable from another.
+  p    If the last ref unspecified - GIT substitutes its with HEAD.
+
+  h3    Multiple Points
+  p    If you want to specify more than two branches to indicate your revision
+  p    Git allows you to do this by using either the ^ character or
+  p    --not before any reference from which you don’t want to see reachable commits.
+  p    Thus these three commands are equivalent:
+  p    [$ git log refA..refB ]
+  p    [$ git log ^refA refB ]
+  p    [$ git log refB --not refA ]
+
+  h3    Triple Dot
+  p    [[$ git log [refA]...[refB]]]
+  p    This syntax specifies all the commtis that are not common of two refs.
+  p    You can also use the [--left-right] switch,
+  p    which shows you which side of the range each commit is in.
+H2      7.2. Interactive Staging
+div(id="72")
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-Tools-Interactive-Staging#Staging-Patches").
+        Staging Patches
+  p    [$ git ap -i]
+
+H2      7.6. Rewriting History
+div(id="76")
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-Tools-Rewriting-History#Changing-Multiple-Commit-Messages").
+        Changing Multiple Commit Messages
+  p    [$ git rebase -i [refs range]]
+  p    With interactive rebase tool, you can then stop after each commit you
+  p    you want to modify and change the message, ap files, or do whatever you wish:
+  p    [$ git rebase -i HEAD~3] - this will rebase you commits of range of three commits
+  p    back from head you are.
+  p    Remember: every commit that is rebasing will be rewritten,
+  p    whether you change message or not.
+
+H2      7.7. Reset Demystified
+div(id="77")
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified").
+      Reset Demystified
+  p
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified#The-Three-Trees").
+      The Three Trees
+  p
+    table.table.table-striped
+      tbody
+        tr
+          th    Tree
+          th    Role
+        tr
+          td    HEAD
+          td    Last commit snapshot, next parent
+        tr
+          td    Index
+          td    Proposed next commit snapshot
+        tr
+          td    Working Directory
+          td    Sandbox
+  p    By “tree" here we really mean “collection of files", not specifically the data structure.
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified#The-Role-of-Reset").
+        The Role of Reset
+  p
+  h3(title="(--soft)").
+        Step 1: Move HEAD (--soft)
+  p    This isn’t the same as changing HEAD itself (which is what checkout does)
+  p    reset moves the branch that HEAD is pointing to.
+
+  h3(title="the Index (--mixed)").
+        Step 2: Updating the Index (--mixed)
+  p    This is the default option wher you run reset command.
+  p    The next thing reset will do is to update the Index
+  p    with the contents of whatever snapshot HEAD now points to.
+
+  h3(title="the Working Directory (--hard)").
+        Step 3: Updating the Working Directory (--hard)
+  p    The third thing that reset will do
+  p    is to make the Working Directory look like the Index.
+  p    We could back our last commit with [$ git reflog] command.
+
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified#Reset-With-a-Path").
+        Reset With a Path
+  p    [$ git reset [path to file]] where
+  p    is the just shortand for [$ git reset --mixed HEAD file.txt]
+  p    So it essentially just copies file.txt from HEAD to the Index.
+  p    This has the practical effect of unstaging the file.
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified#Squashing").
+        Squashing
+  p    You can "squash" your dirty commit with reset command.
+
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified#Check-It-Out").
+        Check It Out
+  p    Like reset, checkout manipulates the three trees, and it is a bit different
+  p    depending on whether you give the command a file path or not.
+  h3    Without Paths
+  p    [$ git checkout [branch] is pretty similar to running [$ git reset --hard [branch]]
+  p    in that it updates all three trees for you to look like [branch]
+  p    but there are two important differences:
+  p
+    ol
+      li Checkout will check to make sure it’s not blowing away files that have changes to them.
+      li Checkout will move HEAD itself to point to another branch (ulike reset that will move the branch that HEAD points to)
+
+  h3    With Paths
+  p    [$ git checkout [REF] file]
+  p    In that case checkout updates the index with that file at that commit,
+  p    but it also overwrites the file in the working directory.
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified#Summary").
+        Cheat-sheet
+  p    Pleas, checkout link for more info.
+
+H2      7.8. Advanced Merging
+div(id="78")
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-Tools-Advanced-Merging#Merge-Conflicts").
+        Merge Conflicts
+  p    Before doing merging, try to make sure your working directory is clean.
+  p    If you have work in progress, either commit it to a temporary branch or stash it.
+  p    This makes it so that you can undo anything you try here.
+
+  h3    Aborting a Merge
+  p    You can simply back out of the merge with [$ git merge --abort].
+  p    Aborting merging no be able perfectly if you had unstashed, uncommited
+  p    changes in your working directory.
+
+  h3    Ignoring Whitespace
+  p    If you see that you have a lot of whitespace
+  p    you can simply abort merge it and do it again with
+  p    [$ git merge -Xignore-all-space] or [-Xignore-space-change] options (latest in priority).
+  p    First option ignores whitespace completely when comparing lines
+  p    Second treats sequences of one or more whitespace characters as equivalent.
+
+
+  h3    Manual File Re-merging
+  p    As an example, let’s pretend that Git could not
+  p    handle the whitespace change and we needed to do it by hand.
+
+  h3    Checking Out Conflicts
+  p    [$ git checkout --conflict]
+  p    Where [--conflict] will re-checkout the file again and replace the merge conflict markers.
+
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-Tools-Advanced-Merging#Undoing-Merges").
+        Undoing Merges
+  p    There are two ways to approach this problem, depending on what your desired outcome is.
+
+  h3    Fix the references
+  p    Ir your changes only exists on your local repository, the easies and best solution is:
+  p    [$ git reset --hard HEAD~]
+  h3    The downside of this approach is that it’s rewriting history
+  p    which can be problematic with a shared repository.
+  p    If other people have the commits you’re rewriting, you should probably avoid reset
+  p    This approach also won’t work if any other commits have been created since the merge
+  p    moving the refs would effectively lose those changes.
+
+  h3    Reverse the commit
+  p    [$ git revert -m 1 HEAD]
+  p    The -m 1 flag indicates which parent is the “mainline” and should be kept.
+  p    Git will get confused if you try to merge reverted branch with previous second branch that was merged.
+
+
+  h3    Subtree Merging
+  p    The idea of the subtree merge is that you have two projects,
+  p    and one of the projects maps to a subdirectory of the other one and vice versa.
+
+H2      7.9. Rerere
+div(id="79")
+  h3    Rerere
+  p    Reuse recorded resolution
+  p    To enable this functionality have run this config setting:
+  p    [$ git config --global rerere.enabled true]
+
+  p    This tool is allow your Git to remember how you had resolved a hunk
+  p    conflict so that the next time it sees the same conflict,
+  p    Git can automatically resolve it for you.
+
+  p    For example, it might be really handy if you want to keep a branch
+  p    rebased so you don’t have to deal with the same rebasing
+  p    conflicts each time you do it.
+
+H2      7.10. Debugging with Git
+div(id="710")
+  h3    Debugging with Git
+  p
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-Tools-Debugging-with-Git#File-Annotation").
+        File Annotation
+
+  p    [$ git blame -L [range-min,range-max] [file]]
+  p    If you want to know by whom in the particular file the bug was previously introduced ,
+  p    this is often your best tool for do that.
+  p
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-Tools-Debugging-with-Git#Binary-Search").
+        Binary Search
+  p    [$ git bisect start]
+  p    The bisect command does a binary search through your commit history to help
+  p    you identify as quickly as possible which commit introduced an issue.
+H2      7.11. Submodules
+div(id="711")
+  h3    Submodules
+  p    Submodules allow you to keep a Git repository as a subdirectory of another Git repository.
+  p    This lets you clone another repository into your project and keep your commits separate.
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-Tools-Submodules#Starting-with-Submodules").
+        Starting with Submodules
+  p    [$ git submodule ap [REPOSITORY]]
+
+  h3    .gitmodules
+  p    This is a configuration file that stores the mapping between
+  p    the project’s URL and the local subdirectory you’ve pulled it into:
+
+  p    Although DbConnector is a subdirectory in your working directory,
+  p    Git sees it as a submodule and doesn’t track its contents when you’re not in that directory.
+  p    Instead, Git sees it as a particular commit from that repository.
+
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-Tools-Submodules#Cloning-a-Project-with-Submodules").
+        Cloning a Project with Submodules
+
+  p    When you clone such a project, by default you get the directories
+  p    that contain submodules, but none of the files within them yet.
+  p    You must run two commands:
+  p
+    ol
+      li [$ git submodule init]     - to initialize your local configuration file.
+      li [$ git submodule update ]  - to fetch all the data from that project and check out the appropriate commit listed in your superproject.
+
+
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-Tools-Submodules#Working-on-a-Project-with-Submodules").
+        Working on a Project with Submodules
+  p
+
+  h3    Pulling in Upstream Changes
+  p    The simplest model  of using submodules in a project
+  p    it consume a subproject as as like any other repo.ю
+  p    [$ git submodule update --remote]
+  p    By default it will update all of your submodules
+
+  p    Another way to do that is passing --recursive to the git clone command.
+  p    You can set default branch to your submodules by either in .gitmodules file
+  p    or jus in your local .git/config:
+  p    [$ git config -f .gitmodules submodule.NAME_OF_YOUR_SUBMODULE.branch [YOUR PREFER BRANCH NAME]]
+  p    Further you can just update your submodules::
+  p    [$ git submodule update --remote]
+
+  p    If you set the configuration setting status.submodulesummary,
+  p    Git will also show you a short summary of changes to your submodules
+  p    [$ git config status.submodulesummary 1]
+
+  h3    Working on a Submodule
+  p
+
+  h3    Publishing Submodule Changes
+  p    [$ git push --recurse-submodules=check]
+  p    [$ git push --recurse-submodules=on-demand]
+
+  h3    Merging Submodule Changes
+  p
+
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-Tools-Submodules#Submodule-Tips").
+        Submodule Tips
+  p    Click for more info. There are a few things you can do to make working a little easier.
+
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-Tools-Submodules#Issues-with-Submodules").
+        Issues with Submodules
+  p    Using submodules isn’t without hiccups, however.
+
+H2      7.12. Bundling
+div(id="712")
+  h3    Bundling
+  p    [$ git bundle create [file name] [REF | ..]]
+  p    Git is capable of “bundling” its data into a single file.
+  p    To create repo from bundle: [$ git clone [path to .bundle file]]
+  p    To import changes from bundle into an existing repo: [$ git fetch [path to .bundle file] [branch:branch_local] etc..]
+
+H2      7.13. Replace
+div(id="713")
+  h3
+    a(href="http://git-scm.com/book/en/v2/Git-Tools-Replace").
+        Replace
+  p    The replace command lets you specify an object in Git
+  p    and say “every time you see this, pretend it’s this other thing”.
+h1 8.1 Customizing Git
 
 
 
 
 h1  Related terms
-    H2(data-toggle="collapse" data-target="#Misc"  aria-controls="Misc").
-      Misc
-    div(id="Misc").collapse
-      dt      GPG
-      dd      - GNU Privacy Guard
-      dd      HEAD  is the pointer that points to the current branch or any a commit.
-      dd      todo: it's need to be revised
-      dd      INDEX is the current state of files of repository which to be included to next commit
-      dt      Useful hints:
-      dd
+    H2          Misc
+    div(id="Misc")
+      h3      GPG
+      p      - GNU Privacy Guard
+      p      HEAD  is the pointer that points to the current branch or any a commit.
+      p      todo: it's need to be revised
+      p      INDEX is the current state of files of repository which to be included to next commit
+      h3      Useful hints:
+      p
         ol
           li  [$ gitk]                            - built-in git GUI
           li  [$ git config color.ui true]        - use colorful git output
           li  [$ git config format.pretty oneline]- show log on just one line per commitM
-          li  [$ git add -i]                      - use interactive adding
+          li  [$ git ap -i]                      - use interactive aping
           li  [$ git gui]
-      dt      Other
-      dd
+      h3      Other
+      p
         ul
-          li   adding for tracking(or staging) : git add [dir]
+          li   aping for tracking(or staging) : git ap [dir]
           li   dChecking status                : git status
           li   dChecking status (short)        : git status -s
 
-      dt      git-shell
-      dd      It is the shell that used instead the default system platform (bash) shell
-      dd      to the git-server authorization process. (chapter 4.4.)
-      dd      For security reasons.
-    script(src="bundle.js")
-    h1.text-color-black.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      h3      git-shell
+      p      It is the shell that used instead the default system platform (bash) shell
+      p      to the git-server authorization process. (chapter 4.4.)
+      p      For security reasons.
