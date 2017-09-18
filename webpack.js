@@ -34,7 +34,7 @@ config.module = {
       {test: /\.tsx?$/  , use: {loader: 'ts-loader'  , options: { transpileOnly: true }} }
     , {test: /\.pug$/   , use: ['pug-loader']}
     , {test: /\.css$/   , use: ['style-loader','css-loader']}
-    , {test: /\.scss$/  , use: [{loader: 'style-loader', options: { hmr: true }},'css-loader','sass-loader']  }
+    , {test: /\.scss$/  , use: [{loader: 'style-loader', options: { hmr: true }},{loader: 'css-loader', options: {url: false} },'sass-loader']  }
     ]
 }
 module.exports = config;
